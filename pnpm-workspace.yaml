@@ -1,0 +1,4 @@
+# esbuild ships a platform binary via a postinstall script; allow it so tsx and
+# drizzle-kit work without the ERR_PNPM_IGNORED_BUILDS warning on install.
+allowBuilds:
+  esbuild: true

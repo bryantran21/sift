@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# secrets — never commit connection strings or keys
+.env
+.env.local
+.env*.local
+
+# next.js (arrives in Phase 5)
+/.next/
+/out/
+
+# build / logs / os
+dist/
+# generated favicons (regenerate with `pnpm build:logos`)
+src/data/logos.json
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+.vercel
+/coverage

@@ -1,0 +1,320 @@
+# sift — sources.yaml
+# The hand-curated list of ATS job boards the ingest actually fetches. This is the
+# INGESTABLE subset: every entry here has a working JSON board and a live adapter.
+#
+#   company : display name
+#   ats     : greenhouse | lever | ashby | smartrecruiters | workable | workday
+#   slug    : the board identifier in the ATS URL
+#   tier    : 1 (top target) · 2 · 3  — feeds relevance scoring (1→25, 2→15, 3→5 pts)
+#   tags    : quant | big-tech | fortune-500
+#   enabled : optional, defaults true — set false to mute a board without deleting it
+#
+# The broader company universe you're organizing (quant / big-tech / fortune-500,
+# including companies that aren't ingestable yet) lives in src/data/companies.ts and
+# in the company-browser UI. Only 'live' companies from there belong in this file.
+# Slugs and job counts (comments) were confirmed against the Greenhouse API 2026-07-20.
+
+# ── Quant trading / market making (live on Greenhouse) ───────────────────────
+- company: Jane Street
+  ats: greenhouse
+  slug: janestreet
+  tier: 1
+  tags: [quant] # 216 jobs
+
+- company: Point72
+  ats: greenhouse
+  slug: point72
+  tier: 1
+  tags: [quant] # 232 jobs
+
+- company: IMC Trading
+  ats: greenhouse
+  slug: imc
+  tier: 1
+  tags: [quant] # 153 jobs
+
+- company: Jump Trading
+  ats: greenhouse
+  slug: jumptrading
+  tier: 1
+  tags: [quant] # 98 jobs
+
+- company: WorldQuant
+  ats: greenhouse
+  slug: worldquant
+  tier: 2
+  tags: [quant] # 99 jobs
+
+- company: Tower Research Capital
+  ats: greenhouse
+  slug: towerresearchcapital
+  tier: 1
+  tags: [quant] # 79 jobs
+
+- company: Flow Traders
+  ats: greenhouse
+  slug: flowtraders
+  tier: 2
+  tags: [quant] # 39 jobs
+
+- company: Virtu Financial
+  ats: greenhouse
+  slug: virtu
+  tier: 2
+  tags: [quant] # 38 jobs
+
+- company: Akuna Capital
+  ats: greenhouse
+  slug: akunacapital
+  tier: 2
+  tags: [quant] # 38 jobs
+
+- company: Old Mission Capital
+  ats: greenhouse
+  slug: oldmissioncapital
+  tier: 2
+  tags: [quant] # 32 jobs
+
+- company: Optiver
+  ats: greenhouse
+  slug: optiver
+  tier: 1
+  tags: [quant] # 0 jobs at last check — live board, kept for when roles open
+
+# ── Big tech / AI / infra (live on Greenhouse) ───────────────────────────────
+- company: Anthropic
+  ats: greenhouse
+  slug: anthropic
+  tier: 1
+  tags: [big-tech] # 412 jobs
+
+- company: Databricks
+  ats: greenhouse
+  slug: databricks
+  tier: 1
+  tags: [big-tech] # 784 jobs
+
+- company: xAI
+  ats: greenhouse
+  slug: xai
+  tier: 1
+  tags: [big-tech] # 216 jobs
+
+- company: Scale AI
+  ats: greenhouse
+  slug: scaleai
+  tier: 1
+  tags: [big-tech] # 191 jobs
+
+- company: Stripe
+  ats: greenhouse
+  slug: stripe
+  tier: 1
+  tags: [big-tech] # 520 jobs
+
+- company: Datadog
+  ats: greenhouse
+  slug: datadog
+  tier: 2
+  tags: [big-tech] # 415 jobs
+
+- company: Cloudflare
+  ats: greenhouse
+  slug: cloudflare
+  tier: 2
+  tags: [big-tech] # 261 jobs
+
+- company: Coinbase
+  ats: greenhouse
+  slug: coinbase
+  tier: 2
+  tags: [big-tech] # 151 jobs
+
+- company: Robinhood
+  ats: greenhouse
+  slug: robinhood
+  tier: 2
+  tags: [big-tech] # 115 jobs
+
+- company: Figma
+  ats: greenhouse
+  slug: figma
+  tier: 2
+  tags: [big-tech] # 172 jobs
+
+- company: Airbnb
+  ats: greenhouse
+  slug: airbnb
+  tier: 2
+  tags: [big-tech] # 198 jobs
+
+- company: Reddit
+  ats: greenhouse
+  slug: reddit
+  tier: 2
+  tags: [big-tech] # 195 jobs
+
+- company: Vercel
+  ats: greenhouse
+  slug: vercel
+  tier: 2
+  tags: [big-tech] # 73 jobs
+
+- company: SambaNova Systems
+  ats: greenhouse
+  slug: sambanovasystems
+  tier: 2
+  tags: [big-tech] # 28 jobs
+
+- company: Discord
+  ats: greenhouse
+  slug: discord
+  tier: 2
+  tags: [big-tech] # 49 jobs
+
+- company: Okta
+  ats: greenhouse
+  slug: okta
+  tier: 3
+  tags: [big-tech] # 352 jobs
+
+- company: Samsara
+  ats: greenhouse
+  slug: samsara
+  tier: 3
+  tags: [big-tech] # 332 jobs
+
+- company: Brex
+  ats: greenhouse
+  slug: brex
+  tier: 3
+  tags: [big-tech] # 260 jobs
+
+- company: Pinterest
+  ats: greenhouse
+  slug: pinterest
+  tier: 3
+  tags: [big-tech] # 190 jobs
+
+- company: Affirm
+  ats: greenhouse
+  slug: affirm
+  tier: 3
+  tags: [big-tech] # 172 jobs
+
+- company: Twilio
+  ats: greenhouse
+  slug: twilio
+  tier: 3
+  tags: [big-tech] # 168 jobs
+
+- company: GitLab
+  ats: greenhouse
+  slug: gitlab
+  tier: 3
+  tags: [big-tech] # 164 jobs
+
+- company: Lyft
+  ats: greenhouse
+  slug: lyft
+  tier: 3
+  tags: [big-tech] # 152 jobs
+
+- company: Asana
+  ats: greenhouse
+  slug: asana
+  tier: 3
+  tags: [big-tech] # 140 jobs
+
+- company: Instacart
+  ats: greenhouse
+  slug: instacart
+  tier: 3
+  tags: [big-tech] # 124 jobs
+
+- company: Gusto
+  ats: greenhouse
+  slug: gusto
+  tier: 3
+  tags: [big-tech] # 74 jobs
+
+- company: Faire
+  ats: greenhouse
+  slug: faire
+  tier: 3
+  tags: [big-tech] # 72 jobs
+
+- company: Chime
+  ats: greenhouse
+  slug: chime
+  tier: 3
+  tags: [big-tech] # 67 jobs
+
+- company: Dropbox
+  ats: greenhouse
+  slug: dropbox
+  tier: 3
+  tags: [big-tech] # 35 jobs
+
+# ── Live via Workday (POST + pagination; coordinates from the careers URL) ────
+# URL shape: https://{tenant}.wd{shard}.myworkdayjobs.com/{site}
+- company: NVIDIA
+  ats: workday
+  slug: nvidia
+  tier: 1
+  tags: [big-tech]
+  tenant: nvidia
+  shard: "5"
+  site: NVIDIAExternalCareerSite
+
+- company: Salesforce
+  ats: workday
+  slug: salesforce
+  tier: 3
+  tags: [big-tech]
+  tenant: salesforce
+  shard: "12"
+  site: External_Career_Site
+
+- company: Mastercard
+  ats: workday
+  slug: mastercard
+  tier: 3
+  tags: [fortune-500]
+  tenant: mastercard
+  shard: "1"
+  site: CorporateCareers
+
+- company: Target
+  ats: workday
+  slug: target
+  tier: 3
+  tags: [fortune-500]
+  tenant: target
+  shard: "5"
+  site: targetcareers
+
+# ── Colleges (Workday) ────────────────────────────────────────────────────────
+# CMU is on a public Workday board. Stanford (Oracle/Taleo), UC Berkeley (UCPath),
+# and Georgia Tech (Trakstar / auth-gated Workday) are not ingestable — see companies.ts.
+- company: Carnegie Mellon (CMU)
+  ats: workday
+  slug: cmu
+  tier: 1
+  tags: [college]
+  tenant: cmu
+  shard: "5"
+  site: CMU
+
+# ── Reference: other ATS shapes (uncomment once their adapters land) ──────────
+# Greenhouse and Workday are live. Lever, Ashby, SmartRecruiters, and Workable
+# arrive in Phase 2 — e.g. OpenAI & Ramp (Ashby), tracked in src/data/companies.ts.
+# Most Fortune 500 non-tech companies run Workday (add them here once you've read
+# the tenant/shard/site off their careers URL) or Taleo/iCIMS (out of scope under
+# the JSON-only rule).
+#
+# - company: OpenAI
+#   ats: ashby
+#   slug: openai
+#   tier: 1
+#   tags: [big-tech]

@@ -1,0 +1,32 @@
+{
+    "total":  2000,
+    "jobPostings":  [
+                        {
+                            "title":  "Maintenance Technician 1 -- Back Half Nights",
+                            "externalPath":  "/job/2300-Walnut-Hill-Ln-DallasTX-75220/Maintenance-Technician-1----Back-Half-Nights_R0000446421",
+                            "locationsText":  "2300 Walnut Hill Ln, Dallas,TX 75220",
+                            "postedOn":  "Posted Today",
+                            "bulletFields":  [
+                                                 "R0000446421"
+                                             ]
+                        },
+                        {
+                            "title":  "Operations Manager - Regional Distribution Center - Stuarts Draft, VA",
+                            "externalPath":  "/job/345-Mount-Vernon-Rd-Stuarts-DraftVA-24477-9345/Operations-Manager---Regional-Distribution-Center---Stuarts-Draft--VA_R0000446246",
+                            "locationsText":  "345 Mount Vernon Rd, Stuarts Draft,VA 24477-9345",
+                            "postedOn":  "Posted Today",
+                            "bulletFields":  [
+                                                 "R0000446246"
+                                             ]
+                        },
+                        {
+                            "title":  "Food \u0026 Beverage Team Leader",
+                            "externalPath":  "/job/50-E-North-Ave-Villa-ParkIL-60181-1244/Food---Beverage-Team-Leader_R0000446408",
+                            "locationsText":  "50 E North Ave, Villa Park,IL 60181-1244",
+                            "postedOn":  "Posted Today",
+                            "bulletFields":  [
+                                                 "R0000446408"
+                                             ]
+                        }
+                    ]
+}
