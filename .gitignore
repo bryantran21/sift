@@ -6,9 +6,10 @@ node_modules/
 .env.local
 .env*.local
 
-# next.js (arrives in Phase 5)
+# next.js
 /.next/
 /out/
+*.tsbuildinfo
 
 # build / logs / os
 dist/
