@@ -5,11 +5,16 @@
   "type": "module",
   "description": "Personal Job Radar — self-hosted, single-user ATS job aggregator.",
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "ingest": "tsx src/ingest/run.ts",
     "build:logos": "tsx scripts/fetch-logos.ts",
     "build:browser": "tsx scripts/build-company-browser.ts",
     "test": "tsx --test src/**/*.test.ts",
     "typecheck": "tsc --noEmit",
+    "db:check": "tsx scripts/check-db.ts",
+    "db:stats": "tsx scripts/db-stats.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -19,13 +24,20 @@
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "js-yaml": "^4.3.0",
+    "next": "^15.5.21",
     "postgres": "^3.4.9",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "drizzle-kit": "^0.31.10",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.23.1",
     "typescript": "^5.9.3"
   }

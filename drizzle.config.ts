@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import './src/env';
 import { defineConfig } from 'drizzle-kit';
 
 // `drizzle-kit generate` diffs the schema against ./drizzle and emits SQL without

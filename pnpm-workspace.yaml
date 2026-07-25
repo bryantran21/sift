@@ -1,4 +1,5 @@
-# esbuild ships a platform binary via a postinstall script; allow it so tsx and
-# drizzle-kit work without the ERR_PNPM_IGNORED_BUILDS warning on install.
+# Package-build approvals (pnpm 11 moved these out of package.json).
+# esbuild: platform binary for tsx/drizzle-kit. sharp: Next.js image optimization.
 allowBuilds:
   esbuild: true
+  sharp: true

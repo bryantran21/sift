@@ -13,7 +13,14 @@ export function getDb() {
   if (!url) {
     throw new Error('DATABASE_URL is not set. Copy .env.example to .env.local and fill it in.');
   }
-  client = postgres(url, { max: 8, prepare: false });
+  try {
+    client = postgres(url, { max: 8, prepare: false });
+  } catch {
+    // Never surface the URL itself — it contains the password.
+    throw new Error(
+      'DATABASE_URL is not a valid Postgres connection string. Check .env.local — any special characters in the password must be percent-encoded (or use a letters-and-numbers-only password).',
+    );
+  }
   db = drizzle(client, { schema });
   return db;
 }

@@ -1,8 +1,10 @@
-import 'dotenv/config';
+import '../env';
 import { loadSources } from '../config/sources';
 import { getAdapter, supportedAts } from '../ats/registry';
 import { normalizeJob } from './normalize';
 import { collapseFanout, renderLocations, type CollapsedJob } from './collapse';
+import { persistRun, type SourceOutcome } from './persist';
+import { closeDb } from '../db/client';
 import { jitter, mapLimit } from '../lib/concurrency';
 import { ageLabel, recencyBucket, type Recency } from '../lib/recency';
 import type { NormalizedJob, Source } from '../types';
@@ -102,6 +104,25 @@ async function main(): Promise<void> {
   );
   printBiggestFanouts(roles, 8);
 
+  // Phase 2: persist + diff (only when a database is configured).
+  if (process.env.DATABASE_URL) {
+    const outcomes: SourceOutcome[] = results.map((r) => ({
+      source: r.source,
+      ok: r.ok,
+      jobCount: r.jobs.length,
+      ms: r.ms,
+      error: r.error,
+    }));
+    const p = await persistRun({ sources: all, outcomes, roles, startedAt: runStart });
+    console.log(
+      `\nPersisted (run #${p.runId}): ${ANSI.green}${p.newCount} new${RESET} · ` +
+        `${p.stillLiveCount} still-live · ${p.reappearedCount} reappeared · ` +
+        `${ANSI.red}${p.disappearedCount} disappeared${RESET}.`,
+    );
+  } else {
+    console.log('\n(no DATABASE_URL set — console only. Add it to .env.local to persist.)');
+  }
+
   const now = new Date();
   const buckets = { green: 0, yellow: 0, red: 0, none: 0 };
   for (const j of roles) buckets[recencyBucket(effectiveDate(j), now)]++;
@@ -197,7 +218,10 @@ function errorMessage(err: unknown): string {
   return String(err);
 }
 
-main().catch((err) => {
-  console.error('\ningest failed:', err);
-  process.exit(1);
-});
+main()
+  .then(() => closeDb())
+  .catch(async (err) => {
+    console.error('\ningest failed:', err);
+    await closeDb();
+    process.exit(1);
+  });
