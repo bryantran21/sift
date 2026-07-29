@@ -10,7 +10,7 @@ import {
   index,
   uniqueIndex,
 } from 'drizzle-orm/pg-core';
-import type { Ats, Category, Seniority, Tier, WorkMode } from '../types';
+import type { Ats, Category, Country, Seniority, Tier, WorkMode } from '../types';
 
 // Enums are plain text columns (not pg enums) on purpose: categories and seniority
 // buckets are defined in the editable rules file and will change over time, and
@@ -60,6 +60,7 @@ export const jobs = pgTable(
     title: text('title').notNull(),
     normalizedTitle: text('normalized_title').notNull(),
     locations: jsonb('locations').$type<string[]>().notNull().default([]),
+    country: text('country').$type<Country>().notNull().default('unknown'),
     workMode: text('work_mode').$type<WorkMode>().notNull().default('unknown'),
     description: text('description').notNull().default(''),
     descriptionHash: text('description_hash').notNull().default(''),
@@ -92,6 +93,9 @@ export const jobs = pgTable(
     index('jobs_posted_at_idx').on(t.postedAt),
     index('jobs_first_seen_idx').on(t.firstSeenAt),
     index('jobs_relevance_idx').on(t.relevanceScore),
+    // feed filters: tech-only (category) and US-only (country)
+    index('jobs_category_idx').on(t.category),
+    index('jobs_country_idx').on(t.country),
   ],
 );
 

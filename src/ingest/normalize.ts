@@ -1,10 +1,13 @@
 import type { NormalizedJob, RawJob, WorkMode } from '../types';
 import { htmlToText } from '../lib/html';
 import { contentHash, stableId } from '../lib/hash';
+import { classifyCategory } from './classify';
+import { deriveCountry } from './location';
 
 export function normalizeJob(raw: RawJob): NormalizedJob {
   const description =
     raw.descriptionFormat === 'html' ? htmlToText(raw.description) : (raw.description ?? '').trim();
+  const locations = dedupeLocations(raw.locations);
 
   return {
     id: stableId([raw.ats, raw.company, raw.atsJobId]),
@@ -12,7 +15,8 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     companyTier: raw.companyTier,
     title: raw.title,
     normalizedTitle: normalizeTitle(raw.title),
-    locations: dedupeLocations(raw.locations),
+    locations,
+    country: deriveCountry(locations),
     workMode: inferWorkMode(raw, description),
     description,
     descriptionHash: contentHash(description),
@@ -22,8 +26,8 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     reqNumber: raw.reqNumber,
     sourceSlug: raw.sourceSlug,
     postedAt: parseDate(raw.postedAt),
-    // Filled in by later phases; defaults keep the shape honest for now.
-    category: 'other',
+    // Stage-1 title classification (§5). Seniority/relevance land in later phases.
+    category: classifyCategory(raw.title),
     seniority: 'unknown',
     relevanceScore: 0,
     filterFlags: [],

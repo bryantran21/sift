@@ -11,6 +11,7 @@ function job(over: Partial<NormalizedJob>): NormalizedJob {
     title: 'Software Engineer',
     normalizedTitle: 'software engineer',
     locations: ['New York'],
+    country: 'US',
     workMode: 'unknown',
     description: 'Build systems with typescript and postgres.',
     descriptionHash: 'h1',

@@ -1,7 +1,7 @@
 import { and, desc, eq, isNull, isNotNull, sql, type SQL } from 'drizzle-orm';
 import { getDb } from './client';
 import { jobs, sources, runs } from './schema';
-import type { Tier, WorkMode } from '../types';
+import type { Category, Tier, WorkMode } from '../types';
 
 export interface FeedParams {
   q?: string;
@@ -9,6 +9,12 @@ export interface FeedParams {
   mode?: WorkMode;
   tag?: string; // quant | big-tech | fortune-500 | college
   recency?: 'green' | 'yellow' | 'red';
+  // category scope: undefined/'tech' → tech roles only (category <> 'other');
+  // 'all' → no category filter; a Category value → that category only.
+  category?: string;
+  // country scope: undefined/'us' → US roles only; 'any' → worldwide.
+  country?: string;
+  company?: string;
   page?: number;
 }
 
@@ -41,6 +47,12 @@ function conditions(p: FeedParams): SQL[] {
   if (p.tier) c.push(eq(jobs.companyTier, p.tier));
   if (p.mode) c.push(eq(jobs.workMode, p.mode));
   if (p.tag) c.push(sql`${sources.tags} @> ${JSON.stringify([p.tag])}::jsonb`);
+  // Category scope. Default (undefined) and 'tech' both mean tech-only.
+  if (!p.category || p.category === 'tech') c.push(sql`${jobs.category} <> 'other'`);
+  else if (p.category !== 'all') c.push(eq(jobs.category, p.category as Category));
+  // Country scope. Default (undefined) and 'us' both mean US-only.
+  if (!p.country || p.country === 'us') c.push(eq(jobs.country, 'US'));
+  if (p.company) c.push(eq(jobs.company, p.company));
   if (p.q) {
     const like = `%${p.q}%`;
     c.push(sql`(${jobs.company} ilike ${like} or ${jobs.title} ilike ${like} or ${jobs.locations}::text ilike ${like})`);
@@ -90,6 +102,17 @@ export async function getFeed(p: FeedParams): Promise<{ rows: FeedRow[]; total: 
     .where(where);
 
   return { rows, total: total ?? 0, page };
+}
+
+// Distinct live companies, for the company filter dropdown.
+export async function getCompanies(): Promise<string[]> {
+  const db = getDb();
+  const rows = await db
+    .selectDistinct({ company: jobs.company })
+    .from(jobs)
+    .where(isNull(jobs.removedAt))
+    .orderBy(jobs.company);
+  return rows.map((r) => r.company);
 }
 
 export interface FeedMeta {

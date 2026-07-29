@@ -13,6 +13,10 @@ export type Tier = 1 | 2 | 3;
 
 export type WorkMode = 'remote' | 'hybrid' | 'onsite' | 'unknown';
 
+// Coarse location bucket derived from the free-text location strings (no structured
+// country data comes from the ATSs). 'US' means at least one location is in the US.
+export type Country = 'US' | 'non-US' | 'unknown';
+
 // Stage-1 classification output (see §5). Rules land in Phase 4.
 export type Category =
   | 'quant-trading'
@@ -76,6 +80,7 @@ export interface NormalizedJob {
   title: string;
   normalizedTitle: string; // grouping key for fan-out collapse (Phase 3)
   locations: string[];
+  country: Country; // derived bucket for the US-only filter
   workMode: WorkMode;
   description: string; // plain text, HTML stripped
   descriptionHash: string;
