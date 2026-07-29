@@ -1,25 +1,9 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { monogram } from '../lib/avatar';
 
-const CATS: [string, string][] = [
-  ['tech', 'Tech only'],
-  ['all', 'All roles'],
-  ['swe-general', 'SWE · General'],
-  ['swe-infra', 'SWE · Infra'],
-  ['ml-engineering', 'ML Engineering'],
-  ['ml-research', 'ML Research'],
-  ['data', 'Data'],
-  ['quant-dev', 'Quant Dev'],
-  ['quant-research', 'Quant Research'],
-  ['quant-trading', 'Quant Trading'],
-  ['other', 'Non-tech'],
-];
-const LOCS: [string, string][] = [
-  ['', 'US only'],
-  ['any', 'Worldwide'],
-];
 const TAGS: [string, string][] = [
   ['', 'All tags'],
   ['quant', 'Quant'],
@@ -47,7 +31,12 @@ const RECENCY: [string, string][] = [
   ['red', '> 7 days'],
 ];
 
-export function FeedFilters({ companies = [] }: { companies?: string[] }) {
+export interface CompanyOpt {
+  name: string;
+  logo: string | null;
+}
+
+export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
@@ -77,10 +66,7 @@ export function FeedFilters({ companies = [] }: { companies?: string[] }) {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency', 'cat', 'loc', 'company'].some((k) =>
-    sp.get(k),
-  );
-  const companyOpts: [string, string][] = [['', 'All companies'], ...companies.map((c) => [c, c] as [string, string])];
+  const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency', 'company'].some((k) => sp.get(k));
 
   return (
     <div className="toolbar">
@@ -103,9 +89,11 @@ export function FeedFilters({ companies = [] }: { companies?: string[] }) {
         />
       </form>
       <div className="selects">
-        <Ctrl name="cat" value={sp.get('cat') || 'tech'} opts={CATS} onChange={(v) => update({ cat: v })} />
-        <Ctrl name="loc" value={sp.get('loc') ?? ''} opts={LOCS} onChange={(v) => update({ loc: v })} />
-        <Ctrl name="company" value={sp.get('company') ?? ''} opts={companyOpts} onChange={(v) => update({ company: v })} />
+        <CompanyPicker
+          companies={companies}
+          value={sp.get('company') ?? ''}
+          onChange={(v) => update({ company: v })}
+        />
         <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
         <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
         <Ctrl name="mode" value={sp.get('mode') ?? ''} opts={MODES} onChange={(v) => update({ mode: v })} />
@@ -139,5 +127,115 @@ function Ctrl({
         </option>
       ))}
     </select>
+  );
+}
+
+// Native <select> can't render logos, so this is a custom dropdown: a trigger that
+// shows the picked company's logo + name, and a filterable popup of logo rows.
+function CompanyPicker({
+  companies,
+  value,
+  onChange,
+}: {
+  companies: CompanyOpt[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const rootRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+  }, [open]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return q ? companies.filter((c) => c.name.toLowerCase().includes(q)) : companies;
+  }, [companies, query]);
+
+  const selected = companies.find((c) => c.name === value) ?? null;
+
+  const pick = (v: string) => {
+    onChange(v);
+    setOpen(false);
+    setQuery('');
+  };
+
+  return (
+    <div className="picker" ref={rootRef}>
+      <button
+        type="button"
+        className="ctrl picker-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+      >
+        {selected ? <Avatar company={selected.name} logo={selected.logo} /> : null}
+        <span className="picker-label">{selected ? selected.name : 'All companies'}</span>
+        <span className="picker-caret">▾</span>
+      </button>
+      {open ? (
+        <div className="picker-menu" role="listbox">
+          <input
+            ref={inputRef}
+            className="picker-search"
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Filter companies…"
+            aria-label="Filter companies"
+          />
+          <div className="picker-list">
+            <button
+              type="button"
+              className={`picker-opt${value === '' ? ' sel' : ''}`}
+              onClick={() => pick('')}
+            >
+              <span className="picker-opt-name">All companies</span>
+            </button>
+            {filtered.map((c) => (
+              <button
+                type="button"
+                key={c.name}
+                className={`picker-opt${c.name === value ? ' sel' : ''}`}
+                onClick={() => pick(c.name)}
+              >
+                <Avatar company={c.name} logo={c.logo} />
+                <span className="picker-opt-name">{c.name}</span>
+              </button>
+            ))}
+            {filtered.length === 0 ? <div className="picker-empty">No match</div> : null}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function Avatar({ company, logo }: { company: string; logo: string | null }) {
+  if (logo) return <img className="ico" src={logo} alt="" />;
+  const { ch, hue } = monogram(company);
+  return (
+    <span className="ico mono-ico" style={{ background: `hsl(${hue},36%,42%)` }}>
+      {ch}
+    </span>
   );
 }

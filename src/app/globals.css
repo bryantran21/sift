@@ -176,6 +176,108 @@ select.ctrl:focus {
   text-decoration: underline;
 }
 
+/* company picker (custom dropdown with logos) */
+.picker {
+  position: relative;
+  display: inline-flex;
+}
+.picker-trigger {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 220px;
+}
+.picker-trigger:hover,
+.picker-trigger[aria-expanded='true'] {
+  border-color: var(--accent);
+}
+.picker-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.picker-caret {
+  color: var(--faint);
+  font-size: 10px;
+  margin-left: auto;
+}
+.picker-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  width: 260px;
+  max-width: 80vw;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.picker-search {
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 7px 9px;
+  outline: none;
+}
+.picker-search:focus {
+  border-color: var(--accent);
+}
+.picker-list {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.picker-opt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 8px;
+  cursor: pointer;
+}
+.picker-opt:hover {
+  background: var(--ink-2);
+}
+.picker-opt.sel {
+  background: var(--accent-soft);
+  color: var(--accent-2);
+}
+.picker-opt-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.picker-empty {
+  padding: 10px 8px;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
 /* table */
 .tablewrap {
   border: 1px solid var(--line);
