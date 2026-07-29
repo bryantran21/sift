@@ -1,12 +1,16 @@
-import { getFeed, getFeedMeta, PAGE_SIZE, type FeedRow, type FeedParams } from '../db/feed';
+import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedRow, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
 import { recencyBucket, ageLabel } from '../lib/recency';
-import type { WorkMode } from '../types';
+import type { Category, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 
 export const dynamic = 'force-dynamic';
 
 const WORK_MODES: WorkMode[] = ['remote', 'hybrid', 'onsite', 'unknown'];
+const CATEGORIES: Category[] = [
+  'quant-trading', 'quant-research', 'quant-dev', 'ml-research', 'ml-engineering',
+  'swe-infra', 'swe-general', 'data', 'other',
+];
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -15,12 +19,17 @@ function parse(sp: SP): FeedParams {
   const tier = Number(g('tier'));
   const mode = g('mode');
   const rec = g('recency');
+  const cat = g('cat');
+  const loc = g('loc');
   return {
     q: g('q')?.trim() || undefined,
     tier: tier === 1 || tier === 2 || tier === 3 ? tier : undefined,
     mode: WORK_MODES.includes(mode as WorkMode) ? (mode as WorkMode) : undefined,
     tag: g('tag') || undefined,
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
+    category: cat === 'all' || cat === 'tech' || CATEGORIES.includes(cat as Category) ? cat : undefined,
+    country: loc === 'any' ? 'any' : undefined,
+    company: g('company')?.trim() || undefined,
     page: Math.max(1, Number(g('page')) || 1),
   };
 }
@@ -28,7 +37,7 @@ function parse(sp: SP): FeedParams {
 export default async function Page({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const params = parse(sp);
-  const [meta, feed] = await Promise.all([getFeedMeta(), getFeed(params)]);
+  const [meta, feed, companies] = await Promise.all([getFeedMeta(), getFeed(params), getCompanies()]);
 
   const totalPages = Math.max(1, Math.ceil(feed.total / PAGE_SIZE));
   const healthWarn = meta.sourcesOk < meta.sourcesTotal;
@@ -63,7 +72,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
         </div>
       </header>
 
-      <FeedFilters />
+      <FeedFilters companies={companies} />
 
       <div className="tablewrap">
         <div className="scroll">

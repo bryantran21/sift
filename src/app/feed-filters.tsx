@@ -3,6 +3,23 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef } from 'react';
 
+const CATS: [string, string][] = [
+  ['tech', 'Tech only'],
+  ['all', 'All roles'],
+  ['swe-general', 'SWE · General'],
+  ['swe-infra', 'SWE · Infra'],
+  ['ml-engineering', 'ML Engineering'],
+  ['ml-research', 'ML Research'],
+  ['data', 'Data'],
+  ['quant-dev', 'Quant Dev'],
+  ['quant-research', 'Quant Research'],
+  ['quant-trading', 'Quant Trading'],
+  ['other', 'Non-tech'],
+];
+const LOCS: [string, string][] = [
+  ['', 'US only'],
+  ['any', 'Worldwide'],
+];
 const TAGS: [string, string][] = [
   ['', 'All tags'],
   ['quant', 'Quant'],
@@ -30,7 +47,7 @@ const RECENCY: [string, string][] = [
   ['red', '> 7 days'],
 ];
 
-export function FeedFilters() {
+export function FeedFilters({ companies = [] }: { companies?: string[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
@@ -60,7 +77,10 @@ export function FeedFilters() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency'].some((k) => sp.get(k));
+  const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency', 'cat', 'loc', 'company'].some((k) =>
+    sp.get(k),
+  );
+  const companyOpts: [string, string][] = [['', 'All companies'], ...companies.map((c) => [c, c] as [string, string])];
 
   return (
     <div className="toolbar">
@@ -83,6 +103,9 @@ export function FeedFilters() {
         />
       </form>
       <div className="selects">
+        <Ctrl name="cat" value={sp.get('cat') || 'tech'} opts={CATS} onChange={(v) => update({ cat: v })} />
+        <Ctrl name="loc" value={sp.get('loc') ?? ''} opts={LOCS} onChange={(v) => update({ loc: v })} />
+        <Ctrl name="company" value={sp.get('company') ?? ''} opts={companyOpts} onChange={(v) => update({ company: v })} />
         <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
         <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
         <Ctrl name="mode" value={sp.get('mode') ?? ''} opts={MODES} onChange={(v) => update({ mode: v })} />
