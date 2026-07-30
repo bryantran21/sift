@@ -14,7 +14,11 @@ export function getDb() {
     throw new Error('DATABASE_URL is not set. Copy .env.example to .env.local and fill it in.');
   }
   try {
-    client = postgres(url, { max: 8, prepare: false });
+    // Keep the pool small: the shared Supabase session-mode pooler caps at 15 total
+    // clients across every process (prod serverless + any local dev + ingest). 8-per-
+    // process let a single extra process exhaust it and 500 production. A read feed
+    // needs very few connections. (Transaction pooler on :6543 removes the cap.)
+    client = postgres(url, { max: 3, prepare: false });
   } catch {
     // Never surface the URL itself — it contains the password.
     throw new Error(
