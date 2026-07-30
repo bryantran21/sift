@@ -2,6 +2,7 @@ import type { NormalizedJob, RawJob, WorkMode } from '../types';
 import { htmlToText } from '../lib/html';
 import { contentHash, stableId } from '../lib/hash';
 import { classifyCategory } from './classify';
+import { classifySeniority } from './seniority';
 import { deriveCountry } from './location';
 
 export function normalizeJob(raw: RawJob): NormalizedJob {
@@ -26,9 +27,9 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     reqNumber: raw.reqNumber,
     sourceSlug: raw.sourceSlug,
     postedAt: parseDate(raw.postedAt),
-    // Stage-1 title classification (§5). Seniority/relevance land in later phases.
+    // Stage-1 title classification (§5). Relevance scoring lands in a later phase.
     category: classifyCategory(raw.title),
-    seniority: 'unknown',
+    seniority: classifySeniority(raw.title),
     relevanceScore: 0,
     filterFlags: [],
   };

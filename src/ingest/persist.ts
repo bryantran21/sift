@@ -97,6 +97,7 @@ export async function persistRun(input: PersistInput): Promise<PersistResult> {
           country: sql`excluded.country`,
           workMode: sql`excluded.work_mode`,
           category: sql`excluded.category`,
+          seniority: sql`excluded.seniority`,
           description: sql`excluded.description`,
           descriptionHash: sql`excluded.description_hash`,
           applyUrl: sql`excluded.apply_url`,

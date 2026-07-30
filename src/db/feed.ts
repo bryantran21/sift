@@ -1,7 +1,7 @@
 import { and, desc, eq, isNull, isNotNull, sql, type SQL } from 'drizzle-orm';
 import { getDb } from './client';
 import { jobs, sources, runs } from './schema';
-import type { Tier, WorkMode } from '../types';
+import type { Seniority, Tier, WorkMode } from '../types';
 
 export interface FeedParams {
   q?: string;
@@ -9,6 +9,7 @@ export interface FeedParams {
   mode?: WorkMode;
   tag?: string; // quant | big-tech | fortune-500 | college
   recency?: 'green' | 'yellow' | 'red';
+  seniority?: string; // intern | new-grad | mid | senior | staff+ (undefined = any level)
   company?: string;
   page?: number;
 }
@@ -45,6 +46,7 @@ function conditions(p: FeedParams): SQL[] {
   // Tech + US are hard constraints of the feed, not user-toggleable filters.
   c.push(sql`${jobs.category} <> 'other'`);
   c.push(eq(jobs.country, 'US'));
+  if (p.seniority) c.push(eq(jobs.seniority, p.seniority as Seniority));
   if (p.company) c.push(eq(jobs.company, p.company));
   if (p.q) {
     const like = `%${p.q}%`;

@@ -2,12 +2,13 @@ import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedRow, type FeedP
 import { logoFor } from '../lib/logos';
 import { monogram } from '../lib/avatar';
 import { recencyBucket, ageLabel } from '../lib/recency';
-import type { WorkMode } from '../types';
+import type { Seniority, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 
 export const dynamic = 'force-dynamic';
 
 const WORK_MODES: WorkMode[] = ['remote', 'hybrid', 'onsite', 'unknown'];
+const SENIORITIES: Seniority[] = ['intern', 'new-grad', 'mid', 'senior', 'staff+'];
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -16,12 +17,14 @@ function parse(sp: SP): FeedParams {
   const tier = Number(g('tier'));
   const mode = g('mode');
   const rec = g('recency');
+  const level = g('level');
   return {
     q: g('q')?.trim() || undefined,
     tier: tier === 1 || tier === 2 || tier === 3 ? tier : undefined,
     mode: WORK_MODES.includes(mode as WorkMode) ? (mode as WorkMode) : undefined,
     tag: g('tag') || undefined,
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
+    seniority: SENIORITIES.includes(level as Seniority) ? level : undefined,
     company: g('company')?.trim() || undefined,
     page: Math.max(1, Number(g('page')) || 1),
   };
