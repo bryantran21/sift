@@ -1,9 +1,8 @@
-import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedRow, type FeedParams } from '../db/feed';
+import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
-import { monogram } from '../lib/avatar';
-import { recencyBucket, ageLabel } from '../lib/recency';
 import type { Seniority, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
+import { FeedTable } from './feed-table';
 
 export const dynamic = 'force-dynamic';
 
@@ -35,6 +34,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
   const params = parse(sp);
   const [meta, feed, companyNames] = await Promise.all([getFeedMeta(), getFeed(params), getCompanies()]);
   const companies = companyNames.map((name) => ({ name, logo: logoFor(name) }));
+  const rows = feed.rows.map((r) => ({ ...r, logo: logoFor(r.company) }));
 
   const totalPages = Math.max(1, Math.ceil(feed.total / PAGE_SIZE));
   const healthWarn = meta.sourcesOk < meta.sourcesTotal;
@@ -73,27 +73,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
 
       <div className="tablewrap">
         <div className="scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Title</th>
-                <th>Locations</th>
-                <th>Added</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feed.rows.length === 0 ? (
-                <tr>
-                  <td colSpan={4}>
-                    <div className="empty">No roles match these filters.</div>
-                  </td>
-                </tr>
-              ) : (
-                feed.rows.map((r) => <Row key={r.id} r={r} />)
-              )}
-            </tbody>
-          </table>
+          <FeedTable rows={rows} />
         </div>
         <div className="showing">
           <span>
@@ -104,53 +84,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
         </div>
       </div>
     </main>
-  );
-}
-
-function Row({ r }: { r: FeedRow }) {
-  const effective = r.postedAt ?? r.firstSeenAt;
-  const bucket = recencyBucket(effective);
-  return (
-    <tr>
-      <td>
-        <div className="co">
-          <Icon company={r.company} />
-          <div>
-            <div className="name">
-              {r.company} {r.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
-            </div>
-            <div className="slug mono">{r.ats}</div>
-          </div>
-        </div>
-      </td>
-      <td>
-        <a className="jtitle" href={r.applyUrl} target="_blank" rel="noopener noreferrer" title={r.title}>
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</span>
-          <span className="ext">↗</span>
-        </a>
-      </td>
-      <td>
-        <div className="locs">{formatLocs(r.locations)}</div>
-      </td>
-      <td>
-        <span className="added">
-          <span className={`rdot r-${bucket}`} />
-          <span className="date mono">{fmtDate(effective)}</span>
-          <span className="age mono">{ageLabel(effective)}</span>
-        </span>
-      </td>
-    </tr>
-  );
-}
-
-function Icon({ company }: { company: string }) {
-  const logo = logoFor(company);
-  if (logo) return <img className="ico" src={logo} alt="" />;
-  const { ch, hue } = monogram(company);
-  return (
-    <span className="ico mono-ico" style={{ background: `hsl(${hue},36%,42%)` }}>
-      {ch}
-    </span>
   );
 }
 
@@ -172,17 +105,6 @@ function Pager({ sp, page, totalPages }: { sp: SP; page: number; totalPages: num
       {page < totalPages ? <a href={href(page + 1)}>Next ›</a> : <span className="disabled">Next ›</span>}
     </div>
   );
-}
-
-function formatLocs(locations: string[]): string {
-  if (!locations || locations.length === 0) return '—';
-  if (locations.length <= 2) return locations.join(' · ');
-  return `${locations.slice(0, 2).join(' · ')} +${locations.length - 2}`;
-}
-
-function fmtDate(d: Date | null): string {
-  if (!d) return '—';
-  return new Date(d).toISOString().slice(0, 10);
 }
 
 function relTime(d: Date | null): string {
