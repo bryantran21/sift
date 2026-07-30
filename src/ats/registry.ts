@@ -1,14 +1,17 @@
 import type { Ats, AtsAdapter } from '../types';
 import { greenhouseAdapter } from './greenhouse';
 import { workdayAdapter } from './workday';
+import { ashbyAdapter } from './ashby';
+import { leverAdapter } from './lever';
 
-// Adapters are registered here as they land. Greenhouse (Phase 1) and Workday
-// (pulled forward) are live; the remaining GET adapters (Lever, Ashby,
-// SmartRecruiters, Workable) arrive in Phase 2. Sources whose ATS has no adapter
-// yet are skipped by the ingest run with a clear note, not treated as errors.
+// Adapters are registered here as they land. Greenhouse, Workday, Ashby, and Lever
+// are live; SmartRecruiters + Workable remain. Sources whose ATS has no adapter yet
+// are skipped by the ingest run with a clear note, not treated as errors.
 const adapters: Partial<Record<Ats, AtsAdapter>> = {
   greenhouse: greenhouseAdapter,
   workday: workdayAdapter,
+  ashby: ashbyAdapter,
+  lever: leverAdapter,
 };
 
 export function getAdapter(ats: Ats): AtsAdapter | undefined {
