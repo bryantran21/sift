@@ -103,7 +103,7 @@ export const companies: Company[] = [
   // ── BIG TECH · custom sites / unconfirmed ───────────────────────────────────
   { name: 'Google', tag: 'big-tech', domain: 'google.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
   { name: 'Meta', tag: 'big-tech', domain: 'meta.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
-  { name: 'Amazon', tag: 'big-tech', domain: 'amazon.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
+  { name: 'Amazon', tag: 'big-tech', domain: 'amazon.com', ats: 'amazon', slug: 'amazon', status: 'live', eta: 'Live', tier: 1, note: 'Bespoke adapter over the amazon.jobs search API.' },
   { name: 'Apple', tag: 'big-tech', domain: 'apple.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
   { name: 'Microsoft', tag: 'big-tech', domain: 'microsoft.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
   { name: 'Snowflake', tag: 'big-tech', domain: 'snowflake.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'No Greenhouse board at common slugs; ATS unconfirmed.' },

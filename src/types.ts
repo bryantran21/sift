@@ -7,7 +7,9 @@ export type Ats =
   | 'ashby'
   | 'smartrecruiters'
   | 'workable'
-  | 'workday';
+  | 'workday'
+  // Bespoke big-tech adapters (custom career-site JSON APIs, 1:1 with a company).
+  | 'amazon';
 
 export type Tier = 1 | 2 | 3;
 
