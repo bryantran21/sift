@@ -1,0 +1,39 @@
+name: prune
+
+# Daily DB cleanup: prune old job_sightings and hard-delete jobs long gone from the
+# ATS. Kept separate from the 30-min ingest so deletes run once/day, not 48×.
+on:
+  schedule:
+    - cron: '0 8 * * *' # daily, 08:00 UTC
+  workflow_dispatch: {} # manual "Run workflow" button
+
+concurrency:
+  group: prune
+  cancel-in-progress: false
+
+jobs:
+  prune:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run prune
+        # `pnpm run` (not `pnpm prune`, which is pnpm's built-in dependency prune).
+        run: pnpm run db:prune
+        env:
+          # Same DB as ingest. Use Supabase's POOLER connection string.
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          # Optional override; defaults to 30.
+          PRUNE_RETAIN_DAYS: ${{ vars.PRUNE_RETAIN_DAYS }}

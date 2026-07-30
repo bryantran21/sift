@@ -35,17 +35,25 @@ export interface FeedRow {
 
 export const PAGE_SIZE = 100;
 
+// Hide listings older than this. A year-old "still open" req usually isn't hiring;
+// keeping them out sharpens the feed. Reversible — the rows stay in the DB, just
+// filtered from the feed. Keyed off COALESCE(posted_at, first_seen_at).
+export const STALE_DAYS = Number(process.env.FEED_STALE_DAYS ?? 45);
+
 // COALESCE(posted_at, first_seen_at) — the "Added" date the feed sorts and colors by.
 const added = sql<Date>`coalesce(${jobs.postedAt}, ${jobs.firstSeenAt})`;
+// Rows fresh enough to show (not older than STALE_DAYS).
+const freshEnough = sql`${added} >= now() - ${STALE_DAYS} * interval '1 day'`;
 
 function conditions(p: FeedParams): SQL[] {
   const c: SQL[] = [isNull(jobs.removedAt)];
   if (p.tier) c.push(eq(jobs.companyTier, p.tier));
   if (p.mode) c.push(eq(jobs.workMode, p.mode));
   if (p.tag) c.push(sql`${sources.tags} @> ${JSON.stringify([p.tag])}::jsonb`);
-  // Tech + US are hard constraints of the feed, not user-toggleable filters.
+  // Tech + US + fresh are hard constraints of the feed, not user-toggleable filters.
   c.push(sql`${jobs.category} <> 'other'`);
   c.push(eq(jobs.country, 'US'));
+  c.push(freshEnough);
   if (p.seniority) c.push(eq(jobs.seniority, p.seniority as Seniority));
   if (p.company) c.push(eq(jobs.company, p.company));
   if (p.q) {
@@ -130,7 +138,7 @@ export async function getFeedMeta(): Promise<FeedMeta> {
 
   const [jobsAgg] = await db
     .select({
-      live: sql<number>`count(*) filter (where ${jobs.removedAt} is null)::int`,
+      live: sql<number>`count(*) filter (where ${jobs.removedAt} is null and ${freshEnough})::int`,
       addedToday: sql<number>`count(*) filter (where ${jobs.removedAt} is null and ${jobs.firstSeenAt} >= date_trunc('day', now()))::int`,
     })
     .from(jobs);
