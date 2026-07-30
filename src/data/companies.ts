@@ -97,8 +97,8 @@ export const companies: Company[] = [
   { name: 'Salesforce', tag: 'big-tech', domain: 'salesforce.com', ats: 'workday', slug: 'salesforce', status: 'live', eta: 'Live', tier: 3, jobs: 1435, tenant: 'salesforce', shard: '12', site: 'External_Career_Site' },
 
   // ── BIG TECH · adapter pending (supported ATS, not yet built) ───────────────
-  { name: 'OpenAI', tag: 'big-tech', domain: 'openai.com', ats: 'ashby', status: 'pending', eta: 'Phase 2', tier: 1, note: 'Ashby board — adapter lands in Phase 2.' },
-  { name: 'Ramp', tag: 'big-tech', domain: 'ramp.com', ats: 'ashby', status: 'pending', eta: 'Phase 2', tier: 2, note: 'Ashby board — adapter lands in Phase 2.' },
+  { name: 'OpenAI', tag: 'big-tech', domain: 'openai.com', ats: 'ashby', slug: 'openai', status: 'live', eta: 'Live', tier: 1, note: 'Ashby board.' },
+  { name: 'Ramp', tag: 'big-tech', domain: 'ramp.com', ats: 'ashby', slug: 'ramp', status: 'live', eta: 'Live', tier: 2, note: 'Ashby board.' },
 
   // ── BIG TECH · custom sites / unconfirmed ───────────────────────────────────
   { name: 'Google', tag: 'big-tech', domain: 'google.com', ats: 'custom', status: 'blocked', tier: 1, note: 'Custom careers site — no JSON board.' },
@@ -110,7 +110,8 @@ export const companies: Company[] = [
   { name: 'DoorDash', tag: 'big-tech', domain: 'doordash.com', ats: 'unknown', status: 'unknown', tier: 3, note: 'ATS unconfirmed.' },
   { name: 'Plaid', tag: 'big-tech', domain: 'plaid.com', ats: 'unknown', status: 'unknown', tier: 3, note: 'ATS unconfirmed.' },
   { name: 'Notion', tag: 'big-tech', domain: 'notion.so', ats: 'unknown', status: 'unknown', tier: 2, note: 'ATS unconfirmed.' },
-  { name: 'Netflix', tag: 'big-tech', domain: 'netflix.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'ATS unconfirmed.' },
+  { name: 'Palantir', tag: 'big-tech', domain: 'palantir.com', ats: 'lever', slug: 'palantir', status: 'live', eta: 'Live', tier: 1, note: 'Lever board.' },
+  { name: 'Netflix', tag: 'big-tech', domain: 'netflix.com', ats: 'custom', status: 'blocked', tier: 2, note: 'Custom careers site (Eightfold) — no public JSON board; not on Lever.' },
 
   // ── COLLEGE · you'd work here ───────────────────────────────────────────────
   { name: 'Carnegie Mellon (CMU)', tag: 'college', domain: 'cmu.edu', ats: 'workday', slug: 'cmu', status: 'live', eta: 'Live', tier: 1, jobs: 203, tenant: 'cmu', shard: '5', site: 'CMU' },
