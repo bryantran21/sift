@@ -9,6 +9,8 @@
     "build": "next build",
     "start": "next start",
     "ingest": "tsx src/ingest/run.ts",
+    "db:prune": "tsx scripts/prune.ts",
+    "score-resume": "tsx scripts/score-resume.ts",
     "build:logos": "tsx scripts/fetch-logos.ts",
     "build:browser": "tsx scripts/build-company-browser.ts",
     "test": "tsx --test src/**/*.test.ts",
@@ -21,6 +23,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "js-yaml": "^4.3.0",
