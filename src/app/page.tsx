@@ -1,16 +1,13 @@
 import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedRow, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
+import { monogram } from '../lib/avatar';
 import { recencyBucket, ageLabel } from '../lib/recency';
-import type { Category, WorkMode } from '../types';
+import type { WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 
 export const dynamic = 'force-dynamic';
 
 const WORK_MODES: WorkMode[] = ['remote', 'hybrid', 'onsite', 'unknown'];
-const CATEGORIES: Category[] = [
-  'quant-trading', 'quant-research', 'quant-dev', 'ml-research', 'ml-engineering',
-  'swe-infra', 'swe-general', 'data', 'other',
-];
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -19,16 +16,12 @@ function parse(sp: SP): FeedParams {
   const tier = Number(g('tier'));
   const mode = g('mode');
   const rec = g('recency');
-  const cat = g('cat');
-  const loc = g('loc');
   return {
     q: g('q')?.trim() || undefined,
     tier: tier === 1 || tier === 2 || tier === 3 ? tier : undefined,
     mode: WORK_MODES.includes(mode as WorkMode) ? (mode as WorkMode) : undefined,
     tag: g('tag') || undefined,
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
-    category: cat === 'all' || cat === 'tech' || CATEGORIES.includes(cat as Category) ? cat : undefined,
-    country: loc === 'any' ? 'any' : undefined,
     company: g('company')?.trim() || undefined,
     page: Math.max(1, Number(g('page')) || 1),
   };
@@ -37,7 +30,8 @@ function parse(sp: SP): FeedParams {
 export default async function Page({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const params = parse(sp);
-  const [meta, feed, companies] = await Promise.all([getFeedMeta(), getFeed(params), getCompanies()]);
+  const [meta, feed, companyNames] = await Promise.all([getFeedMeta(), getFeed(params), getCompanies()]);
+  const companies = companyNames.map((name) => ({ name, logo: logoFor(name) }));
 
   const totalPages = Math.max(1, Math.ceil(feed.total / PAGE_SIZE));
   const healthWarn = meta.sourcesOk < meta.sourcesTotal;
@@ -149,12 +143,9 @@ function Row({ r }: { r: FeedRow }) {
 function Icon({ company }: { company: string }) {
   const logo = logoFor(company);
   if (logo) return <img className="ico" src={logo} alt="" />;
-  const s = company.replace(/[^A-Za-z0-9]/g, '');
-  const ch = (s ? s[0] : '?').toUpperCase();
-  let h = 0;
-  for (let i = 0; i < company.length; i++) h = (h * 31 + company.charCodeAt(i)) % 360;
+  const { ch, hue } = monogram(company);
   return (
-    <span className="ico mono-ico" style={{ background: `hsl(${h},36%,42%)` }}>
+    <span className="ico mono-ico" style={{ background: `hsl(${hue},36%,42%)` }}>
       {ch}
     </span>
   );
