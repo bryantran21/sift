@@ -30,6 +30,14 @@ const RECENCY: [string, string][] = [
   ['yellow', '< 7 days'],
   ['red', '> 7 days'],
 ];
+const LEVELS: [string, string][] = [
+  ['', 'Any level'],
+  ['intern', 'Intern'],
+  ['new-grad', 'New Grad'],
+  ['mid', 'Mid'],
+  ['senior', 'Senior'],
+  ['staff+', 'Staff+'],
+];
 
 export interface CompanyOpt {
   name: string;
@@ -96,7 +104,7 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     update({ q: text.trim() });
   };
 
-  const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency', 'company'].some((k) => sp.get(k));
+  const hasFilters = ['q', 'level', 'tier', 'tag', 'mode', 'recency', 'company'].some((k) => sp.get(k));
 
   return (
     <div className="toolbar">
@@ -124,6 +132,7 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
           value={sp.get('company') ?? ''}
           onChange={(v) => update({ company: v })}
         />
+        <Ctrl name="level" value={sp.get('level') ?? ''} opts={LEVELS} onChange={(v) => update({ level: v })} />
         <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
         <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
         <Ctrl name="mode" value={sp.get('mode') ?? ''} opts={MODES} onChange={(v) => update({ mode: v })} />
