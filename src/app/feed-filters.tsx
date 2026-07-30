@@ -42,9 +42,12 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
   const sp = useSearchParams();
   const searchRef = useRef<HTMLInputElement>(null);
 
+  // Read the LIVE URL (not the `sp` snapshot) so rapid successive updates — e.g. a
+  // debounced search clear racing an immediate dropdown change — merge onto the
+  // latest params instead of clobbering each other with a stale snapshot.
   const update = useCallback(
     (patch: Record<string, string>) => {
-      const params = new URLSearchParams(sp.toString());
+      const params = new URLSearchParams(window.location.search);
       for (const [k, v] of Object.entries(patch)) {
         if (v) params.set(k, v);
         else params.delete(k);
@@ -52,7 +55,7 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
       params.delete('page');
       router.replace(params.toString() ? `${pathname}?${params}` : pathname);
     },
-    [router, pathname, sp],
+    [router, pathname],
   );
 
   useEffect(() => {
@@ -66,6 +69,33 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // Debounced live search: the input drives `q` directly so the visible box always
+  // matches the URL. Previously `q` changed only on Enter, so clearing the box left a
+  // stale `q` that other filter changes carried along — emptying the feed.
+  const [text, setText] = useState(sp.get('q') ?? '');
+  const qTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const urlQ = sp.get('q') ?? '';
+  useEffect(() => {
+    // reflect external `q` changes (e.g. the Clear link) without clobbering typing
+    if (document.activeElement !== searchRef.current) setText(urlQ);
+  }, [urlQ]);
+
+  const onSearch = (v: string) => {
+    setText(v);
+    if (qTimer.current) clearTimeout(qTimer.current);
+    // Clear immediately so it can't race a subsequent filter change; debounce typing.
+    if (v.trim() === '') {
+      update({ q: '' });
+      return;
+    }
+    qTimer.current = setTimeout(() => update({ q: v.trim() }), 300);
+  };
+  const flushSearch = () => {
+    if (qTimer.current) clearTimeout(qTimer.current);
+    update({ q: text.trim() });
+  };
+
   const hasFilters = ['q', 'tier', 'tag', 'mode', 'recency', 'company'].some((k) => sp.get(k));
 
   return (
@@ -74,15 +104,15 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
         className="search"
         onSubmit={(e) => {
           e.preventDefault();
-          update({ q: searchRef.current?.value ?? '' });
+          flushSearch();
         }}
       >
         <span className="ic">⌕</span>
         <input
           ref={searchRef}
-          key={sp.get('q') ?? ''}
           type="search"
-          defaultValue={sp.get('q') ?? ''}
+          value={text}
+          onChange={(e) => onSearch(e.target.value)}
           placeholder="Search company, title, location  ( / )"
           aria-label="Search"
           autoComplete="off"

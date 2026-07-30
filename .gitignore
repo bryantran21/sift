@@ -13,8 +13,12 @@ node_modules/
 
 # build / logs / os
 dist/
-# generated favicons (regenerate with `pnpm build:logos`)
-src/data/logos.json
+# note: src/data/logos.json IS committed so favicons ship to production
+# (Vercel doesn't run `pnpm build:logos`). Regenerate + recommit when sources change.
+
+# personal: your résumé and its score never get committed
+resume.txt
+resume-score.json
 *.log
 npm-debug.log*
 pnpm-debug.log*
