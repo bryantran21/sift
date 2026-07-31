@@ -33,3 +33,11 @@ test('does not false-positive on substrings (Columbus, Belarus)', () => {
   assert.equal(deriveCountry(['Columbus, Ohio']), 'US'); // Ohio is a state
   assert.equal(deriveCountry(['Minsk, Belarus']), 'unknown'); // not a US match
 });
+
+test('recognizes bare US cities (Ashby boards omit state/country)', () => {
+  assert.equal(deriveCountry(['San Francisco']), 'US');
+  assert.equal(deriveCountry(['New York']), 'US');
+  assert.equal(deriveCountry(['Seattle']), 'US');
+  // foreign country still wins over a same-named US city
+  assert.equal(deriveCountry(['San Jose, Costa Rica']), 'non-US');
+});

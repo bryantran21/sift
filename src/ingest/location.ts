@@ -41,6 +41,20 @@ const FOREIGN = [
   'chile', 'santiago', 'peru', 'lima', 'colombia', 'bogota', 'costa rica', 'san jose costa rica',
 ];
 
+// Major US metros / tech hubs, for locations given as a bare city with no state or
+// country (common on Ashby boards, e.g. OpenAI's "San Francisco"). Checked AFTER the
+// foreign list so "San Jose, Costa Rica" resolves non-US before "san jose" → US.
+const US_CITIES = [
+  'san francisco', 'sf', 'new york', 'new york city', 'nyc', 'brooklyn', 'manhattan',
+  'seattle', 'bellevue', 'redmond', 'austin', 'boston', 'cambridge', 'los angeles',
+  'san jose', 'san diego', 'mountain view', 'palo alto', 'menlo park', 'sunnyvale',
+  'santa clara', 'cupertino', 'san mateo', 'oakland', 'san bruno', 'culver city',
+  'santa monica', 'chicago', 'denver', 'boulder', 'atlanta', 'arlington', 'reston',
+  'herndon', 'mclean', 'pittsburgh', 'philadelphia', 'dallas', 'houston', 'phoenix',
+  'miami', 'portland', 'minneapolis', 'detroit', 'nashville', 'raleigh', 'durham',
+  'salt lake city', 'las vegas', 'sacramento', 'irvine',
+];
+
 const US_MARKER = /\b(united states|u\s?s\s?a|us|usa|u\s?s|america)\b/;
 
 function norm(s: string): string {
@@ -52,6 +66,7 @@ function classifyOne(loc: string): Country {
   if (US_MARKER.test(h)) return 'US';
   if (US_STATES.some((st) => h.includes(` ${st} `))) return 'US';
   if (FOREIGN.some((c) => h.includes(` ${c} `))) return 'non-US';
+  if (US_CITIES.some((c) => h.includes(` ${c} `))) return 'US';
   return 'unknown';
 }
 
