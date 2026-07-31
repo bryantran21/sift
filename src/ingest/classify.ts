@@ -31,7 +31,9 @@ const RULES: [RegExp, Category][] = [
 
   // ── General & hardware software/eng ────────────────────────────────────────
   // "software … engineer/developer" covers SDE / "software development engineer".
-  [/\bswe\b|\bsoftware\b.*\b(engineer|developer|dev)\b|\b(full[- ]?stack|front[- ]?end|back[- ]?end|web (engineer|developer)|mobile (engineer|developer)|ios|android|embedded|firmware|programmer|game (engineer|developer)|graphics engineer)\b/, 'swe-general'],
+  // "member of technical staff" is the generalist eng/research title at OpenAI,
+  // Anthropic, xAI, etc.; "research engineer" is likewise a core eng role there.
+  [/\bswe\b|\bsoftware\b.*\b(engineer|developer|dev)\b|\bmember of technical staff\b|\bresearch engineer\b|\b(full[- ]?stack|front[- ]?end|back[- ]?end|web (engineer|developer)|mobile (engineer|developer)|ios|android|embedded|firmware|programmer|game (engineer|developer)|graphics engineer)\b/, 'swe-general'],
   // Hardware / silicon / EE engineering (chip companies) — still "tech".
   [/\b(hardware|silicon|asic|fpga|\brtl\b|vlsi|verification|signal integrity|power (integrity|management|design)|analog|circuit|chip|semiconductor)\b.*\bengineer/, 'swe-general'],
 ];

@@ -333,6 +333,12 @@
   tier: 1
   tags: [big-tech]
 
+- company: Netflix
+  ats: netflix
+  slug: netflix
+  tier: 2
+  tags: [big-tech]
+
 # ── Reference: remaining ATS shapes ───────────────────────────────────────────
 # SmartRecruiters and Workable adapters are not built yet. Most Fortune 500 non-tech
 # companies run Workday (add tenant/shard/site off their careers URL) or Taleo/iCIMS
