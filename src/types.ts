@@ -9,7 +9,8 @@ export type Ats =
   | 'workable'
   | 'workday'
   // Bespoke big-tech adapters (custom career-site JSON APIs, 1:1 with a company).
-  | 'amazon';
+  | 'amazon'
+  | 'netflix';
 
 export type Tier = 1 | 2 | 3;
 

@@ -111,7 +111,7 @@ export const companies: Company[] = [
   { name: 'Plaid', tag: 'big-tech', domain: 'plaid.com', ats: 'unknown', status: 'unknown', tier: 3, note: 'ATS unconfirmed.' },
   { name: 'Notion', tag: 'big-tech', domain: 'notion.so', ats: 'unknown', status: 'unknown', tier: 2, note: 'ATS unconfirmed.' },
   { name: 'Palantir', tag: 'big-tech', domain: 'palantir.com', ats: 'lever', slug: 'palantir', status: 'live', eta: 'Live', tier: 1, note: 'Lever board.' },
-  { name: 'Netflix', tag: 'big-tech', domain: 'netflix.com', ats: 'custom', status: 'blocked', tier: 2, note: 'Custom careers site (Eightfold) — no public JSON board; not on Lever.' },
+  { name: 'Netflix', tag: 'big-tech', domain: 'netflix.com', ats: 'netflix', slug: 'netflix', status: 'live', eta: 'Live', tier: 2, note: 'Bespoke adapter over the Eightfold careers API.' },
 
   // ── COLLEGE · you'd work here ───────────────────────────────────────────────
   { name: 'Carnegie Mellon (CMU)', tag: 'college', domain: 'cmu.edu', ats: 'workday', slug: 'cmu', status: 'live', eta: 'Live', tier: 1, jobs: 203, tenant: 'cmu', shard: '5', site: 'CMU' },

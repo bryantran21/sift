@@ -10,7 +10,7 @@ import type { Source } from '../types';
 
 const sourceSchema = z.object({
   company: z.string().min(1),
-  ats: z.enum(['greenhouse', 'lever', 'ashby', 'smartrecruiters', 'workable', 'workday', 'amazon']),
+  ats: z.enum(['greenhouse', 'lever', 'ashby', 'smartrecruiters', 'workable', 'workday', 'amazon', 'netflix']),
   slug: z.string().min(1),
   tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   tags: z.array(z.string()).default([]),
