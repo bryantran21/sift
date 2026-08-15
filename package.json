@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "ingest": "tsx src/ingest/run.ts",
+    "import:sources": "tsx scripts/import-sources.ts",
     "db:prune": "tsx scripts/prune.ts",
     "score-resume": "tsx scripts/score-resume.ts",
     "build:logos": "tsx scripts/fetch-logos.ts",

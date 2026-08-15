@@ -26,7 +26,7 @@ function effectiveDate(j: NormalizedJob): Date | null {
 // Phase 1 ingest: fetch every runnable source concurrently, normalize, and print.
 // Persistence and diffing arrive in Phase 2 — this run touches no database.
 
-const CONCURRENCY = 8;
+const CONCURRENCY = 12;
 const JITTER_MS = 300;
 
 interface SourceResult {
