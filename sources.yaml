@@ -326,6 +326,15 @@
   tier: 1
   tags: [big-tech]
 
+# ── Live via SmartRecruiters (paginated GET; country=us) ─────────────────────
+# `slug` is the SmartRecruiters companyId. Many more come in via the bulk importer
+# (sources.generated.yaml).
+- company: Western Digital
+  ats: smartrecruiters
+  slug: WesternDigital
+  tier: 3
+  tags: [fortune-500]
+
 # ── Live via bespoke big-tech adapters (company-specific JSON APIs) ───────────
 - company: Amazon
   ats: amazon

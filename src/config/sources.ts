@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { load } from 'js-yaml';
@@ -23,25 +23,21 @@ const sourceSchema = z.object({
 
 const fileSchema = z.array(sourceSchema);
 
-function defaultSourcesPath(): string {
+function rootPath(name: string): string {
   const here = path.dirname(fileURLToPath(import.meta.url));
-  return path.join(here, '..', '..', 'sources.yaml');
+  return path.join(here, '..', '..', name);
 }
 
-export function loadSources(filePath?: string): Source[] {
-  const resolved = filePath ?? defaultSourcesPath();
-  const raw = readFileSync(resolved, 'utf8');
-  const parsed = load(raw);
-
+function parseSourcesFile(resolved: string, label: string): Source[] {
+  const parsed = load(readFileSync(resolved, 'utf8'));
   const result = fileSchema.safeParse(parsed);
   if (!result.success) {
     const details = result.error.issues
       .map((i) => `  - [${i.path.join('.') || 'root'}] ${i.message}`)
       .join('\n');
-    throw new Error(`Invalid sources.yaml:\n${details}`);
+    throw new Error(`Invalid ${label}:\n${details}`);
   }
-
-  const sources = result.data.map(
+  return result.data.map(
     (s): Source => ({
       company: s.company,
       ats: s.ats,
@@ -54,6 +50,29 @@ export function loadSources(filePath?: string): Source[] {
       site: s.site,
     }),
   );
+}
+
+// Curated sources.yaml (hand-maintained) plus an optional machine-generated
+// sources.generated.yaml (from scripts/import-sources.ts). Curated wins on any
+// (ats:slug) conflict; the generated set fills out coverage in bulk.
+export function loadSources(filePath?: string): Source[] {
+  const curated = parseSourcesFile(filePath ?? rootPath('sources.yaml'), 'sources.yaml');
+
+  let generated: Source[] = [];
+  const genPath = rootPath('sources.generated.yaml');
+  if (!filePath && existsSync(genPath)) {
+    generated = parseSourcesFile(genPath, 'sources.generated.yaml');
+  }
+
+  // Merge + dedupe by ats:slug (curated first → curated wins).
+  const seen = new Set<string>();
+  const sources: Source[] = [];
+  for (const s of [...curated, ...generated]) {
+    const key = `${s.ats}:${s.slug}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    sources.push(s);
+  }
 
   // Workday needs all three coordinates or its POST endpoint can't be built.
   for (const s of sources) {
@@ -62,14 +81,6 @@ export function loadSources(filePath?: string): Source[] {
         `Workday source "${s.company}" needs tenant, shard, and site (from the careers URL).`,
       );
     }
-  }
-
-  // Guard against accidental duplicate boards.
-  const seen = new Set<string>();
-  for (const s of sources) {
-    const key = `${s.ats}:${s.slug}`;
-    if (seen.has(key)) throw new Error(`Duplicate source in sources.yaml: ${key}`);
-    seen.add(key);
   }
 
   return sources;
