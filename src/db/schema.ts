@@ -78,6 +78,7 @@ export const jobs = pgTable(
 
     category: text('category').$type<Category>().notNull().default('other'),
     seniority: text('seniority').$type<Seniority>().notNull().default('unknown'),
+    skills: jsonb('skills').$type<string[]>().notNull().default([]),
     relevanceScore: integer('relevance_score').notNull().default(0),
     filterFlags: jsonb('filter_flags').$type<string[]>().notNull().default([]),
 

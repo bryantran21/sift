@@ -4,6 +4,7 @@ import { contentHash, stableId } from '../lib/hash';
 import { classifyCategory } from './classify';
 import { classifySeniority } from './seniority';
 import { deriveCountry } from './location';
+import { extractSkills } from '../scoring/skills';
 
 export function normalizeJob(raw: RawJob): NormalizedJob {
   const description =
@@ -30,6 +31,7 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     // Stage-1 title classification (§5). Relevance scoring lands in a later phase.
     category: classifyCategory(raw.title),
     seniority: classifySeniority(raw.title),
+    skills: extractSkills(`${raw.title}\n${description}`),
     relevanceScore: 0,
     filterFlags: [],
   };

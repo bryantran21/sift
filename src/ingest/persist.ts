@@ -98,6 +98,7 @@ export async function persistRun(input: PersistInput): Promise<PersistResult> {
           workMode: sql`excluded.work_mode`,
           category: sql`excluded.category`,
           seniority: sql`excluded.seniority`,
+          skills: sql`excluded.skills`,
           description: sql`excluded.description`,
           descriptionHash: sql`excluded.description_hash`,
           applyUrl: sql`excluded.apply_url`,
@@ -161,6 +162,7 @@ function toRow(r: CollapsedJob) {
     postedAt: r.postedAt,
     category: r.category,
     seniority: r.seniority,
+    skills: r.skills,
     relevanceScore: r.relevanceScore,
     filterFlags: r.filterFlags,
   };

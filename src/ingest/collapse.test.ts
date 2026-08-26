@@ -23,6 +23,7 @@ function job(over: Partial<NormalizedJob>): NormalizedJob {
     postedAt: null,
     category: 'other',
     seniority: 'unknown',
+    skills: [],
     relevanceScore: 0,
     filterFlags: [],
     ...over,
