@@ -13,7 +13,7 @@ import { dump } from 'js-yaml';
 import { loadSources } from '../src/config/sources';
 import type { Ats } from '../src/types';
 
-const LIMIT = Number(process.argv[2] ?? 500);
+const LIMIT = Number(process.argv[2] ?? 650);
 const LISTINGS = [
   'https://raw.githubusercontent.com/SimplifyJobs/New-Grad-Positions/dev/.github/scripts/listings.json',
   'https://raw.githubusercontent.com/SimplifyJobs/Summer2026-Internships/dev/.github/scripts/listings.json',
