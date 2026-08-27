@@ -15,6 +15,13 @@
       "when": 1785282809746,
       "tag": "0001_exotic_slapstick",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787709904996,
+      "tag": "0002_rainy_shadowcat",
+      "breakpoints": true
     }
   ]
 }

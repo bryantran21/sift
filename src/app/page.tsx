@@ -45,6 +45,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
         <div className="brand">
           <span className="mark">sift</span>
           <span className="tag">job radar</span>
+          <a className="fit-link" href="/fit">
+            ✦ fit finder
+          </a>
         </div>
         <div className="metrics">
           <div className="metric">

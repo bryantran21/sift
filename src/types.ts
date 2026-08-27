@@ -95,6 +95,7 @@ export interface NormalizedJob {
   postedAt: Date | null;
   category: Category;
   seniority: Seniority;
+  skills: string[]; // tech skills extracted from title + description (for résumé fit)
   relevanceScore: number;
   filterFlags: string[];
 }

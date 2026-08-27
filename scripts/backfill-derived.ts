@@ -8,22 +8,29 @@ import { sql } from 'drizzle-orm';
 import { classifyCategory } from '../src/ingest/classify';
 import { classifySeniority } from '../src/ingest/seniority';
 import { deriveCountry } from '../src/ingest/location';
+import { extractSkills } from '../src/scoring/skills';
 
 const db = getDb();
 try {
   const rows = await db
-    .select({ id: schema.jobs.id, title: schema.jobs.title, locations: schema.jobs.locations })
+    .select({
+      id: schema.jobs.id,
+      title: schema.jobs.title,
+      locations: schema.jobs.locations,
+      description: schema.jobs.description,
+    })
     .from(schema.jobs);
 
-  console.log(`recomputing category + country + seniority for ${rows.length} rows…`);
+  console.log(`recomputing category + country + seniority + skills for ${rows.length} rows…`);
   let n = 0;
   for (const r of rows) {
     const category = classifyCategory(r.title);
     const country = deriveCountry(r.locations ?? []);
     const seniority = classifySeniority(r.title);
+    const skills = extractSkills(`${r.title}\n${r.description ?? ''}`);
     await db
       .update(schema.jobs)
-      .set({ category, country, seniority, updatedAt: new Date() })
+      .set({ category, country, seniority, skills, updatedAt: new Date() })
       .where(sql`${schema.jobs.id} = ${r.id}`);
     if (++n % 500 === 0) console.log(`  …${n}`);
   }
