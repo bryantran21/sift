@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { extractSkills } from '../../scoring/skills';
 
 interface CompanyFit {
@@ -11,39 +11,38 @@ interface CompanyFit {
   gaps: string[];
 }
 
-const KEY = 'sift.resumeSkills';
-
 export default function FitPage() {
   const [resume, setResume] = useState('');
   const [skills, setSkills] = useState<string[]>([]);
   const [fits, setFits] = useState<CompanyFit[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  // Restore a previously-analyzed skill set (résumé itself never leaves the browser).
+  // Restore the résumé skills saved for this device (server-side, durable).
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(KEY);
-      if (saved) {
-        const arr = JSON.parse(saved) as string[];
-        if (Array.isArray(arr) && arr.length) {
-          setSkills(arr);
-          void score(arr);
+    (async () => {
+      try {
+        const data = await fetch('/api/resume').then((r) => r.json());
+        if (Array.isArray(data.skills) && data.skills.length) {
+          setSkills(data.skills);
+          void score(data.skills);
         }
+      } catch {
+        /* ignore */
       }
-    } catch {
-      /* localStorage unavailable — fine */
-    }
+    })();
   }, []);
 
   const score = async (sk: string[]) => {
     setLoading(true);
     try {
-      const res = await fetch('/api/fit', {
+      const data = await fetch('/api/fit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ skills: sk }),
-      });
-      const data = await res.json();
+      }).then((r) => r.json());
       setFits(data.fits ?? []);
     } catch {
       setFits([]);
@@ -52,23 +51,54 @@ export default function FitPage() {
     }
   };
 
-  const analyze = () => {
-    const sk = extractSkills(resume);
+  const persistAndScore = async (sk: string[]) => {
     setSkills(sk);
     try {
-      localStorage.setItem(KEY, JSON.stringify(sk));
+      await fetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ skills: sk }),
+      });
     } catch {
-      /* ignore */
+      /* score anyway */
     }
     void score(sk);
   };
 
-  const clear = () => {
+  const onFile = async (file: File | undefined) => {
+    if (!file) return;
+    if (!/\.pdf$/i.test(file.name) && file.type !== 'application/pdf') {
+      alert('Please drop a PDF résumé (or paste the text below).');
+      return;
+    }
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/resume', { method: 'POST', body: fd });
+      if (!res.ok) {
+        alert('Could not read that PDF — paste the text instead.');
+        return;
+      }
+      const data = await res.json();
+      const sk: string[] = data.skills ?? [];
+      setSkills(sk);
+      void score(sk);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const clear = async () => {
     setResume('');
     setSkills([]);
     setFits(null);
     try {
-      localStorage.removeItem(KEY);
+      await fetch('/api/resume', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ skills: [] }),
+      });
     } catch {
       /* ignore */
     }
@@ -87,21 +117,47 @@ export default function FitPage() {
       </header>
 
       <p className="fit-intro">
-        Paste your résumé. sift extracts your skills <strong>in your browser</strong> (the
-        text never leaves this page) and ranks companies by how well you match their live roles.
+        Drop in your résumé (PDF) or paste the text. sift extracts your skills and ranks companies
+        by how well you match their live roles. We keep only the skills, never the file.
       </p>
+
+      <div
+        className={`fit-drop${dragOver ? ' over' : ''}`}
+        onClick={() => fileRef.current?.click()}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragOver(true);
+        }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={(e) => {
+          e.preventDefault();
+          setDragOver(false);
+          void onFile(e.dataTransfer.files?.[0]);
+        }}
+      >
+        <input
+          ref={fileRef}
+          type="file"
+          accept="application/pdf,.pdf"
+          hidden
+          onChange={(e) => void onFile(e.target.files?.[0] ?? undefined)}
+        />
+        {uploading ? 'Reading your résumé…' : '📄 Drop your résumé PDF here, or click to choose'}
+      </div>
+
+      <div className="fit-or">or paste text</div>
 
       <textarea
         className="fit-input"
         value={resume}
         onChange={(e) => setResume(e.target.value)}
         placeholder="Paste your résumé text here…"
-        rows={8}
+        rows={6}
         aria-label="Résumé text"
       />
       <div className="fit-actions">
-        <button className="fit-btn" onClick={analyze} disabled={!resume.trim()}>
-          Analyze fit
+        <button className="fit-btn" onClick={() => persistAndScore(extractSkills(resume))} disabled={!resume.trim()}>
+          Analyze paste
         </button>
         {skills.length > 0 ? (
           <button className="fit-btn ghost" onClick={clear}>

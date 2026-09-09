@@ -32,6 +32,9 @@ importers:
       react-dom:
         specifier: ^19.2.8
         version: 19.2.8(react@19.2.8)
+      unpdf:
+        specifier: ^1.8.1
+        version: 1.8.1
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -1236,6 +1239,15 @@ packages:
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
+  unpdf@1.8.1:
+    resolution: {integrity: sha512-xkURhy2SoGpOIH0a1gLHNkASPIQYonadDJs2AQwPEfUakafeD9EA1WTWWsaR++gfTCXJpV27W7tU1nXuk82UKQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@napi-rs/canvas': ^0.1.69 || ^1.0.0
+    peerDependenciesMeta:
+      '@napi-rs/canvas':
+        optional: true
+
   zod@4.4.3:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
@@ -2033,5 +2045,7 @@ snapshots:
   typescript@5.9.3: {}
 
   undici-types@8.3.0: {}
+
+  unpdf@1.8.1: {}
 
   zod@4.4.3: {}
