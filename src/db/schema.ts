@@ -171,3 +171,35 @@ export const userState = pgTable(
   },
   (t) => [uniqueIndex('user_state_device_job_uq').on(t.deviceId, t.jobId)],
 );
+
+// ── user_profile ─────────────────────────────────────────────────────────────
+// Durable per-device profile (server-side, survives cache clears): the résumé's
+// extracted skills and the user's dream/target companies. One row per device cookie
+// (later associable with a real account). The raw résumé is never stored — only skills.
+export const userProfile = pgTable('user_profile', {
+  deviceId: text('device_id').primaryKey(),
+  resumeSkills: jsonb('resume_skills').$type<string[]>().notNull().default([]),
+  dreamCompanies: jsonb('dream_companies').$type<string[]>().notNull().default([]),
+  resumeUpdatedAt: timestamp('resume_updated_at', { withTimezone: true }),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+// ── application_events ───────────────────────────────────────────────────────
+// The user's application/OA log, per company — powers cooldown warnings. `eventAt`
+// is when it happened (the date the user records), used to compute cooldown windows.
+export type ApplicationEventType = 'applied' | 'oa' | 'interview' | 'rejected' | 'offer';
+
+export const applicationEvents = pgTable(
+  'application_events',
+  {
+    id: serial('id').primaryKey(),
+    deviceId: text('device_id').notNull(),
+    company: text('company').notNull(),
+    type: text('type').$type<ApplicationEventType>().notNull(),
+    eventAt: timestamp('event_at', { withTimezone: true }).notNull().defaultNow(),
+    notes: text('notes'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index('application_events_device_company_idx').on(t.deviceId, t.company)],
+);
