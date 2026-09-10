@@ -2,6 +2,7 @@ import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedParams } from '
 import { logoFor } from '../lib/logos';
 import { getDeviceId } from '../lib/device';
 import { getProfile } from '../db/profile';
+import { getCooldownStatuses } from '../db/events';
 import type { Seniority, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 import { FeedTable } from './feed-table';
@@ -39,8 +40,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
   const params = parse(sp);
 
   const deviceId = await getDeviceId();
-  const resumeSkills = deviceId ? (await getProfile(deviceId)).resumeSkills : [];
+  const [profile, cooldownStatuses] = deviceId
+    ? await Promise.all([getProfile(deviceId), getCooldownStatuses(deviceId)])
+    : [{ resumeSkills: [] as string[], dreamCompanies: [] as string[] }, []];
+  const resumeSkills = profile.resumeSkills;
   const hasResume = resumeSkills.length > 0;
+  const cooldowns: Record<string, string> = {};
+  for (const c of cooldownStatuses) if (c.active) cooldowns[c.company] = c.endsAt;
 
   const [meta, feed, companyNames] = await Promise.all([
     getFeedMeta(),
@@ -61,6 +67,9 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
           <span className="tag">job radar</span>
           <a className="fit-link" href="/fit">
             ✦ fit finder
+          </a>
+          <a className="fit-link" href="/tracker">
+            ⏳ tracker
           </a>
         </div>
         <div className="metrics">
@@ -96,7 +105,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
 
       <div className="tablewrap">
         <div className="scroll">
-          <FeedTable rows={rows} showMatch={hasResume} />
+          <FeedTable rows={rows} showMatch={hasResume} cooldowns={cooldowns} />
         </div>
         <div className="showing">
           <span>
