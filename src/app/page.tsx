@@ -59,13 +59,21 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
   const totalPages = Math.max(1, Math.ceil(feed.total / PAGE_SIZE));
   const healthWarn = meta.sourcesOk < meta.sourcesTotal;
 
+  // Open the fit-finder modal via ?fit=1 while preserving the current filters.
+  const fitParams = new URLSearchParams();
+  for (const [k, v] of Object.entries(sp)) {
+    if (typeof v === 'string' && k !== 'fit' && k !== 'page') fitParams.set(k, v);
+  }
+  fitParams.set('fit', '1');
+  const fitHref = `/?${fitParams}`;
+
   return (
     <main className="wrap">
       <header className="masthead">
         <div className="brand">
           <span className="mark">sift</span>
           <span className="tag">job radar</span>
-          <a className="fit-link" href="/fit">
+          <a className="fit-link" href={fitHref}>
             ✦ fit finder
           </a>
           <a className="fit-link" href="/tracker">
