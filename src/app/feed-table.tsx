@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { recencyBucket, ageLabel } from '../lib/recency';
 import { monogram } from '../lib/avatar';
+import { CompanyTracker } from './company-tracker';
 import type { FeedRow } from '../db/feed';
 
 export type FeedTableRow = FeedRow & { logo: string | null };
@@ -22,7 +23,15 @@ interface JobDetail {
   skills: string[];
 }
 
-export function FeedTable({ rows, showMatch = false }: { rows: FeedTableRow[]; showMatch?: boolean }) {
+export function FeedTable({
+  rows,
+  showMatch = false,
+  cooldowns = {},
+}: {
+  rows: FeedTableRow[];
+  showMatch?: boolean;
+  cooldowns?: Record<string, string>;
+}) {
   const [selected, setSelected] = useState<FeedTableRow | null>(null);
 
   return (
@@ -45,7 +54,15 @@ export function FeedTable({ rows, showMatch = false }: { rows: FeedTableRow[]; s
               </td>
             </tr>
           ) : (
-            rows.map((r) => <Row key={r.id} r={r} showMatch={showMatch} onOpen={() => setSelected(r)} />)
+            rows.map((r) => (
+              <Row
+                key={r.id}
+                r={r}
+                showMatch={showMatch}
+                cooldownUntil={cooldowns[r.company]}
+                onOpen={() => setSelected(r)}
+              />
+            ))
           )}
         </tbody>
       </table>
@@ -64,7 +81,17 @@ function MatchBadge({ n }: { n: number | null }) {
   );
 }
 
-function Row({ r, showMatch, onOpen }: { r: FeedTableRow; showMatch: boolean; onOpen: () => void }) {
+function Row({
+  r,
+  showMatch,
+  cooldownUntil,
+  onOpen,
+}: {
+  r: FeedTableRow;
+  showMatch: boolean;
+  cooldownUntil?: string;
+  onOpen: () => void;
+}) {
   const effective = r.postedAt ? new Date(r.postedAt) : new Date(r.firstSeenAt);
   const bucket = recencyBucket(effective);
   return (
@@ -80,6 +107,14 @@ function Row({ r, showMatch, onOpen }: { r: FeedTableRow; showMatch: boolean; on
           <div>
             <div className="name">
               {r.company} {r.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
+              {cooldownUntil ? (
+                <span
+                  className="cd-badge"
+                  title={`In cooldown until ${new Date(cooldownUntil).toLocaleDateString()}`}
+                >
+                  ⏳
+                </span>
+              ) : null}
             </div>
             <div className="slug mono">{r.ats}</div>
           </div>
@@ -165,6 +200,8 @@ function JobDrawer({ row, onClose }: { row: FeedTableRow; onClose: () => void })
           {row.category && row.category !== 'other' ? <span className="pill">{row.category}</span> : null}
           {row.workMode && row.workMode !== 'unknown' ? <span className="pill">{row.workMode}</span> : null}
         </div>
+
+        <CompanyTracker company={row.company} />
 
         {skills.length > 0 ? (
           <div className="drawer-section">

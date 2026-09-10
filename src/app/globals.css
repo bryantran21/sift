@@ -581,6 +581,80 @@ tbody tr:hover td {
   filter: brightness(1.08);
 }
 
+/* application tracker + cooldowns */
+.cd-badge {
+  font-size: 12px;
+  margin-left: 4px;
+  cursor: help;
+  vertical-align: middle;
+}
+.cd-warn {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid var(--amber-soft);
+  border-radius: 8px;
+  padding: 9px 11px;
+  margin-bottom: 10px;
+}
+.cd-ok {
+  font-size: 12.5px;
+  color: var(--green);
+  background: var(--green-soft);
+  border-radius: 8px;
+  padding: 8px 11px;
+  margin-bottom: 10px;
+}
+.track-log {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.track-date {
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 8px;
+  color-scheme: dark;
+}
+.track-btn {
+  font: inherit;
+  font-size: 12.5px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.track-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-2);
+}
+.track-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.track-events {
+  margin-top: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.track-ev {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: var(--muted);
+  padding: 3px 0;
+}
+
 /* résumé bar on the feed */
 .resumebar {
   margin: 14px 0 4px;
