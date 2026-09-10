@@ -1,8 +1,11 @@
 import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
+import { getDeviceId } from '../lib/device';
+import { getProfile } from '../db/profile';
 import type { Seniority, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 import { FeedTable } from './feed-table';
+import { ResumeBar } from './resume-bar';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,6 +28,8 @@ function parse(sp: SP): FeedParams {
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
     seniority: SENIORITIES.includes(level as Seniority) ? level : undefined,
     company: g('company')?.trim() || undefined,
+    sort: g('sort') === 'match' ? 'match' : undefined,
+    minMatch: Number(g('minmatch')) > 0 ? Number(g('minmatch')) : undefined,
     page: Math.max(1, Number(g('page')) || 1),
   };
 }
@@ -32,7 +37,16 @@ function parse(sp: SP): FeedParams {
 export default async function Page({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const params = parse(sp);
-  const [meta, feed, companyNames] = await Promise.all([getFeedMeta(), getFeed(params), getCompanies()]);
+
+  const deviceId = await getDeviceId();
+  const resumeSkills = deviceId ? (await getProfile(deviceId)).resumeSkills : [];
+  const hasResume = resumeSkills.length > 0;
+
+  const [meta, feed, companyNames] = await Promise.all([
+    getFeedMeta(),
+    getFeed(params, resumeSkills),
+    getCompanies(),
+  ]);
   const companies = companyNames.map((name) => ({ name, logo: logoFor(name) }));
   const rows = feed.rows.map((r) => ({ ...r, logo: logoFor(r.company) }));
 
@@ -72,11 +86,17 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
         </div>
       </header>
 
+      <ResumeBar
+        skillCount={resumeSkills.length}
+        sortByMatch={params.sort === 'match'}
+        matchesOnly={!!params.minMatch}
+      />
+
       <FeedFilters companies={companies} />
 
       <div className="tablewrap">
         <div className="scroll">
-          <FeedTable rows={rows} />
+          <FeedTable rows={rows} showMatch={hasResume} />
         </div>
         <div className="showing">
           <span>
