@@ -2,27 +2,53 @@ import type { ApplicationEventType } from '../db/schema';
 
 // Interview/application cooldowns: how long after a rejection or failed assessment
 // before a company will reconsider you. The clock starts from the rejection / last-
-// interview date. Numbers are grounded in public guidance (the leonstaff big-tech
-// cooldown guide + widely-reported norms); anything not listed falls back to the
+// interview date. Grounded in the public FAANG cooldown lists (LeetCode discuss #771157
+// and Blind) plus the leonstaff big-tech guide; anything not listed falls back to the
 // default and is shown as "approx". These are estimates, not guarantees.
 export const DEFAULT_COOLDOWN_MONTHS = 6;
 
+// A cooldown length in months — a fixed number, or a [min, max] range where public
+// reports genuinely disagree (e.g. Meta: ~6mo per recent recruiters, 12mo historically).
+type Months = number | [number, number];
+
 interface CooldownEntry {
-  oa?: number; // months after a failed online assessment / phone screen
-  onsite?: number; // months after a failed onsite / full loop
-  months?: number; // general fallback for this company
+  oa?: Months; // after a failed online assessment / phone screen
+  onsite?: Months; // after a failed onsite / full loop
+  months?: Months; // general fallback for this company (0 = no cooldown)
 }
 
-// Keys are normalized (lowercased). Add more as they're confirmed.
+// Keys are normalized (lowercased, alphanumerics only). Aliases (facebook/meta,
+// snap/snapchat, twitter/x) map to the same policy. Add more as they're confirmed.
 const COOLDOWNS: Record<string, CooldownEntry> = {
-  amazon: { oa: 6, onsite: 12 }, // "6mo for OA failure; 12mo after a full debrief"
-  google: { oa: 6, onsite: 12 }, // "6mo for screens, 12mo for onsite"
-  palantir: { oa: 6, onsite: 12 }, // "6mo technical screen; 1yr onsite"
-  meta: { months: 9 }, // 6–12mo, hard block on the same role/team
+  // Stage-aware big tech (phone/OA vs onsite)
+  amazon: { oa: 6, onsite: 12 }, // ~6mo after an OA miss; ~12mo (up to 24mo) after a full debrief
+  google: { oa: 6, onsite: 12 }, // 6mo from a phone screen; 12mo from onsite
+  palantir: { oa: 6, onsite: 12 },
+  meta: { months: [6, 12] }, // recruiters cite ~6mo now; historically 1yr, same role/team
+  facebook: { months: [6, 12] },
+  apple: { onsite: 6, months: 0 }, // 6mo only if you fail the onsite; a different team = no wait
+
+  // No cooldown — you can interview with multiple teams in parallel
+  microsoft: { months: 0 },
+  netflix: { months: 0 },
+
+  // Flat "from first interview" cooldowns (LeetCode / Blind lists)
+  linkedin: { months: 12 },
+  snap: { months: 12 },
+  snapchat: { months: 12 },
+  spotify: { months: 6 },
+  uber: { months: 6 },
+  lyft: { months: 6 },
+  oracle: { months: 6 }, // same org branch (e.g. OCI); other orgs unaffected
+  walmart: { months: 6 },
+  tesla: { months: 6 },
+  twitter: { months: 6 },
+  x: { months: 6 },
+
+  // Grounded elsewhere
   nvidia: { months: 12 },
   openai: { months: 12 },
   anthropic: { months: 4 }, // 3–6mo
-  apple: { months: 0 }, // teams operate independently — no company-wide cooldown
 };
 
 function norm(company: string): string {
@@ -41,19 +67,37 @@ export function eventStage(type: ApplicationEventType): 'oa' | 'onsite' | 'gener
   return null; // 'applied' / 'offer' don't start a cooldown
 }
 
-export function cooldownMonths(company: string, stage: 'oa' | 'onsite' | 'general'): number {
+// Raw cooldown length for a company + stage (a number, or a [min, max] range).
+export function cooldownMonths(company: string, stage: 'oa' | 'onsite' | 'general'): Months {
   const e = COOLDOWNS[norm(company)];
   if (!e) return DEFAULT_COOLDOWN_MONTHS;
-  if (stage === 'oa') return e.oa ?? e.months ?? e.onsite ?? DEFAULT_COOLDOWN_MONTHS;
-  if (stage === 'onsite') return e.onsite ?? e.months ?? e.oa ?? DEFAULT_COOLDOWN_MONTHS;
-  return e.months ?? e.onsite ?? e.oa ?? DEFAULT_COOLDOWN_MONTHS;
+  const pick =
+    stage === 'oa'
+      ? e.oa ?? e.months ?? e.onsite
+      : stage === 'onsite'
+        ? e.onsite ?? e.months ?? e.oa
+        : e.months ?? e.onsite ?? e.oa;
+  return pick ?? DEFAULT_COOLDOWN_MONTHS;
+}
+
+const lo = (m: Months): number => (Array.isArray(m) ? m[0] : m);
+const hi = (m: Months): number => (Array.isArray(m) ? m[1] : m);
+
+function addMonths(d: Date, months: number): Date {
+  const out = new Date(d);
+  out.setMonth(out.getMonth() + months);
+  return out;
 }
 
 export interface CooldownStatus {
   company: string;
-  endsAt: string; // ISO
-  active: boolean; // now < endsAt
-  months: number;
+  endsAt: string; // ISO — conservative (latest) end date
+  endsAtMin: string; // ISO — earliest you might be eligible again
+  active: boolean; // now < endsAt (latest)
+  months: number; // = monthsMax, kept for existing consumers
+  monthsMin: number;
+  monthsMax: number;
+  isRange: boolean; // monthsMin !== monthsMax
   basisType: ApplicationEventType;
   basisDate: string; // ISO
   approx: boolean; // using the default (company not in the known map)
@@ -66,7 +110,7 @@ interface EventLike {
 }
 
 // Compute a company's cooldown from the most recent cooldown-triggering event.
-// Returns null if nothing triggers one (or the company has no cooldown, e.g. Apple).
+// Returns null if nothing triggers one (or the company has no cooldown, e.g. Apple/MSFT).
 export function computeCooldown(company: string, events: EventLike[]): CooldownStatus | null {
   const triggers = events
     .filter((e) => eventStage(e.type) !== null)
@@ -75,16 +119,22 @@ export function computeCooldown(company: string, events: EventLike[]): CooldownS
   const basis = triggers[0];
   if (!basis) return null;
 
-  const months = cooldownMonths(company, eventStage(basis.type)!);
-  if (months <= 0) return null;
+  const m = cooldownMonths(company, eventStage(basis.type)!);
+  const monthsMin = lo(m);
+  const monthsMax = hi(m);
+  if (monthsMax <= 0) return null;
 
-  const endsAt = new Date(basis.at);
-  endsAt.setMonth(endsAt.getMonth() + months);
+  const endsAtMin = addMonths(basis.at, monthsMin);
+  const endsAtMax = addMonths(basis.at, monthsMax);
   return {
     company,
-    endsAt: endsAt.toISOString(),
-    active: Date.now() < endsAt.getTime(),
-    months,
+    endsAt: endsAtMax.toISOString(),
+    endsAtMin: endsAtMin.toISOString(),
+    active: Date.now() < endsAtMax.getTime(),
+    months: monthsMax,
+    monthsMin,
+    monthsMax,
+    isRange: monthsMin !== monthsMax,
     basisType: basis.type,
     basisDate: basis.at.toISOString(),
     approx: !isKnownCooldown(company),

@@ -12,8 +12,12 @@ interface TrackedEvent {
 interface CooldownStatus {
   company: string;
   endsAt: string;
+  endsAtMin: string;
   active: boolean;
   months: number;
+  monthsMin: number;
+  monthsMax: number;
+  isRange: boolean;
   basisType: string;
   basisDate: string;
   approx: boolean;
@@ -71,7 +75,14 @@ export function CompanyTracker({ company }: { company: string }) {
     <div className="drawer-section">
       <div className="drawer-label">Application tracker</div>
 
-      {cd && cd.active ? (
+      {cd && cd.active && cd.isRange ? (
+        <div className="cd-warn">
+          ⚠️ In cooldown — eligible as early as <strong>{fmtDate(cd.endsAtMin)}</strong>, at the latest{' '}
+          <strong>{fmtDate(cd.endsAt)}</strong> ({cd.monthsMin}–{cd.monthsMax} months from your{' '}
+          {labelFor(cd.basisType)} on {fmtDate(cd.basisDate)})
+          {cd.approx ? ' — approx, no confirmed policy' : ''}.
+        </div>
+      ) : cd && cd.active ? (
         <div className="cd-warn">
           ⚠️ In cooldown until <strong>{fmtDate(cd.endsAt)}</strong> — about {cd.months} months from your{' '}
           {labelFor(cd.basisType)} on {fmtDate(cd.basisDate)}
