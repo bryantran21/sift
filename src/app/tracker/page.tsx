@@ -11,8 +11,12 @@ interface TrackedEvent {
 interface CooldownStatus {
   company: string;
   endsAt: string;
+  endsAtMin: string;
   active: boolean;
   months: number;
+  monthsMin: number;
+  monthsMax: number;
+  isRange: boolean;
   basisType: string;
   basisDate: string;
   approx: boolean;
@@ -79,9 +83,13 @@ export default function TrackerPage() {
                   <div className="fit-co">{c.company}</div>
                   <div className={c.active ? 'fit-gaps' : 'fit-matched'}>
                     {c.active
-                      ? `In cooldown until ${fmtDate(c.endsAt)} · ~${c.months}mo from your ${labelFor(
-                          c.basisType,
-                        )} on ${fmtDate(c.basisDate)}${c.approx ? ' (approx)' : ''}`
+                      ? c.isRange
+                        ? `In cooldown · eligible ${fmtDate(c.endsAtMin)} – ${fmtDate(c.endsAt)} (${c.monthsMin}–${c.monthsMax}mo from your ${labelFor(
+                            c.basisType,
+                          )} on ${fmtDate(c.basisDate)})${c.approx ? ' (approx)' : ''}`
+                        : `In cooldown until ${fmtDate(c.endsAt)} · ~${c.months}mo from your ${labelFor(
+                            c.basisType,
+                          )} on ${fmtDate(c.basisDate)}${c.approx ? ' (approx)' : ''}`
                       : `Eligible again — cooldown ended ${fmtDate(c.endsAt)}`}
                   </div>
                 </div>
