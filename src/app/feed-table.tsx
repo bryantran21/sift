@@ -22,7 +22,7 @@ interface JobDetail {
   skills: string[];
 }
 
-export function FeedTable({ rows }: { rows: FeedTableRow[] }) {
+export function FeedTable({ rows, showMatch = false }: { rows: FeedTableRow[]; showMatch?: boolean }) {
   const [selected, setSelected] = useState<FeedTableRow | null>(null);
 
   return (
@@ -30,6 +30,7 @@ export function FeedTable({ rows }: { rows: FeedTableRow[] }) {
       <table>
         <thead>
           <tr>
+            {showMatch ? <th className="th-match">Match</th> : null}
             <th>Company</th>
             <th>Title</th>
             <th>Locations</th>
@@ -39,12 +40,12 @@ export function FeedTable({ rows }: { rows: FeedTableRow[] }) {
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={4}>
+              <td colSpan={showMatch ? 5 : 4}>
                 <div className="empty">No roles match these filters.</div>
               </td>
             </tr>
           ) : (
-            rows.map((r) => <Row key={r.id} r={r} onOpen={() => setSelected(r)} />)
+            rows.map((r) => <Row key={r.id} r={r} showMatch={showMatch} onOpen={() => setSelected(r)} />)
           )}
         </tbody>
       </table>
@@ -53,11 +54,26 @@ export function FeedTable({ rows }: { rows: FeedTableRow[] }) {
   );
 }
 
-function Row({ r, onOpen }: { r: FeedTableRow; onOpen: () => void }) {
+function MatchBadge({ n }: { n: number | null }) {
+  if (n == null) return <span className="match match-none">—</span>;
+  const cls = n >= 5 ? 'match-hi' : n >= 2 ? 'match-mid' : n >= 1 ? 'match-lo' : 'match-none';
+  return (
+    <span className={`match ${cls}`} title={`${n} of your skills`}>
+      {n}
+    </span>
+  );
+}
+
+function Row({ r, showMatch, onOpen }: { r: FeedTableRow; showMatch: boolean; onOpen: () => void }) {
   const effective = r.postedAt ? new Date(r.postedAt) : new Date(r.firstSeenAt);
   const bucket = recencyBucket(effective);
   return (
     <tr className="clickrow" onClick={onOpen}>
+      {showMatch ? (
+        <td className="td-match">
+          <MatchBadge n={r.match} />
+        </td>
+      ) : null}
       <td>
         <div className="co">
           <Avatar company={r.company} logo={r.logo} />

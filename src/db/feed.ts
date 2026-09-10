@@ -11,6 +11,8 @@ export interface FeedParams {
   recency?: 'green' | 'yellow' | 'red';
   seniority?: string; // intern | new-grad | mid | senior | staff+ (undefined = any level)
   company?: string;
+  sort?: 'recent' | 'match'; // default recent; 'match' only meaningful with a résumé
+  minMatch?: number; // only roles matching ≥ N of your skills (needs a résumé)
   page?: number;
 }
 
@@ -31,6 +33,8 @@ export interface FeedRow {
   seniority: string;
   relevanceScore: number;
   tags: string[] | null;
+  // per-job résumé match: how many of the job's skills are in the résumé (null = no résumé)
+  match: number | null;
 }
 
 export const PAGE_SIZE = 100;
@@ -45,8 +49,9 @@ const added = sql<Date>`coalesce(${jobs.postedAt}, ${jobs.firstSeenAt})`;
 // Rows fresh enough to show (not older than STALE_DAYS).
 const freshEnough = sql`${added} >= now() - ${STALE_DAYS} * interval '1 day'`;
 
-function conditions(p: FeedParams): SQL[] {
+function conditions(p: FeedParams, match: SQL | null): SQL[] {
   const c: SQL[] = [isNull(jobs.removedAt)];
+  if (match && p.minMatch && p.minMatch > 0) c.push(sql`${match} >= ${p.minMatch}`);
   if (p.tier) c.push(eq(jobs.companyTier, p.tier));
   if (p.mode) c.push(eq(jobs.workMode, p.mode));
   if (p.tag) c.push(sql`${sources.tags} @> ${JSON.stringify([p.tag])}::jsonb`);
@@ -67,10 +72,25 @@ function conditions(p: FeedParams): SQL[] {
   return c;
 }
 
-export async function getFeed(p: FeedParams): Promise<{ rows: FeedRow[]; total: number; page: number }> {
+export async function getFeed(
+  p: FeedParams,
+  resumeSkills?: string[],
+): Promise<{ rows: FeedRow[]; total: number; page: number }> {
   const db = getDb();
   const page = Math.max(1, p.page ?? 1);
-  const where = and(...conditions(p));
+  const hasResume = !!(resumeSkills && resumeSkills.length);
+
+  // How many of the job's skills are in the résumé — computed in SQL so sort + filter
+  // work across the whole result set, not just the current page. Pass the résumé as a
+  // single jsonb param (drizzle spreads a JS array into a param list, not a text[]).
+  const resumeJson = JSON.stringify(resumeSkills ?? []);
+  const match: SQL | null = hasResume
+    ? sql`(select count(*)::int from jsonb_array_elements_text(${jobs.skills}) sk where ${resumeJson}::jsonb @> to_jsonb(sk))`
+    : null;
+
+  const where = and(...conditions(p, match));
+  const orderBy =
+    p.sort === 'match' && match ? [desc(match), desc(added)] : [desc(added)];
 
   const rows = (await db
     .select({
@@ -90,11 +110,12 @@ export async function getFeed(p: FeedParams): Promise<{ rows: FeedRow[]; total: 
       seniority: jobs.seniority,
       relevanceScore: jobs.relevanceScore,
       tags: sources.tags,
+      match: match ?? sql<number | null>`null`,
     })
     .from(jobs)
     .leftJoin(sources, and(eq(sources.ats, jobs.ats), eq(sources.slug, jobs.sourceSlug)))
     .where(where)
-    .orderBy(desc(added))
+    .orderBy(...orderBy)
     .limit(PAGE_SIZE)
     .offset((page - 1) * PAGE_SIZE)) as FeedRow[];
 
