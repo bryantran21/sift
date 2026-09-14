@@ -1,4 +1,4 @@
-import { and, desc, eq, isNull, isNotNull, sql, type SQL } from 'drizzle-orm';
+import { and, desc, eq, inArray, isNull, isNotNull, sql, type SQL } from 'drizzle-orm';
 import { getDb } from './client';
 import { jobs, sources, runs } from './schema';
 import type { Seniority, Tier, WorkMode } from '../types';
@@ -10,7 +10,8 @@ export interface FeedParams {
   tag?: string; // quant | big-tech | fortune-500 | college
   recency?: 'green' | 'yellow' | 'red';
   seniority?: string; // intern | new-grad | mid | senior | staff+ (undefined = any level)
-  company?: string;
+  company?: string; // single-company deep link (fit modal / tracker)
+  companies?: string[]; // multi-company watchlist checklist (empty/undefined = all)
   sort?: 'recent' | 'match'; // default recent; 'match' only meaningful with a résumé
   minMatch?: number; // only roles matching ≥ N of your skills (needs a résumé)
   page?: number;
@@ -60,7 +61,9 @@ function conditions(p: FeedParams, match: SQL | null): SQL[] {
   c.push(eq(jobs.country, 'US'));
   c.push(freshEnough);
   if (p.seniority) c.push(eq(jobs.seniority, p.seniority as Seniority));
-  if (p.company) c.push(eq(jobs.company, p.company));
+  // Company filter: union of the single-company deep link and the multi-select watchlist.
+  const cos = [...new Set([...(p.companies ?? []), ...(p.company ? [p.company] : [])])];
+  if (cos.length) c.push(inArray(jobs.company, cos));
   if (p.q) {
     const like = `%${p.q}%`;
     c.push(sql`(${jobs.company} ilike ${like} or ${jobs.title} ilike ${like} or ${jobs.locations}::text ilike ${like})`);
