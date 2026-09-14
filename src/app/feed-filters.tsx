@@ -4,6 +4,28 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { monogram } from '../lib/avatar';
 
+// The company watchlist is stored locally (per browser) so a curated set of companies
+// sticks across visits without an account. It's mirrored into the `companies` URL param
+// so the server filters across the whole feed (not just the current page).
+const WATCHLIST_KEY = 'sift_watchlist';
+
+function loadWatchlist(): string[] {
+  try {
+    const raw = localStorage.getItem(WATCHLIST_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr.filter((x): x is string => typeof x === 'string') : [];
+  } catch {
+    return [];
+  }
+}
+function saveWatchlist(list: string[]): void {
+  try {
+    localStorage.setItem(WATCHLIST_KEY, JSON.stringify(list));
+  } catch {
+    /* ignore (private mode / disabled storage) */
+  }
+}
+
 const TAGS: [string, string][] = [
   ['', 'All tags'],
   ['quant', 'Quant'],
@@ -77,6 +99,33 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
+  // The active company scope = the multi-select watchlist (`companies`) plus any single
+  // `company` deep link (from the fit modal / tracker).
+  const selectedCompanies = useMemo(() => {
+    const multi = (sp.get('companies') ?? '').split(',').map((s) => s.trim()).filter(Boolean);
+    const single = sp.get('company')?.trim();
+    return [...new Set([...multi, ...(single ? [single] : [])])];
+  }, [sp]);
+
+  const setCompanies = useCallback(
+    (next: string[]) => {
+      saveWatchlist(next);
+      update({ companies: next.join(','), company: '' });
+    },
+    [update],
+  );
+
+  // On first load, re-apply the saved watchlist if the URL isn't already company-scoped.
+  const seeded = useRef(false);
+  useEffect(() => {
+    if (seeded.current) return;
+    seeded.current = true;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('companies') || params.get('company')) return;
+    const saved = loadWatchlist();
+    if (saved.length) update({ companies: saved.join(',') });
+  }, [update]);
+
   // Debounced live search: the input drives `q` directly so the visible box always
   // matches the URL. Previously `q` changed only on Enter, so clearing the box left a
   // stale `q` that other filter changes carried along — emptying the feed.
@@ -104,7 +153,9 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     update({ q: text.trim() });
   };
 
-  const hasFilters = ['q', 'level', 'tier', 'tag', 'mode', 'recency', 'company'].some((k) => sp.get(k));
+  const hasFilters = ['q', 'level', 'tier', 'tag', 'mode', 'recency', 'company', 'companies'].some((k) =>
+    sp.get(k),
+  );
 
   return (
     <div className="toolbar">
@@ -127,11 +178,7 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
         />
       </form>
       <div className="selects">
-        <CompanyPicker
-          companies={companies}
-          value={sp.get('company') ?? ''}
-          onChange={(v) => update({ company: v })}
-        />
+        <CompanyChecklist companies={companies} selected={selectedCompanies} onChange={setCompanies} />
         <Ctrl name="level" value={sp.get('level') ?? ''} opts={LEVELS} onChange={(v) => update({ level: v })} />
         <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
         <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
@@ -169,16 +216,17 @@ function Ctrl({
   );
 }
 
-// Native <select> can't render logos, so this is a custom dropdown: a trigger that
-// shows the picked company's logo + name, and a filterable popup of logo rows.
-function CompanyPicker({
+// A multi-select company watchlist: tick the companies you want and the feed narrows to
+// just those (server-side, across all pages). Native <select> can't do logos + checkboxes,
+// so this is a custom popup. Selection is mirrored to localStorage by the parent.
+function CompanyChecklist({
   companies,
-  value,
+  selected,
   onChange,
 }: {
   companies: CompanyOpt[];
-  value: string;
-  onChange: (v: string) => void;
+  selected: string[];
+  onChange: (next: string[]) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
@@ -205,18 +253,25 @@ function CompanyPicker({
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const filtered = useMemo(() => {
+  const selSet = useMemo(() => new Set(selected), [selected]);
+
+  // Selected companies float to the top of the list so your set is easy to review.
+  const ordered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return q ? companies.filter((c) => c.name.toLowerCase().includes(q)) : companies;
-  }, [companies, query]);
+    const list = q ? companies.filter((c) => c.name.toLowerCase().includes(q)) : companies;
+    return [...list].sort((a, b) => {
+      const as = selSet.has(a.name) ? 0 : 1;
+      const bs = selSet.has(b.name) ? 0 : 1;
+      return as - bs || a.name.localeCompare(b.name);
+    });
+  }, [companies, query, selSet]);
 
-  const selected = companies.find((c) => c.name === value) ?? null;
-
-  const pick = (v: string) => {
-    onChange(v);
-    setOpen(false);
-    setQuery('');
+  const toggle = (name: string) => {
+    onChange(selSet.has(name) ? selected.filter((n) => n !== name) : [...selected, name]);
   };
+
+  const count = selected.length;
+  const label = count === 0 ? 'All companies' : count === 1 ? selected[0] : `${count} companies`;
 
   return (
     <div className="picker" ref={rootRef}>
@@ -227,12 +282,12 @@ function CompanyPicker({
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
       >
-        {selected ? <Avatar company={selected.name} logo={selected.logo} /> : null}
-        <span className="picker-label">{selected ? selected.name : 'All companies'}</span>
+        {count > 0 ? <span className="picker-count">{count}</span> : null}
+        <span className="picker-label">{label}</span>
         <span className="picker-caret">▾</span>
       </button>
       {open ? (
-        <div className="picker-menu" role="listbox">
+        <div className="picker-menu" role="listbox" aria-multiselectable="true">
           <input
             ref={inputRef}
             className="picker-search"
@@ -242,26 +297,33 @@ function CompanyPicker({
             placeholder="Filter companies…"
             aria-label="Filter companies"
           />
-          <div className="picker-list">
-            <button
-              type="button"
-              className={`picker-opt${value === '' ? ' sel' : ''}`}
-              onClick={() => pick('')}
-            >
-              <span className="picker-opt-name">All companies</span>
-            </button>
-            {filtered.map((c) => (
-              <button
-                type="button"
-                key={c.name}
-                className={`picker-opt${c.name === value ? ' sel' : ''}`}
-                onClick={() => pick(c.name)}
-              >
-                <Avatar company={c.name} logo={c.logo} />
-                <span className="picker-opt-name">{c.name}</span>
+          <div className="picker-foot">
+            <span className="picker-foot-count">{count > 0 ? `${count} selected` : 'Showing all'}</span>
+            {count > 0 ? (
+              <button type="button" className="picker-foot-btn" onClick={() => onChange([])}>
+                Clear
               </button>
-            ))}
-            {filtered.length === 0 ? <div className="picker-empty">No match</div> : null}
+            ) : null}
+          </div>
+          <div className="picker-list">
+            {ordered.map((c) => {
+              const on = selSet.has(c.name);
+              return (
+                <button
+                  type="button"
+                  key={c.name}
+                  className={`picker-opt${on ? ' sel' : ''}`}
+                  role="option"
+                  aria-selected={on}
+                  onClick={() => toggle(c.name)}
+                >
+                  <span className={`picker-check${on ? ' on' : ''}`}>{on ? '✓' : ''}</span>
+                  <Avatar company={c.name} logo={c.logo} />
+                  <span className="picker-opt-name">{c.name}</span>
+                </button>
+              );
+            })}
+            {ordered.length === 0 ? <div className="picker-empty">No match</div> : null}
           </div>
         </div>
       ) : null}

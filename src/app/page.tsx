@@ -29,6 +29,10 @@ function parse(sp: SP): FeedParams {
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
     seniority: SENIORITIES.includes(level as Seniority) ? level : undefined,
     company: g('company')?.trim() || undefined,
+    companies: g('companies')
+      ?.split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
     sort: g('sort') === 'match' ? 'match' : undefined,
     minMatch: Number(g('minmatch')) > 0 ? Number(g('minmatch')) : undefined,
     page: Math.max(1, Number(g('page')) || 1),
