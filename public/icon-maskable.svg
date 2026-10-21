@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#2f6df6"/>
+  <!-- sift funnel mark, scaled + centered within the maskable safe zone -->
+  <g transform="translate(256 256) scale(5.6) translate(-32 -34.5)">
+    <path d="M14 18h36l-12 15v13l-12 5V33L14 18z" fill="#ffffff" fill-opacity="0.96"/>
+  </g>
+</svg>
