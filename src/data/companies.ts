@@ -6,16 +6,20 @@
 // tracked here so you can see and organize the whole landscape, with an honest
 // status for each:
 //
-//   live     — verified JSON board, adapter exists → ingesting now (Greenhouse/Workday).
-//   pending  — on a supported ATS whose adapter is still coming (see `eta`).
-//   blocked  — Oracle/Taleo/UCPath/custom careers site, no JSON API → out of scope.
-//   unknown  — no board found at common slugs; ATS unconfirmed, needs a manual look.
+//   live     — verified JSON board, adapter exists → ingesting now.
+//   pending  — on a supported platform whose adapter isn't built yet.
+//   blocked  — no supported board (Radancy/iCIMS/Taleo/custom site) → see the coverage report.
+//   unknown  — not probed yet.
+//
+// `pnpm probe` writes src/data/probe-results.json; entries here are overlaid with it, so a
+// company's board / blocked status comes from the probe rather than hand edits.
 //
 // `domain` powers the row favicon (fetched + inlined by scripts/fetch-logos.ts).
 // Job counts on `live` rows are from the last probe (2026-07) and drift over time.
 
 import type { Industry } from './industries';
 import { brands } from './brands';
+import { probeResults } from './probe';
 
 export type CompanyTag = 'quant' | 'big-tech' | 'fortune-500' | 'college';
 export type CompanyStatus = 'live' | 'pending' | 'blocked' | 'unknown';
@@ -25,6 +29,8 @@ export interface Company {
   tag: CompanyTag;
   industry?: Industry; // falls back by tag (quant→quant, college→education, else tech)
   aliases?: string[]; // other names this company appears under in job sources
+  careers?: string; // careers page URL, when it isn't at a guessable spot on `domain`
+  host?: string; // Eightfold / Oracle HCM API host (with `site` as the board id)
   domain?: string; // for the favicon
   ats: string; // greenhouse | ashby | lever | workday | custom | unknown
   slug?: string; // set once we have a verified board
@@ -158,9 +164,9 @@ const core: Company[] = [
   { name: 'Verizon', tag: 'fortune-500', industry: 'telecom', domain: 'verizon.com', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'Comcast', tag: 'fortune-500', industry: 'telecom', domain: 'comcast.com', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'Marriott', tag: 'fortune-500', industry: 'travel', domain: 'marriott.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Walt Disney', tag: 'fortune-500', industry: 'media', aliases: ['Disney', 'The Walt Disney Company'], domain: 'thewaltdisneycompany.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Walt Disney', tag: 'fortune-500', industry: 'media', aliases: ['Disney', 'The Walt Disney Company'], domain: 'thewaltdisneycompany.com', careers: 'https://www.disneycareers.com/en/search-jobs', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'Ford', tag: 'fortune-500', industry: 'auto', domain: 'ford.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'General Motors', tag: 'fortune-500', industry: 'auto', domain: 'gm.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'General Motors', tag: 'fortune-500', industry: 'auto', domain: 'gm.com', careers: 'https://search-careers.gm.com', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'Boeing', tag: 'fortune-500', industry: 'aerospace', domain: 'boeing.com', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'ExxonMobil', tag: 'fortune-500', industry: 'energy', domain: 'exxonmobil.com', ats: 'unknown', status: 'unknown', tier: 3 },
   { name: 'UnitedHealth Group', tag: 'fortune-500', industry: 'health', domain: 'unitedhealthgroup.com', ats: 'unknown', status: 'unknown', tier: 3 },
@@ -171,7 +177,31 @@ const core: Company[] = [
   { name: 'UPS', tag: 'fortune-500', industry: 'logistics', domain: 'ups.com', ats: 'unknown', status: 'unknown', tier: 3 },
 ];
 
-export const companies: Company[] = [...core, ...brands];
+// Overlay the latest probe result. Hand-verified live entries win; otherwise the probe
+// decides: a verified board → live (src/config/sources.ts wires it automatically), else
+// blocked with the detected careers platform.
+function withProbe(c: Company): Company {
+  if (c.status === 'live') return c;
+  const r = probeResults[c.name];
+  if (!r) return c;
+  if (r.status === 'blocked') {
+    return { ...c, status: 'blocked', ats: c.ats === 'unknown' ? 'custom' : c.ats, note: `Careers platform: ${r.platform}.` };
+  }
+  return {
+    ...c,
+    status: 'live',
+    eta: r.via === 'existing-source' ? 'Live' : 'Auto',
+    ats: r.ats ?? c.ats,
+    slug: r.slug,
+    tenant: r.tenant,
+    shard: r.shard,
+    site: r.site,
+    host: r.host,
+    jobs: r.jobs ?? c.jobs,
+  };
+}
+
+export const companies: Company[] = [...core, ...brands].map(withProbe);
 
 // Convenience selectors used by the ingest config and the browser generator.
 export const liveCompanies = companies.filter((c) => c.status === 'live');

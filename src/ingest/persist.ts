@@ -189,7 +189,9 @@ export async function upsertSources(db: ReturnType<typeof getDb>, sources: Sourc
     const config: Record<string, string> =
       s.ats === 'workday'
         ? { tenant: s.tenant ?? '', shard: s.shard ?? '', site: s.site ?? '' }
-        : {};
+        : s.ats === 'eightfold' || s.ats === 'oraclehcm' || s.ats === 'phenom'
+          ? { host: s.host ?? '', site: s.site ?? '' }
+          : {};
     return {
       company: s.company,
       ats: s.ats,

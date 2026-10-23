@@ -9,6 +9,7 @@ export class HttpError extends Error {
   constructor(
     readonly status: number,
     readonly url: string,
+    readonly retryAfterMs: number | null = null,
   ) {
     super(`HTTP ${status} for ${url}`);
     this.name = 'HttpError';
@@ -33,7 +34,28 @@ export interface HttpResult<T> {
   lastModified: string | null;
 }
 
+// Transient failures worth retrying: rate limits and gateway/server hiccups. Two retries
+// with exponential backoff (honoring Retry-After, capped) keep one throttled board from
+// failing a whole run, without hammering a host that's genuinely down.
+const RETRYABLE = new Set([429, 500, 502, 503, 504]);
+const MAX_RETRIES = 2;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 export async function httpJson<T>(req: HttpRequest): Promise<HttpResult<T>> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await httpJsonOnce<T>(req);
+    } catch (e) {
+      const status = e instanceof HttpError ? e.status : null;
+      const retryable = status !== null && RETRYABLE.has(status);
+      if (!retryable || attempt >= MAX_RETRIES) throw e;
+      const retryAfter = e instanceof HttpError ? e.retryAfterMs : null;
+      await sleep(Math.min(retryAfter ?? 1500 * 2 ** attempt, 10_000) + Math.random() * 300);
+    }
+  }
+}
+
+async function httpJsonOnce<T>(req: HttpRequest): Promise<HttpResult<T>> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), req.timeoutMs ?? 20_000);
   try {
@@ -64,7 +86,8 @@ export async function httpJson<T>(req: HttpRequest): Promise<HttpResult<T>> {
     }
     if (!res.ok) {
       await res.text().catch(() => undefined); // drain body to free the socket
-      throw new HttpError(res.status, req.url);
+      const ra = Number(res.headers.get('retry-after'));
+      throw new HttpError(res.status, req.url, Number.isFinite(ra) && ra > 0 ? ra * 1000 : null);
     }
     return {
       status: res.status,

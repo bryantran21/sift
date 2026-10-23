@@ -37,6 +37,7 @@ const FOREIGN = [
   'australia', 'sydney', 'melbourne', 'new zealand', 'philippines', 'manila',
   'vietnam', 'thailand', 'bangkok', 'indonesia', 'jakarta', 'malaysia', 'kuala lumpur',
   'uae', 'dubai', 'abu dhabi', 'saudi', 'egypt', 'cairo', 'south africa', 'nigeria', 'lagos', 'kenya', 'nairobi',
+  'frankfurt', 'hamburg', 'cologne', 'haifa', 'medellin', 'cali',
   'mexico', 'guadalajara', 'brazil', 'sao paulo', 'argentina', 'buenos aires',
   'chile', 'santiago', 'peru', 'lima', 'colombia', 'bogota', 'costa rica', 'san jose costa rica',
 ];
@@ -57,6 +58,20 @@ const US_CITIES = [
 
 const US_MARKER = /\b(united states|u\s?s\s?a|us|usa|u\s?s|america)\b/;
 
+// Two-letter postal codes, matched only in the "City, ST" position (after a comma, as
+// written in uppercase) — "Cincinnati, OH", "Austin, TX 78701". Checked after the
+// foreign list so "Bengaluru, KA, IN" or "Toronto, ON, CA" still resolve non-US.
+const STATE_CODES = new Set(
+  ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ ' +
+    'NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC PR').split(' '),
+);
+const STATE_CODE_RE = /,\s*([A-Z]{2})\b/g;
+
+function hasStateCode(loc: string): boolean {
+  for (const m of loc.matchAll(STATE_CODE_RE)) if (STATE_CODES.has(m[1])) return true;
+  return false;
+}
+
 function norm(s: string): string {
   return ` ${s.toLowerCase().replace(/[^a-z\s]+/g, ' ').replace(/\s+/g, ' ').trim()} `;
 }
@@ -67,6 +82,7 @@ function classifyOne(loc: string): Country {
   if (US_STATES.some((st) => h.includes(` ${st} `))) return 'US';
   if (FOREIGN.some((c) => h.includes(` ${c} `))) return 'non-US';
   if (US_CITIES.some((c) => h.includes(` ${c} `))) return 'US';
+  if (hasStateCode(loc)) return 'US';
   return 'unknown';
 }
 

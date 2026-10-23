@@ -18,7 +18,7 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     title: raw.title,
     normalizedTitle: normalizeTitle(raw.title),
     locations,
-    country: deriveCountry(locations),
+    country: raw.country === 'US' ? 'US' : deriveCountry(locations),
     workMode: inferWorkMode(raw, description),
     description,
     descriptionHash: contentHash(description),

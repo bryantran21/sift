@@ -34,6 +34,18 @@ test('does not false-positive on substrings (Columbus, Belarus)', () => {
   assert.equal(deriveCountry(['Minsk, Belarus']), 'unknown'); // not a US match
 });
 
+test('recognizes "City, ST" postal codes', () => {
+  assert.equal(deriveCountry(['Cincinnati, OH']), 'US');
+  assert.equal(deriveCountry(['Boise, ID']), 'US');
+  assert.equal(deriveCountry(['Austin, TX 78701']), 'US');
+  // foreign metro wins over a code that collides with a country abbreviation
+  assert.equal(deriveCountry(['Bengaluru, KA, IN']), 'non-US');
+  assert.equal(deriveCountry(['Toronto, ON, CA']), 'non-US');
+  assert.equal(deriveCountry(['Frankfurt, DE']), 'non-US');
+  // only uppercase, comma-delimited codes count
+  assert.equal(deriveCountry(['Remote or Hybrid']), 'unknown');
+});
+
 test('recognizes bare US cities (Ashby boards omit state/country)', () => {
   assert.equal(deriveCountry(['San Francisco']), 'US');
   assert.equal(deriveCountry(['New York']), 'US');
