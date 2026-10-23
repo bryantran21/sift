@@ -3,6 +3,7 @@
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { monogram } from '../lib/avatar';
+import { INDUSTRIES, INDUSTRY_KEYS, type Industry } from '../data/industries';
 
 // The company watchlist is stored locally (per browser) so a curated set of companies
 // sticks across visits without an account. It's mirrored into the `companies` URL param
@@ -64,6 +65,7 @@ const LEVELS: [string, string][] = [
 export interface CompanyOpt {
   name: string;
   logo: string | null;
+  industry?: string;
 }
 
 export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
@@ -153,9 +155,16 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     update({ q: text.trim() });
   };
 
-  const hasFilters = ['q', 'level', 'tier', 'tag', 'mode', 'recency', 'company', 'companies'].some((k) =>
-    sp.get(k),
+  const hasFilters = ['q', 'level', 'tier', 'tag', 'industry', 'mode', 'recency', 'company', 'companies'].some(
+    (k) => sp.get(k),
   );
+
+  // Only offer industries that actually have companies in the feed, in taxonomy order.
+  const industryOpts = useMemo((): [string, string][] => {
+    const present = new Set(companies.map((c) => c.industry ?? 'tech'));
+    return [['', 'All industries'], ...INDUSTRY_KEYS.filter((k) => present.has(k)).map((k): [string, string] => [k, INDUSTRIES[k]])];
+  }, [companies]);
+  const industry = sp.get('industry') ?? '';
 
   return (
     <div className="toolbar">
@@ -178,7 +187,13 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
         />
       </form>
       <div className="selects">
-        <CompanyChecklist companies={companies} selected={selectedCompanies} onChange={setCompanies} />
+        <Ctrl name="industry" value={industry} opts={industryOpts} onChange={(v) => update({ industry: v })} />
+        <CompanyChecklist
+          companies={companies}
+          industry={industry}
+          selected={selectedCompanies}
+          onChange={setCompanies}
+        />
         <Ctrl name="level" value={sp.get('level') ?? ''} opts={LEVELS} onChange={(v) => update({ level: v })} />
         <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
         <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
@@ -221,17 +236,30 @@ function Ctrl({
 // so this is a custom popup. Selection is mirrored to localStorage by the parent.
 function CompanyChecklist({
   companies,
+  industry,
   selected,
   onChange,
 }: {
   companies: CompanyOpt[];
+  industry: string; // active industry filter ('' = all) — scopes the list
   selected: string[];
   onChange: (next: string[]) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
+  // Industry groups start collapsed (Tech alone has hundreds of boards); searching or an
+  // active industry filter expands everything that matches.
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set(['_selected']));
   const rootRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const toggleGroup = (key: string) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      return next;
+    });
 
   useEffect(() => {
     if (!open) return;
@@ -255,16 +283,34 @@ function CompanyChecklist({
 
   const selSet = useMemo(() => new Set(selected), [selected]);
 
-  // Selected companies float to the top of the list so your set is easy to review.
-  const ordered = useMemo(() => {
+  // Your picks first (a "Selected" group, so the set is easy to review), then every other
+  // company grouped under its industry in taxonomy order. An active industry filter scopes
+  // the groups to that industry; the search box filters within all of it.
+  const groups = useMemo(() => {
     const q = query.trim().toLowerCase();
-    const list = q ? companies.filter((c) => c.name.toLowerCase().includes(q)) : companies;
-    return [...list].sort((a, b) => {
-      const as = selSet.has(a.name) ? 0 : 1;
-      const bs = selSet.has(b.name) ? 0 : 1;
-      return as - bs || a.name.localeCompare(b.name);
-    });
-  }, [companies, query, selSet]);
+    const matches = (c: CompanyOpt) => !q || c.name.toLowerCase().includes(q);
+    const byName = (a: CompanyOpt, b: CompanyOpt) => a.name.localeCompare(b.name);
+
+    const out: { key: string; label: string; items: CompanyOpt[] }[] = [];
+    const picked = companies.filter((c) => selSet.has(c.name) && matches(c)).sort(byName);
+    if (picked.length) out.push({ key: '_selected', label: 'Selected', items: picked });
+
+    const byIndustry = new Map<string, CompanyOpt[]>();
+    for (const c of companies) {
+      const ind = c.industry ?? 'tech';
+      if (selSet.has(c.name) || !matches(c) || (industry && ind !== industry)) continue;
+      const arr = byIndustry.get(ind) ?? [];
+      arr.push(c);
+      byIndustry.set(ind, arr);
+    }
+    for (const k of INDUSTRY_KEYS) {
+      const items = byIndustry.get(k);
+      if (items?.length) out.push({ key: k, label: INDUSTRIES[k as Industry], items: items.sort(byName) });
+    }
+    return out;
+  }, [companies, query, selSet, industry]);
+  const shown = groups.reduce((n, g) => n + g.items.length, 0);
+  const autoExpand = query.trim() !== '' || industry !== '';
 
   const toggle = (name: string) => {
     onChange(selSet.has(name) ? selected.filter((n) => n !== name) : [...selected, name]);
@@ -306,24 +352,42 @@ function CompanyChecklist({
             ) : null}
           </div>
           <div className="picker-list">
-            {ordered.map((c) => {
-              const on = selSet.has(c.name);
+            {groups.map((g) => {
+              const isOpen = autoExpand || expanded.has(g.key);
               return (
+              <div key={g.key} role="group" aria-label={g.label}>
                 <button
                   type="button"
-                  key={c.name}
-                  className={`picker-opt${on ? ' sel' : ''}`}
-                  role="option"
-                  aria-selected={on}
-                  onClick={() => toggle(c.name)}
+                  className="picker-group"
+                  aria-expanded={isOpen}
+                  onClick={() => toggleGroup(g.key)}
                 >
-                  <span className={`picker-check${on ? ' on' : ''}`}>{on ? '✓' : ''}</span>
-                  <Avatar company={c.name} logo={c.logo} />
-                  <span className="picker-opt-name">{c.name}</span>
+                  <span>
+                    <span className="picker-group-caret">{isOpen ? '▾' : '▸'}</span> {g.label}
+                  </span>
+                  <span className="picker-group-n">{g.items.length}</span>
                 </button>
+                {isOpen && g.items.map((c) => {
+                  const on = selSet.has(c.name);
+                  return (
+                    <button
+                      type="button"
+                      key={c.name}
+                      className={`picker-opt${on ? ' sel' : ''}`}
+                      role="option"
+                      aria-selected={on}
+                      onClick={() => toggle(c.name)}
+                    >
+                      <span className={`picker-check${on ? ' on' : ''}`}>{on ? '✓' : ''}</span>
+                      <Avatar company={c.name} logo={c.logo} />
+                      <span className="picker-opt-name">{c.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
               );
             })}
-            {ordered.length === 0 ? <div className="picker-empty">No match</div> : null}
+            {shown === 0 ? <div className="picker-empty">No match</div> : null}
           </div>
         </div>
       ) : null}

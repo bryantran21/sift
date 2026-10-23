@@ -277,6 +277,46 @@ select.ctrl:focus {
   font-size: 12.5px;
   color: var(--faint);
 }
+/* Industry group headers inside the company checklist */
+.picker-group {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 6px;
+  background: var(--panel-2);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  text-align: left;
+}
+.picker-group:hover {
+  color: var(--ink);
+  background: var(--ink-2);
+}
+.picker-group-caret {
+  display: inline-block;
+  width: 10px;
+  color: var(--faint);
+}
+.picker-group-n {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+/* Industry label under the company name in feed rows */
+.slug .ind {
+  color: var(--muted);
+}
+
 /* Multi-select watchlist extras */
 .picker-count {
   display: inline-flex;

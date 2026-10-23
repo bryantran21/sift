@@ -3,6 +3,8 @@ import { getDb, schema } from '../db/client';
 import type { Source } from '../types';
 import type { RunSourceStatus } from '../db/schema';
 import type { CollapsedJob } from './collapse';
+import { industryFor } from '../data/companies';
+import { isIndustry } from '../data/industries';
 
 // Phase 2 persistence + diffing (§7). One run:
 //   1. upsert sources (config + health);
@@ -180,7 +182,8 @@ function toStatus(o: SourceOutcome): RunSourceStatus {
   };
 }
 
-async function upsertSources(db: ReturnType<typeof getDb>, sources: Source[]): Promise<void> {
+// Exported for scripts/sync-sources.ts, which pushes config changes without an ingest.
+export async function upsertSources(db: ReturnType<typeof getDb>, sources: Source[]): Promise<void> {
   if (sources.length === 0) return;
   const rows = sources.map((s) => {
     const config: Record<string, string> =
@@ -193,6 +196,7 @@ async function upsertSources(db: ReturnType<typeof getDb>, sources: Source[]): P
       slug: s.slug,
       tier: s.tier,
       tags: s.tags,
+      industry: s.industry && isIndustry(s.industry) ? s.industry : industryFor(s.company, s.tags),
       config,
       enabled: s.enabled,
     };
@@ -206,6 +210,7 @@ async function upsertSources(db: ReturnType<typeof getDb>, sources: Source[]): P
         company: sql`excluded.company`,
         tier: sql`excluded.tier`,
         tags: sql`excluded.tags`,
+        industry: sql`excluded.industry`,
         config: sql`excluded.config`,
         enabled: sql`excluded.enabled`,
         updatedAt: sql`now()`,

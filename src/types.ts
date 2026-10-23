@@ -42,6 +42,7 @@ export interface Source {
   tier: Tier;
   tags: string[];
   enabled: boolean;
+  industry?: string; // optional override; normally resolved from the company registry
   // Workday needs coordinates discovered from the careers URL (Phase 7).
   tenant?: string;
   shard?: string;

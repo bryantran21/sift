@@ -8,6 +8,7 @@ export interface FeedParams {
   tier?: Tier;
   mode?: WorkMode;
   tag?: string; // quant | big-tech | fortune-500 | college
+  industry?: string; // src/data/industries.ts key (airlines, retail, tech, …)
   recency?: 'green' | 'yellow' | 'red';
   seniority?: string; // intern | new-grad | mid | senior | staff+ (undefined = any level)
   company?: string; // single-company deep link (fit modal / tracker)
@@ -34,6 +35,7 @@ export interface FeedRow {
   seniority: string;
   relevanceScore: number;
   tags: string[] | null;
+  industry: string; // from the source; 'tech' when unknown
   // per-job résumé match: how many of the job's skills are in the résumé (null = no résumé)
   match: number | null;
 }
@@ -56,6 +58,7 @@ function conditions(p: FeedParams, match: SQL | null): SQL[] {
   if (p.tier) c.push(eq(jobs.companyTier, p.tier));
   if (p.mode) c.push(eq(jobs.workMode, p.mode));
   if (p.tag) c.push(sql`${sources.tags} @> ${JSON.stringify([p.tag])}::jsonb`);
+  if (p.industry) c.push(sql`coalesce(${sources.industry}, 'tech') = ${p.industry}`);
   // Tech + US + fresh are hard constraints of the feed, not user-toggleable filters.
   c.push(sql`${jobs.category} <> 'other'`);
   c.push(eq(jobs.country, 'US'));
@@ -113,6 +116,7 @@ export async function getFeed(
       seniority: jobs.seniority,
       relevanceScore: jobs.relevanceScore,
       tags: sources.tags,
+      industry: sql<string>`coalesce(${sources.industry}, 'tech')`,
       match: match ?? sql<number | null>`null`,
     })
     .from(jobs)
@@ -131,15 +135,27 @@ export async function getFeed(
   return { rows, total: total ?? 0, page };
 }
 
-// Distinct live companies, for the company filter dropdown.
-export async function getCompanies(): Promise<string[]> {
+export interface CompanyIndustry {
+  company: string;
+  industry: string;
+}
+
+// Distinct live companies with their industry, for the company checklist (grouped by
+// industry) and the industry filter.
+export async function getCompanies(): Promise<CompanyIndustry[]> {
   const db = getDb();
   const rows = await db
-    .selectDistinct({ company: jobs.company })
+    .selectDistinct({
+      company: jobs.company,
+      industry: sql<string>`coalesce(${sources.industry}, 'tech')`,
+    })
     .from(jobs)
+    .leftJoin(sources, and(eq(sources.ats, jobs.ats), eq(sources.slug, jobs.sourceSlug)))
     .where(isNull(jobs.removedAt))
     .orderBy(jobs.company);
-  return rows.map((r) => r.company);
+  // A company with boards in two industries (rare) keeps its first label.
+  const seen = new Set<string>();
+  return rows.filter((r) => (seen.has(r.company) ? false : (seen.add(r.company), true)));
 }
 
 export interface FeedMeta {
