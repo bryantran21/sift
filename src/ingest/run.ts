@@ -18,6 +18,12 @@ const ANSI: Record<Recency, string> = {
 };
 const RESET = '\x1b[0m';
 
+// The feed only shows tech roles in the US; 'unknown' country is kept so a role whose
+// location we can't yet parse isn't lost if the parser improves.
+export function isPersistable(j: NormalizedJob): boolean {
+  return j.category !== 'other' && j.country !== 'non-US';
+}
+
 function effectiveDate(j: NormalizedJob): Date | null {
   // Pre-persistence: postedAt is all we have. firstSeenAt takes over in Phase 2.
   return j.postedAt;
@@ -96,12 +102,17 @@ async function main(): Promise<void> {
   );
 
   // Phase 3: collapse fan-out (one row per req, locations unioned).
-  const roles = collapseFanout(jobs);
-  const merged = jobs.length - roles.length;
+  const collapsed = collapseFanout(jobs);
+  const merged = jobs.length - collapsed.length;
   console.log(
-    `\nFan-out collapse: ${jobs.length} postings → ${roles.length} unique roles ` +
+    `\nFan-out collapse: ${jobs.length} postings → ${collapsed.length} unique roles ` +
       `(${merged} duplicate postings merged, ${pct(merged, jobs.length)}).`,
   );
+  // Only persist roles the feed can ever show: tech roles that aren't known to be outside
+  // the US. Enterprise boards are mostly store / warehouse / nursing / foreign roles; storing
+  // them pushed the database past its 500 MB quota (81% of rows were never displayable).
+  const roles = collapsed.filter(isPersistable);
+  console.log(`Relevant (tech, not non-US): ${roles.length} of ${collapsed.length} roles kept.`);
   printBiggestFanouts(roles, 8);
 
   // Phase 2: persist + diff (only when a database is configured).
