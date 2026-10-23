@@ -36,6 +36,20 @@
       "when": 1792780667045,
       "tag": "0004_same_radioactive_man",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1792785669126,
+      "tag": "0005_dapper_jamie_braddock",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1792786823093,
+      "tag": "0006_clammy_infant_terrible",
+      "breakpoints": true
     }
   ]
 }
