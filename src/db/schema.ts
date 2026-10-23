@@ -29,6 +29,8 @@ export const sources = pgTable(
     slug: text('slug').notNull(),
     tier: integer('tier').$type<Tier>().notNull(),
     tags: jsonb('tags').$type<string[]>().notNull().default([]),
+    // Industry key (src/data/industries.ts), resolved from the company registry at ingest.
+    industry: text('industry').notNull().default('tech'),
     // Extra coordinates for ATSs like Workday (tenant/shard/site).
     config: jsonb('config').$type<Record<string, string>>().notNull().default({}),
     enabled: boolean('enabled').notNull().default(true),
@@ -45,7 +47,7 @@ export const sources = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [uniqueIndex('sources_ats_slug_uq').on(t.ats, t.slug)],
+  (t) => [uniqueIndex('sources_ats_slug_uq').on(t.ats, t.slug), index('sources_industry_idx').on(t.industry)],
 );
 
 // ── jobs ─────────────────────────────────────────────────────────────────────

@@ -14,13 +14,17 @@
 // `domain` powers the row favicon (fetched + inlined by scripts/fetch-logos.ts).
 // Job counts on `live` rows are from the last probe (2026-07) and drift over time.
 
+import type { Industry } from './industries';
+import { brands } from './brands';
+
 export type CompanyTag = 'quant' | 'big-tech' | 'fortune-500' | 'college';
 export type CompanyStatus = 'live' | 'pending' | 'blocked' | 'unknown';
 
 export interface Company {
   name: string;
   tag: CompanyTag;
-  industry?: string; // mainly for fortune-500 (airline, retail, bank, …)
+  industry?: Industry; // falls back by tag (quant→quant, college→education, else tech)
+  aliases?: string[]; // other names this company appears under in job sources
   domain?: string; // for the favicon
   ats: string; // greenhouse | ashby | lever | workday | custom | unknown
   slug?: string; // set once we have a verified board
@@ -35,7 +39,9 @@ export interface Company {
   site?: string;
 }
 
-export const companies: Company[] = [
+// Companies with a verified board or a recorded status. The broader curated brand
+// universe lives in ./brands and is merged into `companies` below.
+const core: Company[] = [
   // ── QUANT · live on Greenhouse ──────────────────────────────────────────────
   { name: 'Jane Street', tag: 'quant', domain: 'janestreet.com', ats: 'greenhouse', slug: 'janestreet', status: 'live', eta: 'Live', tier: 1, jobs: 216 },
   { name: 'Point72', tag: 'quant', domain: 'point72.com', ats: 'greenhouse', slug: 'point72', status: 'live', eta: 'Live', tier: 1, jobs: 232 },
@@ -75,7 +81,7 @@ export const companies: Company[] = [
   { name: 'Airbnb', tag: 'big-tech', domain: 'airbnb.com', ats: 'greenhouse', slug: 'airbnb', status: 'live', eta: 'Live', tier: 2, jobs: 198 },
   { name: 'Reddit', tag: 'big-tech', domain: 'reddit.com', ats: 'greenhouse', slug: 'reddit', status: 'live', eta: 'Live', tier: 2, jobs: 195 },
   { name: 'Vercel', tag: 'big-tech', domain: 'vercel.com', ats: 'greenhouse', slug: 'vercel', status: 'live', eta: 'Live', tier: 2, jobs: 73 },
-  { name: 'SambaNova Systems', tag: 'big-tech', domain: 'sambanova.ai', ats: 'greenhouse', slug: 'sambanovasystems', status: 'live', eta: 'Live', tier: 2, jobs: 28 },
+  { name: 'SambaNova Systems', tag: 'big-tech', industry: 'semis', domain: 'sambanova.ai', ats: 'greenhouse', slug: 'sambanovasystems', status: 'live', eta: 'Live', tier: 2, jobs: 28 },
   { name: 'Discord', tag: 'big-tech', domain: 'discord.com', ats: 'greenhouse', slug: 'discord', status: 'live', eta: 'Live', tier: 2, jobs: 49 },
   { name: 'Okta', tag: 'big-tech', domain: 'okta.com', ats: 'greenhouse', slug: 'okta', status: 'live', eta: 'Live', tier: 3, jobs: 352 },
   { name: 'Samsara', tag: 'big-tech', domain: 'samsara.com', ats: 'greenhouse', slug: 'samsara', status: 'live', eta: 'Live', tier: 3, jobs: 332 },
@@ -93,7 +99,7 @@ export const companies: Company[] = [
   { name: 'Dropbox', tag: 'big-tech', domain: 'dropbox.com', ats: 'greenhouse', slug: 'dropbox', status: 'live', eta: 'Live', tier: 3, jobs: 35 },
 
   // ── BIG TECH · live via Workday (verified tenant/shard/site) ────────────────
-  { name: 'NVIDIA', tag: 'big-tech', domain: 'nvidia.com', ats: 'workday', slug: 'nvidia', status: 'live', eta: 'Live', tier: 1, jobs: 2000, tenant: 'nvidia', shard: '5', site: 'NVIDIAExternalCareerSite' },
+  { name: 'NVIDIA', tag: 'big-tech', industry: 'semis', domain: 'nvidia.com', ats: 'workday', slug: 'nvidia', status: 'live', eta: 'Live', tier: 1, jobs: 2000, tenant: 'nvidia', shard: '5', site: 'NVIDIAExternalCareerSite' },
   { name: 'Salesforce', tag: 'big-tech', domain: 'salesforce.com', ats: 'workday', slug: 'salesforce', status: 'live', eta: 'Live', tier: 3, jobs: 1435, tenant: 'salesforce', shard: '12', site: 'External_Career_Site' },
 
   // ── BIG TECH · adapter pending (supported ATS, not yet built) ───────────────
@@ -123,47 +129,49 @@ export const companies: Company[] = [
   // Most large enterprises run Workday (adapter: live — add tenant/shard/site) or
   // Taleo/iCIMS (out of scope). ATS per company is unconfirmed unless noted; each
   // needs a manual careers-URL check before it can move to 'live'.
-  { name: 'Target', tag: 'fortune-500', industry: 'Retail', domain: 'target.com', ats: 'workday', slug: 'target', status: 'live', eta: 'Live', tier: 3, jobs: 2000, tenant: 'target', shard: '5', site: 'targetcareers' },
-  { name: 'Mastercard', tag: 'fortune-500', industry: 'Payments', domain: 'mastercard.com', ats: 'workday', slug: 'mastercard', status: 'live', eta: 'Live', tier: 3, jobs: 1157, tenant: 'mastercard', shard: '1', site: 'CorporateCareers' },
-  { name: 'Delta Air Lines', tag: 'fortune-500', industry: 'Airline', domain: 'delta.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'United Airlines', tag: 'fortune-500', industry: 'Airline', domain: 'united.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'American Airlines', tag: 'fortune-500', industry: 'Airline', domain: 'aa.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Southwest Airlines', tag: 'fortune-500', industry: 'Airline', domain: 'southwest.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Alaska Airlines', tag: 'fortune-500', industry: 'Airline', domain: 'alaskaair.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'JetBlue', tag: 'fortune-500', industry: 'Airline', domain: 'jetblue.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Walmart', tag: 'fortune-500', industry: 'Retail', domain: 'walmart.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Costco', tag: 'fortune-500', industry: 'Retail', domain: 'costco.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'The Home Depot', tag: 'fortune-500', industry: 'Retail', domain: 'homedepot.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: "Lowe's", tag: 'fortune-500', industry: 'Retail', domain: 'lowes.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Best Buy', tag: 'fortune-500', industry: 'Retail', domain: 'bestbuy.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Kroger', tag: 'fortune-500', industry: 'Retail', domain: 'kroger.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Walgreens', tag: 'fortune-500', industry: 'Retail', domain: 'walgreens.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'CVS Health', tag: 'fortune-500', industry: 'Retail/Health', domain: 'cvshealth.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Nike', tag: 'fortune-500', industry: 'Retail', domain: 'nike.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Starbucks', tag: 'fortune-500', industry: 'Retail/Food', domain: 'starbucks.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'JPMorgan Chase', tag: 'fortune-500', industry: 'Bank', domain: 'jpmorganchase.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Large quant/eng org — worth verifying.' },
-  { name: 'Bank of America', tag: 'fortune-500', industry: 'Bank', domain: 'bankofamerica.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Wells Fargo', tag: 'fortune-500', industry: 'Bank', domain: 'wellsfargo.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Goldman Sachs', tag: 'fortune-500', industry: 'Bank', domain: 'goldmansachs.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Investment bank — quant-adjacent roles.' },
-  { name: 'Morgan Stanley', tag: 'fortune-500', industry: 'Bank', domain: 'morganstanley.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Investment bank — quant-adjacent roles.' },
-  { name: 'American Express', tag: 'fortune-500', industry: 'Finance', domain: 'americanexpress.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Capital One', tag: 'fortune-500', industry: 'Bank', domain: 'capitalone.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'AT&T', tag: 'fortune-500', industry: 'Telecom', domain: 'att.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Verizon', tag: 'fortune-500', industry: 'Telecom', domain: 'verizon.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Comcast', tag: 'fortune-500', industry: 'Telecom/Media', domain: 'comcast.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Marriott', tag: 'fortune-500', industry: 'Hospitality', domain: 'marriott.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Walt Disney', tag: 'fortune-500', industry: 'Media', domain: 'thewaltdisneycompany.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Ford', tag: 'fortune-500', industry: 'Automotive', domain: 'ford.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'General Motors', tag: 'fortune-500', industry: 'Automotive', domain: 'gm.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Boeing', tag: 'fortune-500', industry: 'Aerospace', domain: 'boeing.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'ExxonMobil', tag: 'fortune-500', industry: 'Energy', domain: 'exxonmobil.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'UnitedHealth Group', tag: 'fortune-500', industry: 'Healthcare', domain: 'unitedhealthgroup.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Pfizer', tag: 'fortune-500', industry: 'Pharma', domain: 'pfizer.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'PepsiCo', tag: 'fortune-500', industry: 'Food/CPG', domain: 'pepsico.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'Procter & Gamble', tag: 'fortune-500', industry: 'CPG', domain: 'pg.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'FedEx', tag: 'fortune-500', industry: 'Logistics', domain: 'fedex.com', ats: 'unknown', status: 'unknown', tier: 3 },
-  { name: 'UPS', tag: 'fortune-500', industry: 'Logistics', domain: 'ups.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Target', tag: 'fortune-500', industry: 'retail', domain: 'target.com', ats: 'workday', slug: 'target', status: 'live', eta: 'Live', tier: 3, jobs: 2000, tenant: 'target', shard: '5', site: 'targetcareers' },
+  { name: 'Mastercard', tag: 'fortune-500', industry: 'finance', domain: 'mastercard.com', ats: 'workday', slug: 'mastercard', status: 'live', eta: 'Live', tier: 3, jobs: 1157, tenant: 'mastercard', shard: '1', site: 'CorporateCareers' },
+  { name: 'Delta Air Lines', tag: 'fortune-500', industry: 'airlines', domain: 'delta.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'United Airlines', tag: 'fortune-500', industry: 'airlines', domain: 'united.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'American Airlines', tag: 'fortune-500', industry: 'airlines', domain: 'aa.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Southwest Airlines', tag: 'fortune-500', industry: 'airlines', domain: 'southwest.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Alaska Airlines', tag: 'fortune-500', industry: 'airlines', domain: 'alaskaair.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'JetBlue', tag: 'fortune-500', industry: 'airlines', domain: 'jetblue.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Walmart', tag: 'fortune-500', industry: 'retail', domain: 'walmart.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Costco', tag: 'fortune-500', industry: 'retail', domain: 'costco.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'The Home Depot', tag: 'fortune-500', industry: 'retail', domain: 'homedepot.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: "Lowe's", tag: 'fortune-500', industry: 'retail', domain: 'lowes.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Best Buy', tag: 'fortune-500', industry: 'retail', domain: 'bestbuy.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Kroger', tag: 'fortune-500', industry: 'retail', domain: 'kroger.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Walgreens', tag: 'fortune-500', industry: 'retail', domain: 'walgreens.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'CVS Health', tag: 'fortune-500', industry: 'health', domain: 'cvshealth.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Nike', tag: 'fortune-500', industry: 'consumer', domain: 'nike.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Starbucks', tag: 'fortune-500', industry: 'food', domain: 'starbucks.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'JPMorgan Chase', tag: 'fortune-500', industry: 'finance', domain: 'jpmorganchase.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Large quant/eng org — worth verifying.' },
+  { name: 'Bank of America', tag: 'fortune-500', industry: 'finance', domain: 'bankofamerica.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Wells Fargo', tag: 'fortune-500', industry: 'finance', domain: 'wellsfargo.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Goldman Sachs', tag: 'fortune-500', industry: 'finance', domain: 'goldmansachs.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Investment bank — quant-adjacent roles.' },
+  { name: 'Morgan Stanley', tag: 'fortune-500', industry: 'finance', domain: 'morganstanley.com', ats: 'unknown', status: 'unknown', tier: 2, note: 'Investment bank — quant-adjacent roles.' },
+  { name: 'American Express', tag: 'fortune-500', industry: 'finance', domain: 'americanexpress.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Capital One', tag: 'fortune-500', industry: 'finance', domain: 'capitalone.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'AT&T', tag: 'fortune-500', industry: 'telecom', domain: 'att.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Verizon', tag: 'fortune-500', industry: 'telecom', domain: 'verizon.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Comcast', tag: 'fortune-500', industry: 'telecom', domain: 'comcast.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Marriott', tag: 'fortune-500', industry: 'travel', domain: 'marriott.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Walt Disney', tag: 'fortune-500', industry: 'media', aliases: ['Disney', 'The Walt Disney Company'], domain: 'thewaltdisneycompany.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Ford', tag: 'fortune-500', industry: 'auto', domain: 'ford.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'General Motors', tag: 'fortune-500', industry: 'auto', domain: 'gm.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Boeing', tag: 'fortune-500', industry: 'aerospace', domain: 'boeing.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'ExxonMobil', tag: 'fortune-500', industry: 'energy', domain: 'exxonmobil.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'UnitedHealth Group', tag: 'fortune-500', industry: 'health', domain: 'unitedhealthgroup.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Pfizer', tag: 'fortune-500', industry: 'health', domain: 'pfizer.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'PepsiCo', tag: 'fortune-500', industry: 'food', domain: 'pepsico.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'Procter & Gamble', tag: 'fortune-500', industry: 'consumer', domain: 'pg.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'FedEx', tag: 'fortune-500', industry: 'logistics', domain: 'fedex.com', ats: 'unknown', status: 'unknown', tier: 3 },
+  { name: 'UPS', tag: 'fortune-500', industry: 'logistics', domain: 'ups.com', ats: 'unknown', status: 'unknown', tier: 3 },
 ];
+
+export const companies: Company[] = [...core, ...brands];
 
 // Convenience selectors used by the ingest config and the browser generator.
 export const liveCompanies = companies.filter((c) => c.status === 'live');
@@ -176,4 +184,55 @@ export function companyCounts() {
     byStatus[c.status]++;
   }
   return { total: companies.length, byTag, byStatus };
+}
+
+// ── Name matching + industry resolution ───────────────────────────────────────
+// Job sources name companies inconsistently ("The Home Depot" vs "Home Depot",
+// "Lawrence Livermore National Laboratory (LLNL)"), so registry lookups go through a
+// normalized key, and entries can list aliases.
+export function normCompany(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '') // strip accents: Nestlé → nestle
+    .replace(/\(.*?\)/g, ' ') // drop parentheticals: "… (LLNL)"
+    .replace(/['’.]/g, '') // Lowe's → lowes, U.S. → us
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\b(the|inc|incorporated|corp|corporation|co|company|llc|ltd|plc|group|holdings)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+const byName = new Map<string, Company>();
+for (const c of companies) {
+  for (const n of [c.name, ...(c.aliases ?? [])]) {
+    const k = normCompany(n);
+    if (k && !byName.has(k)) byName.set(k, c);
+  }
+}
+
+export function findCompany(name: string): Company | undefined {
+  return byName.get(normCompany(name));
+}
+
+const TAG_INDUSTRY: Record<CompanyTag, Industry> = {
+  quant: 'quant',
+  'big-tech': 'tech',
+  'fortune-500': 'tech',
+  college: 'education',
+};
+
+export function industryOf(c: Company): Industry {
+  return c.industry ?? TAG_INDUSTRY[c.tag];
+}
+
+// Industry for a job source: registry match → the source's tags → Tech (the bulk-imported
+// boards come from tech new-grad/internship listings).
+export function industryFor(company: string, tags: string[] = []): Industry {
+  const c = findCompany(company);
+  if (c) return industryOf(c);
+  if (tags.includes('quant')) return 'quant';
+  if (tags.includes('college')) return 'education';
+  return 'tech';
 }

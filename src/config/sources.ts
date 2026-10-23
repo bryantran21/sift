@@ -15,6 +15,8 @@ const sourceSchema = z.object({
   tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   tags: z.array(z.string()).default([]),
   enabled: z.boolean().default(true),
+  // Optional industry override (src/data/industries.ts); normally resolved from the registry.
+  industry: z.string().optional(),
   // Workday coordinates (only meaningful for ats: workday).
   tenant: z.string().optional(),
   shard: z.string().optional(),
@@ -45,6 +47,7 @@ function parseSourcesFile(resolved: string, label: string): Source[] {
       tier: s.tier,
       tags: s.tags,
       enabled: s.enabled,
+      industry: s.industry,
       tenant: s.tenant,
       shard: s.shard,
       site: s.site,

@@ -1,5 +1,6 @@
 import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
+import { isIndustry } from '../data/industries';
 import { getDeviceId } from '../lib/device';
 import { getProfile } from '../db/profile';
 import { getCooldownStatuses } from '../db/events';
@@ -26,6 +27,7 @@ function parse(sp: SP): FeedParams {
     tier: tier === 1 || tier === 2 || tier === 3 ? tier : undefined,
     mode: WORK_MODES.includes(mode as WorkMode) ? (mode as WorkMode) : undefined,
     tag: g('tag') || undefined,
+    industry: isIndustry(g('industry')) ? g('industry') : undefined,
     recency: rec === 'green' || rec === 'yellow' || rec === 'red' ? rec : undefined,
     seniority: SENIORITIES.includes(level as Seniority) ? level : undefined,
     company: g('company')?.trim() || undefined,
@@ -57,7 +59,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
     getFeed(params, resumeSkills),
     getCompanies(),
   ]);
-  const companies = companyNames.map((name) => ({ name, logo: logoFor(name) }));
+  const companies = companyNames.map((c) => ({
+    name: c.company,
+    industry: c.industry,
+    logo: logoFor(c.company),
+  }));
   const rows = feed.rows.map((r) => ({ ...r, logo: logoFor(r.company) }));
 
   const totalPages = Math.max(1, Math.ceil(feed.total / PAGE_SIZE));

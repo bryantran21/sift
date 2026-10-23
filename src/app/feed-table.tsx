@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { recencyBucket, ageLabel } from '../lib/recency';
 import { monogram } from '../lib/avatar';
 import { CompanyTracker } from './company-tracker';
+import { industryLabel } from '../data/industries';
 import type { FeedRow } from '../db/feed';
 
 export type FeedTableRow = FeedRow & { logo: string | null };
@@ -116,7 +117,10 @@ function Row({
                 </span>
               ) : null}
             </div>
-            <div className="slug mono">{r.ats}</div>
+            <div className="slug">
+              <span className="ind">{industryLabel(r.industry)}</span>
+              <span className="mono"> · {r.ats}</span>
+            </div>
           </div>
         </div>
       </td>
@@ -196,6 +200,7 @@ function JobDrawer({ row, onClose }: { row: FeedTableRow; onClose: () => void })
         </div>
 
         <div className="drawer-meta">
+          <span className="pill">{industryLabel(row.industry)}</span>
           {row.seniority && row.seniority !== 'unknown' ? <span className="pill">{row.seniority}</span> : null}
           {row.category && row.category !== 'other' ? <span className="pill">{row.category}</span> : null}
           {row.workMode && row.workMode !== 'unknown' ? <span className="pill">{row.workMode}</span> : null}
