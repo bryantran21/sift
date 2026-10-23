@@ -1,0 +1,4179 @@
+{
+  "3M": {
+    "probedAt": "2026-10-23T19:42:56.577Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.3m.com/",
+    "via": "careers-page"
+  },
+  "7-Eleven": {
+    "probedAt": "2026-10-23T19:41:42.525Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.7-eleven.com/",
+    "via": "careers-page"
+  },
+  "ABB": {
+    "probedAt": "2026-10-23T19:44:09.181Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "abb1global",
+    "host": "careers.abb",
+    "site": "ABB1GLOBAL",
+    "jobs": 2179,
+    "via": "careers-page",
+    "careersUrl": "https://careers.abb/us/en"
+  },
+  "Abbott": {
+    "probedAt": "2026-10-23T19:02:40.440Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "abbott",
+    "tenant": "abbott",
+    "shard": "5",
+    "site": "abbottcareers",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://www.abbott.com/en-us/careers"
+  },
+  "AbbVie": {
+    "probedAt": "2026-10-23T19:02:33.023Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "AbbVie",
+    "via": "existing-source"
+  },
+  "Accenture": {
+    "probedAt": "2026-10-23T19:00:11.667Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "AccentureFederalServices",
+    "via": "existing-source"
+  },
+  "Activision Blizzard": {
+    "probedAt": "2026-10-23T19:44:02.665Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "accous",
+    "host": "careers.activisionblizzard.com",
+    "site": "ACCOUS",
+    "jobs": 45,
+    "via": "careers-page",
+    "careersUrl": "https://careers.activisionblizzard.com/"
+  },
+  "Adidas": {
+    "probedAt": "2026-10-23T19:42:03.166Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Adobe": {
+    "probedAt": "2026-10-23T19:44:00.808Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "adobus",
+    "host": "careers.adobe.com",
+    "site": "ADOBUS",
+    "jobs": 293,
+    "via": "careers-page",
+    "careersUrl": "https://careers.adobe.com/us/en"
+  },
+  "Aflac": {
+    "probedAt": "2026-10-23T19:41:10.071Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.aflac.com/",
+    "via": "careers-page"
+  },
+  "AIG": {
+    "probedAt": "2026-10-23T19:00:08.261Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "aig",
+    "tenant": "aig",
+    "shard": "1",
+    "site": "aig",
+    "jobs": 431,
+    "via": "careers-page",
+    "careersUrl": "https://www.aig.com/careers"
+  },
+  "Airbus": {
+    "probedAt": "2026-10-23T19:42:51.457Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.airbus.com/careers",
+    "via": "careers-page"
+  },
+  "Airtable": {
+    "probedAt": "2026-10-23T18:59:14.876Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "airtable",
+    "jobs": 4,
+    "via": "slug-guess"
+  },
+  "Akamai": {
+    "probedAt": "2026-10-23T19:40:34.372Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://www.akamai.com/careers",
+    "via": "careers-page"
+  },
+  "Alaska Airlines": {
+    "probedAt": "2026-10-23T19:34:51.388Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.alaskaair.com/",
+    "via": "careers-page"
+  },
+  "Albertsons": {
+    "probedAt": "2026-10-23T19:41:31.645Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "eofd",
+    "host": "eofd.fa.us6.oraclecloud.com",
+    "site": "CX_1001",
+    "jobs": 8429,
+    "via": "careers-page",
+    "careersUrl": "https://eofd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/pages/Albertsons"
+  },
+  "Aldi": {
+    "probedAt": "2026-10-23T19:41:42.261Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.aldi.us/",
+    "via": "careers-page"
+  },
+  "Allen Institute for AI": {
+    "probedAt": "2026-10-23T19:03:01.022Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "thealleninstitute",
+    "jobs": 16,
+    "via": "careers-page",
+    "careersUrl": "https://allenai.org/careers"
+  },
+  "Allstate": {
+    "probedAt": "2026-10-23T19:00:03.451Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "allstate",
+    "tenant": "allstate",
+    "shard": "5",
+    "site": "allstate_careers",
+    "jobs": 425,
+    "via": "careers-page",
+    "careersUrl": "https://www.allstatecorporation.com/careers.aspx"
+  },
+  "Ally Financial": {
+    "probedAt": "2026-10-23T18:59:51.265Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "ally",
+    "tenant": "ally",
+    "shard": "1",
+    "site": "Ally",
+    "jobs": 86,
+    "via": "careers-page",
+    "careersUrl": "https://www.ally.com/about/careers/"
+  },
+  "Altice USA": {
+    "probedAt": "2026-10-23T19:42:24.895Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.sap.com/products/hcm/recruiting-software.html",
+    "via": "careers-page"
+  },
+  "AMC Theatres": {
+    "probedAt": "2026-10-23T19:42:20.644Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.amctheatres.com/",
+    "via": "careers-page"
+  },
+  "AMD": {
+    "probedAt": "2026-10-23T19:40:36.347Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.amd.com/careers-home/jobs",
+    "via": "careers-page"
+  },
+  "American Airlines": {
+    "probedAt": "2026-10-23T19:34:50.351Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://jobs.aa.com/?utm_source=careersite",
+    "via": "careers-page"
+  },
+  "American Express": {
+    "probedAt": "2026-10-23T19:37:38.834Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://careers.americanexpress.com/en/sites/CX_1",
+    "via": "careers-page"
+  },
+  "Amgen": {
+    "probedAt": "2026-10-23T19:02:35.070Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "amgen",
+    "tenant": "amgen",
+    "shard": "1",
+    "site": "Careers",
+    "jobs": 1702,
+    "via": "careers-page",
+    "careersUrl": "https://careers.amgen.com/en"
+  },
+  "Amtrak": {
+    "probedAt": "2026-10-23T19:43:38.285Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.amtrak.com/",
+    "via": "careers-page"
+  },
+  "Analog Devices": {
+    "probedAt": "2026-10-23T18:59:28.093Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "analogdevices",
+    "tenant": "analogdevices",
+    "shard": "1",
+    "site": "External",
+    "jobs": 840,
+    "via": "careers-page",
+    "careersUrl": "https://www.analog.com/en/careers.html"
+  },
+  "Anduril": {
+    "probedAt": "2026-10-23T19:02:11.253Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "andurilindustries",
+    "via": "existing-source"
+  },
+  "Anheuser-Busch": {
+    "probedAt": "2026-10-23T19:42:02.784Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.anheuser-busch.com/careers",
+    "via": "careers-page"
+  },
+  "Apollo Global": {
+    "probedAt": "2026-10-23T18:59:54.983Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "athene",
+    "tenant": "athene",
+    "shard": "5",
+    "site": "Apollo_Careers",
+    "jobs": 54,
+    "via": "careers-page",
+    "careersUrl": "https://www.apollo.com/careers"
+  },
+  "Apple": {
+    "probedAt": "2026-10-23T19:34:46.833Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.apple.com/careers/us/",
+    "via": "careers-page"
+  },
+  "Applied Intuition": {
+    "probedAt": "2026-10-23T18:59:17.307Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "applied",
+    "via": "existing-source"
+  },
+  "Applied Materials": {
+    "probedAt": "2026-10-23T19:40:37.162Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "appliedmaterials",
+    "host": "appliedmaterials.eightfold.ai",
+    "site": "appliedmaterials.com",
+    "jobs": 938,
+    "via": "slug-guess"
+  },
+  "Aptiv": {
+    "probedAt": "2026-10-23T19:42:45.506Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.aptiv.com/en/jobs",
+    "via": "careers-page"
+  },
+  "AQR Capital": {
+    "probedAt": "2026-10-23T18:59:42.902Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "aqr",
+    "jobs": 57,
+    "via": "careers-page",
+    "careersUrl": "https://careers.aqr.com/"
+  },
+  "Archer Aviation": {
+    "probedAt": "2026-10-23T19:42:56.128Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://archer.com/careers",
+    "via": "careers-page"
+  },
+  "Argonne National Laboratory": {
+    "probedAt": "2026-10-23T19:43:41.659Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Arm": {
+    "probedAt": "2026-10-23T19:40:39.604Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.arm.com/",
+    "via": "careers-page"
+  },
+  "ASML": {
+    "probedAt": "2026-10-23T19:40:39.450Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.asml.com/en/careers",
+    "via": "careers-page"
+  },
+  "Astera Labs": {
+    "probedAt": "2026-10-23T18:59:35.955Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "asteraearlycareer2026",
+    "via": "existing-source"
+  },
+  "AstraZeneca": {
+    "probedAt": "2026-10-23T19:43:21.508Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "astrazeneca",
+    "host": "astrazeneca.eightfold.ai",
+    "site": "astrazeneca.com",
+    "jobs": 336,
+    "via": "careers-page",
+    "careersUrl": "https://careers.astrazeneca.com/"
+  },
+  "AT&T": {
+    "probedAt": "2026-10-23T19:37:40.245Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.attcareers.com/",
+    "via": "careers-page"
+  },
+  "Atlassian": {
+    "probedAt": "2026-10-23T19:40:20.016Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.atlassian.com/company/careers",
+    "via": "careers-page"
+  },
+  "Aurora Innovation": {
+    "probedAt": "2026-10-23T19:42:44.400Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://aurora.tech/careers",
+    "via": "careers-page"
+  },
+  "Autodesk": {
+    "probedAt": "2026-10-23T19:40:26.537Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "autodesk",
+    "host": "autodesk.eightfold.ai",
+    "site": "autodesk.com",
+    "jobs": 92,
+    "via": "slug-guess"
+  },
+  "AutoZone": {
+    "probedAt": "2026-10-23T19:41:36.709Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1",
+    "via": "careers-page"
+  },
+  "Avis Budget Group": {
+    "probedAt": "2026-10-23T19:42:32.019Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.avisbudgetgroup.com/home",
+    "via": "careers-page"
+  },
+  "BAE Systems": {
+    "probedAt": "2026-10-23T19:44:08.975Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "bae1us",
+    "host": "jobs.baesystems.com",
+    "site": "BAE1US",
+    "jobs": 2048,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.baesystems.com/global/en"
+  },
+  "Bain & Company": {
+    "probedAt": "2026-10-23T19:41:18.367Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.bain.com/",
+    "via": "careers-page"
+  },
+  "Balyasny Asset Management": {
+    "probedAt": "2026-10-23T19:40:48.375Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.bamfunds.com/careers",
+    "via": "careers-page"
+  },
+  "Bank of America": {
+    "probedAt": "2026-10-23T18:56:40.747Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "ghr",
+    "tenant": "ghr",
+    "shard": "1",
+    "site": "lateral-us",
+    "jobs": 1954,
+    "via": "careers-page",
+    "careersUrl": "https://careers.bankofamerica.com/en-us"
+  },
+  "Barclays": {
+    "probedAt": "2026-10-23T19:41:00.709Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://home.barclays/careers/",
+    "via": "careers-page"
+  },
+  "Base Power": {
+    "probedAt": "2026-10-23T19:02:32.530Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "base-power",
+    "via": "existing-source"
+  },
+  "Bath & Body Works": {
+    "probedAt": "2026-10-23T19:41:36.652Z",
+    "status": "blocked",
+    "platform": "Oracle Taleo",
+    "careersUrl": "https://careers.bathandbodyworks.com/",
+    "via": "careers-page"
+  },
+  "Best Buy": {
+    "probedAt": "2026-10-23T19:34:56.987Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.bestbuy.com/bby",
+    "via": "careers-page"
+  },
+  "BlackRock": {
+    "probedAt": "2026-10-23T19:40:50.746Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.blackrock.com/",
+    "via": "careers-page"
+  },
+  "Blackstone": {
+    "probedAt": "2026-10-23T19:40:55.738Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Block": {
+    "probedAt": "2026-10-23T18:59:53.036Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "block",
+    "jobs": 212,
+    "via": "slug-guess"
+  },
+  "Bloomberg": {
+    "probedAt": "2026-10-23T19:40:57.430Z",
+    "status": "blocked",
+    "platform": "Avature",
+    "careersUrl": "https://www.bloomberg.com/company/what-we-do/",
+    "via": "careers-page"
+  },
+  "Blue Origin": {
+    "probedAt": "2026-10-23T19:42:50.813Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "BMW": {
+    "probedAt": "2026-10-23T19:42:39.003Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "BNSF Railway": {
+    "probedAt": "2026-10-23T19:44:12.884Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "brsbrwus",
+    "host": "jobs.bnsf.com",
+    "site": "BRSBRWUS",
+    "jobs": 108,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.bnsf.com/us/en"
+  },
+  "BNY": {
+    "probedAt": "2026-10-23T19:40:51.534Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "eofe",
+    "host": "eofe.fa.us2.oraclecloud.com",
+    "site": "BNY",
+    "jobs": 1383,
+    "via": "careers-page",
+    "careersUrl": "https://www.bny.com/corporate/global/en/about-us/careers/work-with-us.html"
+  },
+  "Boeing": {
+    "probedAt": "2026-10-23T18:56:45.595Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "boeing",
+    "tenant": "boeing",
+    "shard": "1",
+    "site": "EXTERNAL_CAREERS",
+    "jobs": 767,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.boeing.com/"
+  },
+  "Booking Holdings": {
+    "probedAt": "2026-10-23T19:42:27.372Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Booz Allen Hamilton": {
+    "probedAt": "2026-10-23T19:00:16.346Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "bah",
+    "tenant": "bah",
+    "shard": "1",
+    "site": "BAH_Jobs",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://www.boozallen.com/careers.html"
+  },
+  "Bose": {
+    "probedAt": "2026-10-23T19:44:06.687Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "bcrbcsus",
+    "host": "careers.bose.com",
+    "site": "BCRBCSUS",
+    "jobs": 90,
+    "via": "careers-page",
+    "careersUrl": "https://careers.bose.com/us/en"
+  },
+  "Boston Consulting Group": {
+    "probedAt": "2026-10-23T19:41:18.159Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "bcg",
+    "host": "bcg.eightfold.ai",
+    "site": "bcg.com",
+    "jobs": 5,
+    "via": "careers-page",
+    "careersUrl": "https://careers.bcg.com/global/en/"
+  },
+  "Boston Scientific": {
+    "probedAt": "2026-10-23T19:43:22.307Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "bostonscientific",
+    "host": "bostonscientific.eightfold.ai",
+    "site": "bostonscientific.com",
+    "jobs": 317,
+    "via": "careers-page",
+    "careersUrl": "https://www.bostonscientific.com/en-US/careers.html"
+  },
+  "Box": {
+    "probedAt": "2026-10-23T19:40:26.830Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "BP": {
+    "probedAt": "2026-10-23T19:02:26.904Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "bpinternational",
+    "tenant": "bpinternational",
+    "shard": "3",
+    "site": "bpCareers",
+    "jobs": 292,
+    "via": "careers-page",
+    "careersUrl": "https://careers.bp.com/"
+  },
+  "Bridgewater Associates": {
+    "probedAt": "2026-10-23T19:40:46.812Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.bridgewater.com/careers",
+    "via": "careers-page"
+  },
+  "Bristol Myers Squibb": {
+    "probedAt": "2026-10-23T19:02:33.404Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "bristolmyerssquibb",
+    "tenant": "bristolmyerssquibb",
+    "shard": "5",
+    "site": "BMS",
+    "jobs": 667,
+    "via": "careers-page",
+    "careersUrl": "https://careers.bms.com/"
+  },
+  "Broadcom": {
+    "probedAt": "2026-10-23T19:40:37.860Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.broadcom.com/company/careers",
+    "via": "careers-page"
+  },
+  "Bumble": {
+    "probedAt": "2026-10-23T19:40:34.910Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.bumble.com/",
+    "via": "careers-page"
+  },
+  "C.H. Robinson": {
+    "probedAt": "2026-10-23T19:02:50.512Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "chrobinson",
+    "tenant": "chrobinson",
+    "shard": "5",
+    "site": "CHRobinson",
+    "jobs": 164,
+    "via": "careers-page",
+    "careersUrl": "https://www.chrobinson.com/en-us/careers/"
+  },
+  "Caesars Entertainment": {
+    "probedAt": "2026-10-23T19:42:29.574Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.caesars.com/",
+    "via": "careers-page"
+  },
+  "Canva": {
+    "probedAt": "2026-10-23T18:59:04.419Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "Canva",
+    "via": "existing-source"
+  },
+  "Capgemini": {
+    "probedAt": "2026-10-23T19:41:19.159Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.capgemini.com/",
+    "via": "careers-page"
+  },
+  "Capital One": {
+    "probedAt": "2026-10-23T18:56:42.196Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "capitalone",
+    "tenant": "capitalone",
+    "shard": "12",
+    "site": "Capital_One",
+    "jobs": 1995,
+    "via": "careers-page",
+    "careersUrl": "https://www.capitalonecareers.com/"
+  },
+  "CarMax": {
+    "probedAt": "2026-10-23T19:00:48.120Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "carmax",
+    "tenant": "carmax",
+    "shard": "1",
+    "site": "External",
+    "jobs": 1177,
+    "via": "careers-page",
+    "careersUrl": "https://careers.carmax.com/"
+  },
+  "Carnival": {
+    "probedAt": "2026-10-23T19:42:27.566Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://www.carnivalcorp.com/careers",
+    "via": "careers-page"
+  },
+  "Carrier": {
+    "probedAt": "2026-10-23T19:02:22.972Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "carrier",
+    "tenant": "carrier",
+    "shard": "5",
+    "site": "jobs",
+    "jobs": 1034,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.carrier.com/en"
+  },
+  "Carvana": {
+    "probedAt": "2026-10-23T19:02:06.230Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "carvana",
+    "jobs": 1674,
+    "via": "slug-guess"
+  },
+  "Caterpillar": {
+    "probedAt": "2026-10-23T19:02:18.496Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "cat",
+    "tenant": "cat",
+    "shard": "5",
+    "site": "CaterpillarCareers",
+    "jobs": 1041,
+    "via": "careers-page",
+    "careersUrl": "https://www.caterpillar.com/en/careers.html"
+  },
+  "CAVA": {
+    "probedAt": "2026-10-23T19:41:56.290Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Cerebras": {
+    "probedAt": "2026-10-23T18:59:35.936Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "cerebras",
+    "via": "existing-source"
+  },
+  "Character.AI": {
+    "probedAt": "2026-10-23T18:59:17.126Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "character",
+    "jobs": 13,
+    "via": "careers-page",
+    "careersUrl": "https://character.ai/careers"
+  },
+  "Charles Schwab": {
+    "probedAt": "2026-10-23T19:40:49.012Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Charter Communications": {
+    "probedAt": "2026-10-23T19:42:21.048Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://jobs.spectrum.com/",
+    "via": "careers-page"
+  },
+  "Chevron": {
+    "probedAt": "2026-10-23T19:43:03.016Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.chevron.com/",
+    "via": "careers-page"
+  },
+  "Chewy": {
+    "probedAt": "2026-10-23T19:44:04.351Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "chinus",
+    "host": "careers.chewy.com",
+    "site": "CHINUS",
+    "jobs": 240,
+    "via": "careers-page",
+    "careersUrl": "https://careers.chewy.com/us/en"
+  },
+  "Chick-fil-A": {
+    "probedAt": "2026-10-23T19:41:49.733Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.chick-fil-a.com/corporate/jobs",
+    "via": "careers-page"
+  },
+  "Chipotle": {
+    "probedAt": "2026-10-23T19:41:44.281Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://jobs.chipotle.com/",
+    "via": "careers-page"
+  },
+  "Chubb": {
+    "probedAt": "2026-10-23T19:41:09.247Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "fa-ewgu-saasfaprod1",
+    "host": "fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site": "CX_2001",
+    "jobs": 732,
+    "via": "careers-page",
+    "careersUrl": "https://fa-ewgu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001"
+  },
+  "Cigna": {
+    "probedAt": "2026-10-23T19:02:47.089Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "cigna",
+    "tenant": "cigna",
+    "shard": "5",
+    "site": "cignacareers",
+    "jobs": 541,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.thecignagroup.com/us/en"
+  },
+  "Cisco": {
+    "probedAt": "2026-10-23T19:44:00.807Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "ciscisglobal",
+    "host": "careers.cisco.com",
+    "site": "CISCISGLOBAL",
+    "jobs": 1477,
+    "via": "careers-page",
+    "careersUrl": "https://careers.cisco.com/global/en"
+  },
+  "Citadel": {
+    "probedAt": "2026-10-23T19:34:45.237Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Citadel Securities": {
+    "probedAt": "2026-10-23T19:34:45.274Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Citi": {
+    "probedAt": "2026-10-23T18:59:43.534Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "citi",
+    "tenant": "citi",
+    "shard": "5",
+    "site": "2",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.citi.com/"
+  },
+  "Citizens Bank": {
+    "probedAt": "2026-10-23T19:41:02.806Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "hcgn",
+    "host": "hcgn.fa.us2.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 500,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.citizensbank.com/"
+  },
+  "Clorox": {
+    "probedAt": "2026-10-23T19:42:13.735Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.thecloroxcompany.com/careers/",
+    "via": "careers-page"
+  },
+  "CME Group": {
+    "probedAt": "2026-10-23T18:59:57.055Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "cmegroup",
+    "tenant": "cmegroup",
+    "shard": "1",
+    "site": "cme_careers",
+    "jobs": 65,
+    "via": "careers-page",
+    "careersUrl": "https://www.cmegroup.com/careers.html?redirect=/careers"
+  },
+  "Coca-Cola": {
+    "probedAt": "2026-10-23T19:01:11.353Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "coke",
+    "tenant": "coke",
+    "shard": "1",
+    "site": "coca-cola-careers",
+    "jobs": 235,
+    "via": "careers-page",
+    "careersUrl": "https://coke.wd1.myworkdayjobs.com/coca-cola-careers"
+  },
+  "Cognizant": {
+    "probedAt": "2026-10-23T19:41:20.552Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Cohere": {
+    "probedAt": "2026-10-23T18:59:16.434Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "cohere",
+    "via": "existing-source"
+  },
+  "Colgate-Palmolive": {
+    "probedAt": "2026-10-23T19:42:12.322Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.perfectname.com/domain/Dummy.com",
+    "via": "careers-page"
+  },
+  "Comcast": {
+    "probedAt": "2026-10-23T18:56:43.506Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "comcast",
+    "tenant": "comcast",
+    "shard": "115",
+    "site": "Comcast_Careers",
+    "jobs": 678,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.comcast.com/"
+  },
+  "Con Edison": {
+    "probedAt": "2026-10-23T19:43:11.630Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ejcu",
+    "host": "ejcu.fa.us6.oraclecloud.com",
+    "site": "CX_1033",
+    "jobs": 54,
+    "via": "careers-page",
+    "careersUrl": "https://www.coned.com/en/about-us/careers"
+  },
+  "Confluent": {
+    "probedAt": "2026-10-23T19:40:25.304Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "ConocoPhillips": {
+    "probedAt": "2026-10-23T19:02:26.410Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "conocophillips",
+    "tenant": "conocophillips",
+    "shard": "1",
+    "site": "External",
+    "jobs": 41,
+    "via": "careers-page",
+    "careersUrl": "https://careers.conocophillips.com/"
+  },
+  "Constellation Brands": {
+    "probedAt": "2026-10-23T19:01:18.504Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "cbrands",
+    "tenant": "cbrands",
+    "shard": "5",
+    "site": "CBI_External_Careers",
+    "jobs": 82,
+    "via": "careers-page",
+    "careersUrl": "https://cbrands.wd5.myworkdayjobs.com/CBI_External_Careers"
+  },
+  "Corning": {
+    "probedAt": "2026-10-23T19:44:09.768Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "cuwcupus",
+    "host": "careers.corning.com",
+    "site": "CUWCUPUS",
+    "jobs": 1143,
+    "via": "careers-page",
+    "careersUrl": "https://careers.corning.com/us/en"
+  },
+  "Costco": {
+    "probedAt": "2026-10-23T19:34:55.851Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.costco.com/",
+    "via": "careers-page"
+  },
+  "Coursera": {
+    "probedAt": "2026-10-23T19:03:01.888Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "coursera",
+    "jobs": 30,
+    "via": "slug-guess"
+  },
+  "Cox Communications": {
+    "probedAt": "2026-10-23T19:42:22.310Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Crocs": {
+    "probedAt": "2026-10-23T19:42:15.121Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.crocs.com/",
+    "via": "careers-page"
+  },
+  "CrowdStrike": {
+    "probedAt": "2026-10-23T18:59:00.347Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "crowdstrike",
+    "tenant": "crowdstrike",
+    "shard": "5",
+    "site": "crowdstrikecareers",
+    "jobs": 392,
+    "via": "careers-page",
+    "careersUrl": "https://www.crowdstrike.com/en-us/careers/"
+  },
+  "CSX": {
+    "probedAt": "2026-10-23T19:43:37.332Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Cummins": {
+    "probedAt": "2026-10-23T19:42:59.724Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "fa-espx-saasfaprod1",
+    "host": "fa-espx-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 1242,
+    "via": "careers-page",
+    "careersUrl": "https://cummins.jobs/"
+  },
+  "CVS Health": {
+    "probedAt": "2026-10-23T19:44:00.806Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "cvschlus",
+    "host": "jobs.cvshealth.com",
+    "site": "CVSCHLUS",
+    "jobs": 19519,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.cvshealth.com/us/en/home"
+  },
+  "D. E. Shaw": {
+    "probedAt": "2026-10-23T19:34:45.276Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.deshaw.com/careers",
+    "via": "careers-page"
+  },
+  "Danaher": {
+    "probedAt": "2026-10-23T19:44:11.497Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "danaglobal",
+    "host": "jobs.danaher.com",
+    "site": "DANAGLOBAL",
+    "jobs": 1445,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.danaher.com/global/en"
+  },
+  "Darden Restaurants": {
+    "probedAt": "2026-10-23T19:41:52.813Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.darden.com/careers/",
+    "via": "careers-page"
+  },
+  "Deel": {
+    "probedAt": "2026-10-23T19:40:30.486Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.deel.com/careers/",
+    "via": "careers-page"
+  },
+  "Dell Technologies": {
+    "probedAt": "2026-10-23T19:40:40.642Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers",
+    "via": "careers-page"
+  },
+  "Deloitte": {
+    "probedAt": "2026-10-23T19:41:12.015Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.deloitte.com/us/en/careers/careers.html",
+    "via": "careers-page"
+  },
+  "Delta Air Lines": {
+    "probedAt": "2026-10-23T19:34:48.717Z",
+    "status": "blocked",
+    "platform": "Avature",
+    "careersUrl": "https://www.delta.com/us/en/careers/overview",
+    "via": "careers-page"
+  },
+  "Deutsche Bank": {
+    "probedAt": "2026-10-23T19:41:01.272Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.db.com/",
+    "via": "careers-page"
+  },
+  "DHL": {
+    "probedAt": "2026-10-23T19:44:12.078Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "dpdhglobal",
+    "host": "careers.dhl.com",
+    "site": "DPDHGLOBAL",
+    "jobs": 9810,
+    "via": "careers-page",
+    "careersUrl": "https://careers.dhl.com/amer/en"
+  },
+  "Dick's Sporting Goods": {
+    "probedAt": "2026-10-23T19:00:37.451Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "dickssportinggoods",
+    "tenant": "dickssportinggoods",
+    "shard": "1",
+    "site": "DSG",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://www.dickssportinggoods.jobs/"
+  },
+  "Discover": {
+    "probedAt": "2026-10-23T19:40:52.304Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://919052.toplakehorizon.com/?mlk=Ll7MikcLQss85ZNAVdTVHsT%2Fm0v9y7bMDLNwySkHZWrIQ9fZ8LhJkd11GwPof8gijRnGy1a3%2Bl6NUXLrFREKH1Zc2cDpuxUY2C4Y3uQ1uytWtFkqfqgdklsZHKuIsTPzfeEmT4j4%2BktMFogmpfXVO7its0vAc%2FfWOeWSKUq3SMtRDlRX0KSEjx8LAHV%2B21ANVoaH6hETeAW3U3WhB5IwVmPmS%2BmnVhNAqc32N4NMtui9AVVy0VyTYv%2FcR4eqNVb9TFLkR77Dmr6LIiebMABSWh2e74wcmNtbxE9izc9AsYsKFih2RuhD3p5iXi%2FKK0y%2BxgvJM39VJ6NVHn0yQrf9Bz%2B79%2BCD7L4ZSGZzgcMTG4jPoyueI3cCumqpn2SQTU01qMy1lSm1zn5covVrJor8Y4X%2BQsx61qOgBUaLji%2FXjJbiajtxkp2SNABeHPxBDxxQitkOK1XwtoDOnqpM7P%2FcwuTfxjoDPUT1ooGI1als0nN%2FE73R6yrSDWI66m5dlSVCF7tyAGfxSPH21uwyzrXnVeCwyaaPgADjfrsUAlMQFq7rt78z4p6Pd%2FEsgWawpalUtxmbXPpDCI0twi3NZUAO6b%2BbiamaYYO1AneyGsQED%2BQj%2BsSPMCa13A%2FafrgWSRXIqfSewZYTu%2FGgtfyLhPvS%2BGLA3Zf7Yn1e7%2Bny6IACivTL4hbsUcKF1spYcncYQbEYD4S7Yuc2sv816migB1p0NnKDn%2Fd7j8Agq2pYoXG4DqzH2pfZx0Q%2FKsGuH1s5KxA3h%2BxAcYwb8x8nj4PpMOpAUA6kVlbshb2saiUsjF9AKLh4g4hSmvD%2FIXho%2FqDNI%2FgcosAEqefK3Z14HiHpMKaBF1lgWilNGVoqVEeZn95hX4gR%2FGGSyg47PF%2Fftp6n5S4ngjj5NedAFbpu8KFPwMb7LogFGpS2QAwxB9pZ2mpmyul9xWdCvYGAy83c0Qxjj4tl6wdQlXt3%2BFTx%2F2ukroi6BsRXkqbTLEC%2B1tdOfBEsY2k6NsoWJ7sVB%2FEgIuRo%2BVg%2Fa3szQqS4CHTiOfnuJnjvNDPrSNF5J3PeM6Gt4bFojAFC0CNXU5twJGHGoB0m5lbvLYI%3D",
+    "via": "careers-page"
+  },
+  "DocuSign": {
+    "probedAt": "2026-10-23T19:40:27.057Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.docusign.com/careers-home",
+    "via": "careers-page"
+  },
+  "Dollar General": {
+    "probedAt": "2026-10-23T19:41:30.694Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ibxwjb",
+    "host": "ibxwjb.fa.ocs.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 91381,
+    "via": "careers-page",
+    "careersUrl": "https://careers.dollargeneral.com/"
+  },
+  "Dollar Tree": {
+    "probedAt": "2026-10-23T19:44:04.261Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "dtydtjus",
+    "host": "careers.dollartree.com",
+    "site": "DTYDTJUS",
+    "jobs": 15392,
+    "via": "careers-page",
+    "careersUrl": "https://careers.dollartree.com/us/en"
+  },
+  "Domino's": {
+    "probedAt": "2026-10-23T19:00:54.458Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "Dominos",
+    "via": "existing-source"
+  },
+  "DoorDash": {
+    "probedAt": "2026-10-23T18:54:34.232Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "doordashusa",
+    "via": "existing-source"
+  },
+  "Dow": {
+    "probedAt": "2026-10-23T19:43:00.827Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://corporate.dow.com/en-us/careers.html",
+    "via": "careers-page"
+  },
+  "Dow Jones": {
+    "probedAt": "2026-10-23T19:42:19.955Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.dowjones.com/company/careers/",
+    "via": "careers-page"
+  },
+  "DRW": {
+    "probedAt": "2026-10-23T18:54:31.523Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "drweng",
+    "via": "existing-source"
+  },
+  "Duke Energy": {
+    "probedAt": "2026-10-23T19:02:26.905Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "dukeenergy",
+    "tenant": "dukeenergy",
+    "shard": "1",
+    "site": "search",
+    "jobs": 82,
+    "via": "careers-page",
+    "careersUrl": "https://www.duke-energy.com/our-company/careers"
+  },
+  "Duolingo": {
+    "probedAt": "2026-10-23T18:59:04.627Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "duolingo",
+    "jobs": 60,
+    "via": "slug-guess"
+  },
+  "DuPont": {
+    "probedAt": "2026-10-23T19:44:09.450Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "dupous",
+    "host": "careers.dupont.com",
+    "site": "DUPOUS",
+    "jobs": 203,
+    "via": "careers-page",
+    "careersUrl": "https://careers.dupont.com/us/en"
+  },
+  "Eaton": {
+    "probedAt": "2026-10-23T19:42:59.656Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "eaton",
+    "host": "eaton.eightfold.ai",
+    "site": "eaton.com",
+    "jobs": 1203,
+    "via": "careers-page",
+    "careersUrl": "https://www.eaton.com/us/en-us/company/careers.html"
+  },
+  "eBay": {
+    "probedAt": "2026-10-23T19:40:29.046Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.ebayinc.com/",
+    "via": "careers-page"
+  },
+  "EchoStar": {
+    "probedAt": "2026-10-23T19:42:23.379Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "efgz-dev2",
+    "host": "efgz-dev2.fa.us6.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 19,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.echostar.com/jobs?"
+  },
+  "Edward Jones": {
+    "probedAt": "2026-10-23T19:40:58.940Z",
+    "status": "blocked",
+    "platform": "BrassRing",
+    "careersUrl": "https://careers.edwardjones.com/",
+    "via": "careers-page"
+  },
+  "Elastic": {
+    "probedAt": "2026-10-23T18:59:02.403Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "elastic",
+    "jobs": 401,
+    "via": "slug-guess"
+  },
+  "Electronic Arts": {
+    "probedAt": "2026-10-23T19:40:42.298Z",
+    "status": "blocked",
+    "platform": "UKG",
+    "careersUrl": "https://www.ea.com/careers",
+    "via": "careers-page"
+  },
+  "Elevance Health": {
+    "probedAt": "2026-10-23T19:02:46.509Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "elevancehealth",
+    "tenant": "elevancehealth",
+    "shard": "1",
+    "site": "ANT",
+    "jobs": 265,
+    "via": "careers-page",
+    "careersUrl": "https://careers.elevancehealth.com/"
+  },
+  "Eli Lilly": {
+    "probedAt": "2026-10-23T19:43:18.649Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Emerson": {
+    "probedAt": "2026-10-23T19:42:59.445Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "hdjq",
+    "host": "hdjq.fa.us2.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 1117,
+    "via": "careers-page",
+    "careersUrl": "https://www.emerson.com/en/corporate/careers"
+  },
+  "Enphase Energy": {
+    "probedAt": "2026-10-23T19:43:15.652Z",
+    "status": "blocked",
+    "platform": "Jobvite",
+    "careersUrl": "https://enphase.com/careers",
+    "via": "careers-page"
+  },
+  "Enterprise Mobility": {
+    "probedAt": "2026-10-23T19:42:31.958Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.enterprisemobility.com/careers",
+    "via": "careers-page"
+  },
+  "Epic Games": {
+    "probedAt": "2026-10-23T18:59:37.199Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "epicgames",
+    "jobs": 152,
+    "via": "slug-guess"
+  },
+  "Epic Systems": {
+    "probedAt": "2026-10-23T19:43:31.211Z",
+    "status": "blocked",
+    "platform": "Avature",
+    "careersUrl": "https://careers.epic.com/",
+    "via": "careers-page"
+  },
+  "Equifax": {
+    "probedAt": "2026-10-23T19:41:04.420Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Estée Lauder": {
+    "probedAt": "2026-10-23T19:42:08.968Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "elcompanies",
+    "host": "elcompanies.eightfold.ai",
+    "site": "elcompanies.com",
+    "jobs": 819,
+    "via": "slug-guess"
+  },
+  "Etsy": {
+    "probedAt": "2026-10-23T19:40:27.847Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.etsy.com/",
+    "via": "careers-page"
+  },
+  "Exelon": {
+    "probedAt": "2026-10-23T19:43:13.340Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.exeloncorp.com/exelon-corporate/",
+    "via": "careers-page"
+  },
+  "Expedia Group": {
+    "probedAt": "2026-10-23T19:01:48.208Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "expedia",
+    "tenant": "expedia",
+    "shard": "108",
+    "site": "search",
+    "jobs": 166,
+    "via": "careers-page",
+    "careersUrl": "https://careers.expediagroup.com/"
+  },
+  "Experian": {
+    "probedAt": "2026-10-23T19:00:02.312Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "experian",
+    "jobs": 382,
+    "via": "slug-guess"
+  },
+  "ExxonMobil": {
+    "probedAt": "2026-10-23T19:37:43.186Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://jobs.exxonmobil.com/",
+    "via": "careers-page"
+  },
+  "EY": {
+    "probedAt": "2026-10-23T19:41:14.883Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.ey.com/",
+    "via": "careers-page"
+  },
+  "FedEx": {
+    "probedAt": "2026-10-23T19:40:14.489Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.fedex.com/",
+    "via": "careers-page"
+  },
+  "Fidelity Investments": {
+    "probedAt": "2026-10-23T19:40:49.080Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Fifth Third": {
+    "probedAt": "2026-10-23T18:59:59.821Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "fifththird",
+    "tenant": "fifththird",
+    "shard": "5",
+    "site": "53careers",
+    "jobs": 1002,
+    "via": "careers-page",
+    "careersUrl": "https://www.53.com/content/fifth-third/en/careers.html"
+  },
+  "First Solar": {
+    "probedAt": "2026-10-23T19:43:14.733Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "fa-esbv-saasfaprod1",
+    "host": "fa-esbv-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 263,
+    "via": "careers-page",
+    "careersUrl": "https://www.firstsolar.com/careers"
+  },
+  "FIS": {
+    "probedAt": "2026-10-23T19:00:02.711Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "fis",
+    "tenant": "fis",
+    "shard": "5",
+    "site": "SearchJobs",
+    "jobs": 501,
+    "via": "careers-page",
+    "careersUrl": "https://careers.fisglobal.com/us/en"
+  },
+  "Fiserv": {
+    "probedAt": "2026-10-23T19:44:03.394Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "fffyjus",
+    "host": "careers.fiserv.com",
+    "site": "FFFYJUS",
+    "jobs": 380,
+    "via": "careers-page",
+    "careersUrl": "https://careers.fiserv.com/us/en"
+  },
+  "Five Rings": {
+    "probedAt": "2026-10-23T18:54:31.524Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "fiveringsllc",
+    "jobs": 17,
+    "via": "careers-page",
+    "careersUrl": "https://fiverings.com/careers/"
+  },
+  "Flexport": {
+    "probedAt": "2026-10-23T19:02:50.775Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "flexport",
+    "jobs": 193,
+    "via": "careers-page",
+    "careersUrl": "https://www.flexport.com/careers/"
+  },
+  "Ford": {
+    "probedAt": "2026-10-23T19:37:41.520Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "ford",
+    "host": "ford.eightfold.ai",
+    "site": "ford.com",
+    "jobs": 645,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.ford.com/careers"
+  },
+  "Fortinet": {
+    "probedAt": "2026-10-23T19:40:25.100Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "edel",
+    "host": "edel.fa.us2.oraclecloud.com",
+    "site": "CX_2001",
+    "jobs": 1032,
+    "via": "careers-page",
+    "careersUrl": "https://www.fortinet.com/corporate/careers"
+  },
+  "Fox Corporation": {
+    "probedAt": "2026-10-23T19:42:18.147Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.fox.com/",
+    "via": "careers-page"
+  },
+  "Frontier Airlines": {
+    "probedAt": "2026-10-23T19:42:25.658Z",
+    "status": "blocked",
+    "platform": "UKG",
+    "careersUrl": "https://www.flyfrontier.com/careers",
+    "via": "careers-page"
+  },
+  "GameStop": {
+    "probedAt": "2026-10-23T19:41:40.895Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Gap Inc.": {
+    "probedAt": "2026-10-23T19:00:29.710Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "gapinc",
+    "jobs": 11,
+    "via": "slug-guess"
+  },
+  "Garner Health": {
+    "probedAt": "2026-10-23T19:02:49.223Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "garnerhealth",
+    "via": "existing-source"
+  },
+  "Gartner": {
+    "probedAt": "2026-10-23T19:41:25.795Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "GE Aerospace": {
+    "probedAt": "2026-10-23T19:44:08.340Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "gaogayglobal",
+    "host": "careers.geaerospace.com",
+    "site": "GAOGAYGLOBAL",
+    "jobs": 608,
+    "via": "careers-page",
+    "careersUrl": "https://careers.geaerospace.com/global/en"
+  },
+  "GE HealthCare": {
+    "probedAt": "2026-10-23T19:44:11.851Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "gevghlglobal",
+    "host": "careers.gehealthcare.com",
+    "site": "GEVGHLGLOBAL",
+    "jobs": 1043,
+    "via": "careers-page",
+    "careersUrl": "https://careers.gehealthcare.com/global/en"
+  },
+  "GE Vernova": {
+    "probedAt": "2026-10-23T19:02:17.109Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "gevernova",
+    "tenant": "gevernova",
+    "shard": "5",
+    "site": "Vernova_ExternalSite",
+    "jobs": 2255,
+    "via": "careers-page",
+    "careersUrl": "https://careers.gevernova.com/"
+  },
+  "GEICO": {
+    "probedAt": "2026-10-23T19:41:05.827Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.geico.com/",
+    "via": "careers-page"
+  },
+  "Genentech": {
+    "probedAt": "2026-10-23T19:44:10.376Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "geneus",
+    "host": "careers.gene.com",
+    "site": "GENEUS",
+    "jobs": 244,
+    "via": "careers-page",
+    "careersUrl": "https://careers.gene.com/us/en"
+  },
+  "General Dynamics": {
+    "probedAt": "2026-10-23T19:42:47.672Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.gd.com/careers",
+    "via": "careers-page"
+  },
+  "General Mills": {
+    "probedAt": "2026-10-23T19:01:12.795Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "genmills",
+    "tenant": "genmills",
+    "shard": "1",
+    "site": "GMI_External_Careers",
+    "jobs": 375,
+    "via": "careers-page",
+    "careersUrl": "https://www.careers.generalmills.com/"
+  },
+  "General Motors": {
+    "probedAt": "2026-10-23T19:37:43.040Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Georgia Tech": {
+    "probedAt": "2026-10-23T19:34:48.132Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://hr.gatech.edu/",
+    "via": "careers-page"
+  },
+  "Gilead Sciences": {
+    "probedAt": "2026-10-23T19:02:35.110Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "gilead",
+    "tenant": "gilead",
+    "shard": "1",
+    "site": "gileadcareers",
+    "jobs": 411,
+    "via": "careers-page",
+    "careersUrl": "https://www.gilead.com/careers"
+  },
+  "GitHub": {
+    "probedAt": "2026-10-23T19:40:31.979Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://www.github.careers/careers-home",
+    "via": "careers-page"
+  },
+  "Glean": {
+    "probedAt": "2026-10-23T19:40:35.787Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.glean.com/careers",
+    "via": "careers-page"
+  },
+  "Global Payments": {
+    "probedAt": "2026-10-23T19:41:05.107Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.globalpayments.com/",
+    "via": "careers-page"
+  },
+  "GoDaddy": {
+    "probedAt": "2026-10-23T18:59:08.402Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "godaddy",
+    "jobs": 37,
+    "via": "slug-guess"
+  },
+  "Goldman Sachs": {
+    "probedAt": "2026-10-23T19:37:36.958Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.goldmansachs.com/careers",
+    "via": "careers-page"
+  },
+  "Goodyear": {
+    "probedAt": "2026-10-23T19:02:07.195Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "goodyear",
+    "tenant": "goodyear",
+    "shard": "1",
+    "site": "GoodyearCareers",
+    "jobs": 64,
+    "via": "careers-page",
+    "careersUrl": "https://corporate.goodyear.com/us/en/company/working-at-goodyear.html"
+  },
+  "Google": {
+    "probedAt": "2026-10-23T19:34:45.278Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.google.com/about/careers/applications/",
+    "via": "careers-page"
+  },
+  "Grammarly": {
+    "probedAt": "2026-10-23T19:40:26.771Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://superhuman.com/company/careers",
+    "via": "careers-page"
+  },
+  "Groq": {
+    "probedAt": "2026-10-23T19:40:42.091Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://groq.com/",
+    "via": "careers-page"
+  },
+  "GSK": {
+    "probedAt": "2026-10-23T19:44:10.585Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "ghvgpagb",
+    "host": "jobs.gsk.com",
+    "site": "GHVGPAGB",
+    "jobs": 866,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.gsk.com/us/en"
+  },
+  "H-E-B": {
+    "probedAt": "2026-10-23T19:41:32.905Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.heb.com/careers-home",
+    "via": "careers-page"
+  },
+  "Halliburton": {
+    "probedAt": "2026-10-23T19:43:14.690Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.halliburton.com/",
+    "via": "careers-page"
+  },
+  "Harley-Davidson": {
+    "probedAt": "2026-10-23T19:42:45.325Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.harley-davidson.com/us/en/about-us/careers.html?source_cd=Vanity_careers",
+    "via": "careers-page"
+  },
+  "Harvard University": {
+    "probedAt": "2026-10-23T19:02:55.472Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "harvarduniversity",
+    "jobs": 324,
+    "via": "slug-guess"
+  },
+  "Hasbro": {
+    "probedAt": "2026-10-23T19:01:34.301Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "hasbro",
+    "jobs": 116,
+    "via": "careers-page",
+    "careersUrl": "https://consumercare.hasbro.com/en-us/where-to-buy"
+  },
+  "HashiCorp": {
+    "probedAt": "2026-10-23T19:40:25.582Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "HCA Healthcare": {
+    "probedAt": "2026-10-23T19:43:28.070Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Hershey": {
+    "probedAt": "2026-10-23T19:42:00.364Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.thehersheycompany.com/",
+    "via": "careers-page"
+  },
+  "Hertz": {
+    "probedAt": "2026-10-23T19:42:30.066Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://www.hertz.com/careers/",
+    "via": "careers-page"
+  },
+  "Hilton": {
+    "probedAt": "2026-10-23T19:42:25.829Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "efet",
+    "host": "efet.fa.us2.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 4545,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.hilton.com/"
+  },
+  "Honda": {
+    "probedAt": "2026-10-23T19:44:07.749Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "ahmahmus",
+    "host": "careers.honda.com",
+    "site": "AHMAHMUS",
+    "jobs": 303,
+    "via": "careers-page",
+    "careersUrl": "https://careers.honda.com/us/en"
+  },
+  "Honeywell": {
+    "probedAt": "2026-10-23T19:42:56.188Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ibqbjb",
+    "host": "ibqbjb.fa.ocs.oraclecloud.com",
+    "site": "Honeywell",
+    "jobs": 1332,
+    "via": "careers-page",
+    "careersUrl": "https://www.honeywell.com/us/en/careers"
+  },
+  "HP": {
+    "probedAt": "2026-10-23T18:59:30.029Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "hp",
+    "jobs": 22,
+    "via": "slug-guess"
+  },
+  "HPE": {
+    "probedAt": "2026-10-23T19:44:02.634Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "hpe1us",
+    "host": "careers.hpe.com",
+    "site": "HPE1US",
+    "jobs": 1642,
+    "via": "careers-page",
+    "careersUrl": "https://careers.hpe.com/us/en"
+  },
+  "HSBC": {
+    "probedAt": "2026-10-23T19:41:00.201Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "hsbc",
+    "host": "hsbc.eightfold.ai",
+    "site": "hsbc.com",
+    "jobs": 56,
+    "via": "slug-guess"
+  },
+  "HubSpot": {
+    "probedAt": "2026-10-23T19:40:24.757Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.hubspot.com/careers",
+    "via": "careers-page"
+  },
+  "Hudson River Trading": {
+    "probedAt": "2026-10-23T19:34:45.276Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Hugging Face": {
+    "probedAt": "2026-10-23T19:40:33.353Z",
+    "status": "blocked",
+    "platform": "Workable",
+    "careersUrl": "https://apply.workable.com/huggingface",
+    "via": "careers-page"
+  },
+  "Humana": {
+    "probedAt": "2026-10-23T19:44:12.077Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "humhumus",
+    "host": "careers.humana.com",
+    "site": "HUMHUMUS",
+    "jobs": 2095,
+    "via": "careers-page",
+    "careersUrl": "https://careers.humana.com/us/en"
+  },
+  "Hyatt": {
+    "probedAt": "2026-10-23T19:42:26.750Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.hyatt.com/",
+    "via": "careers-page"
+  },
+  "Hyundai": {
+    "probedAt": "2026-10-23T19:42:35.125Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://hyundaicareers.com/",
+    "via": "careers-page"
+  },
+  "IBM": {
+    "probedAt": "2026-10-23T19:40:15.266Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.ibm.com/en_US/careers",
+    "via": "careers-page"
+  },
+  "iHeartMedia": {
+    "probedAt": "2026-10-23T19:01:42.131Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "iheartmedia",
+    "tenant": "iheartmedia",
+    "shard": "5",
+    "site": "External_iHM",
+    "jobs": 302,
+    "via": "careers-page",
+    "careersUrl": "https://iheartmedia.wd5.myworkdayjobs.com/External_iHM/jobs"
+  },
+  "IHG": {
+    "probedAt": "2026-10-23T19:42:27.276Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.ihg.com/en/",
+    "via": "careers-page"
+  },
+  "IKEA": {
+    "probedAt": "2026-10-23T19:41:40.324Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://jobs.ikea.com/en",
+    "via": "careers-page"
+  },
+  "Illumina": {
+    "probedAt": "2026-10-23T19:02:42.841Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "illumina",
+    "tenant": "illumina",
+    "shard": "1",
+    "site": "illumina-careers",
+    "jobs": 156,
+    "via": "careers-page",
+    "careersUrl": "https://illumina.wd1.myworkdayjobs.com/illumina-careers"
+  },
+  "Infosys": {
+    "probedAt": "2026-10-23T19:41:22.162Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.infosys.com/",
+    "via": "careers-page"
+  },
+  "Inspire Brands": {
+    "probedAt": "2026-10-23T19:41:50.164Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.inspirebrands.com/",
+    "via": "careers-page"
+  },
+  "Intel": {
+    "probedAt": "2026-10-23T18:59:24.136Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "intel",
+    "tenant": "intel",
+    "shard": "1",
+    "site": "External",
+    "jobs": 779,
+    "via": "careers-page",
+    "careersUrl": "https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000"
+  },
+  "Intercontinental Exchange": {
+    "probedAt": "2026-10-23T19:40:57.612Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.ice.com/jobs",
+    "via": "careers-page"
+  },
+  "Intuit": {
+    "probedAt": "2026-10-23T19:40:19.330Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://www.intuit.com/careers/",
+    "via": "careers-page"
+  },
+  "Intuitive Surgical": {
+    "probedAt": "2026-10-23T19:02:41.533Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "Intuitive",
+    "via": "existing-source"
+  },
+  "J.B. Hunt": {
+    "probedAt": "2026-10-23T19:02:50.502Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "jbhunt",
+    "tenant": "jbhunt",
+    "shard": "501",
+    "site": "Careers",
+    "jobs": 491,
+    "via": "careers-page",
+    "careersUrl": "https://careers.jbhunt.com/"
+  },
+  "JetBlue": {
+    "probedAt": "2026-10-23T19:34:52.400Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.jetblue.com/",
+    "via": "careers-page"
+  },
+  "Joby Aviation": {
+    "probedAt": "2026-10-23T19:42:55.466Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://www.jobyaviation.com/careers",
+    "via": "careers-page"
+  },
+  "John Deere": {
+    "probedAt": "2026-10-23T19:42:56.860Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.deere.com/careers",
+    "via": "careers-page"
+  },
+  "Johnson & Johnson": {
+    "probedAt": "2026-10-23T19:43:16.541Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Johnson Controls": {
+    "probedAt": "2026-10-23T19:02:24.457Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "jci",
+    "tenant": "jci",
+    "shard": "5",
+    "site": "JCI",
+    "jobs": 2774,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.johnsoncontrols.com/"
+  },
+  "JPMorgan Chase": {
+    "probedAt": "2026-10-23T19:34:19.783Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "jpmc",
+    "host": "jpmc.fa.oraclecloud.com",
+    "site": "CX_1001",
+    "jobs": 7257,
+    "via": "careers-page",
+    "careersUrl": "https://www.jpmorganchase.com/careers?redirect=careers_jpm"
+  },
+  "Kaiser Permanente": {
+    "probedAt": "2026-10-23T19:43:26.171Z",
+    "status": "blocked",
+    "platform": "Oracle Taleo",
+    "careersUrl": "https://www.kaiserpermanentejobs.org/?kp_shortcut_referrer=kp.org/careers",
+    "via": "careers-page"
+  },
+  "Kellanova": {
+    "probedAt": "2026-10-23T19:41:57.385Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://jobs.kellanova.com/",
+    "via": "careers-page"
+  },
+  "Keurig Dr Pepper": {
+    "probedAt": "2026-10-23T19:41:57.000Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "kdrp",
+    "host": "kdrp.eightfold.ai",
+    "site": "kdrp.com",
+    "jobs": 606,
+    "via": "careers-page",
+    "careersUrl": "https://careers.keurigdrpepper.com/en"
+  },
+  "Khan Academy": {
+    "probedAt": "2026-10-23T19:03:02.204Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "khanacademy",
+    "jobs": 5,
+    "via": "slug-guess"
+  },
+  "Kimberly-Clark": {
+    "probedAt": "2026-10-23T19:42:13.567Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "KKR": {
+    "probedAt": "2026-10-23T19:40:56.487Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.kkr.com/careers",
+    "via": "careers-page"
+  },
+  "KLA": {
+    "probedAt": "2026-10-23T18:59:26.575Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "kla",
+    "tenant": "kla",
+    "shard": "1",
+    "site": "Search",
+    "jobs": 1125,
+    "via": "careers-page",
+    "careersUrl": "https://www.kla.com/careers"
+  },
+  "Klaviyo": {
+    "probedAt": "2026-10-23T18:59:14.518Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "klaviyo",
+    "jobs": 159,
+    "via": "slug-guess"
+  },
+  "Kohl's": {
+    "probedAt": "2026-10-23T19:00:27.079Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "kohls",
+    "tenant": "kohls",
+    "shard": "504",
+    "site": "kohlscareers",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://careers.kohls.com/"
+  },
+  "KPMG": {
+    "probedAt": "2026-10-23T19:41:16.751Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://kpmg.com/xx/en/careers.html",
+    "via": "careers-page"
+  },
+  "Kraft Heinz": {
+    "probedAt": "2026-10-23T19:41:57.145Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.kraftheinzcompany.com/",
+    "via": "careers-page"
+  },
+  "Kroger": {
+    "probedAt": "2026-10-23T19:37:34.789Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://www.krogerfamilycareers.com/en/sites/CX_2001",
+    "via": "careers-page"
+  },
+  "L'Oréal": {
+    "probedAt": "2026-10-23T19:42:10.088Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.loreal.com/en",
+    "via": "careers-page"
+  },
+  "L3Harris": {
+    "probedAt": "2026-10-23T19:42:48.212Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.l3harris.com/en",
+    "via": "careers-page"
+  },
+  "Lam Research": {
+    "probedAt": "2026-10-23T19:40:37.450Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "lamresearch",
+    "host": "lamresearch.eightfold.ai",
+    "site": "lamresearch.com",
+    "jobs": 587,
+    "via": "careers-page",
+    "careersUrl": "https://www.lamresearch.com/careers/careers-overview/?utm_source=vanity&utm_campaign=lam_careers_vanity&utm_medium=vanity&utm_content=careers_vanity"
+  },
+  "Lawrence Livermore National Laboratory": {
+    "probedAt": "2026-10-23T19:02:57.393Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "LLNL",
+    "via": "existing-source"
+  },
+  "LEGO": {
+    "probedAt": "2026-10-23T19:01:34.491Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "lego",
+    "tenant": "lego",
+    "shard": "103",
+    "site": "LEGO_External",
+    "jobs": 489,
+    "via": "careers-page",
+    "careersUrl": "https://www.lego.com/en-us/careers"
+  },
+  "Leidos": {
+    "probedAt": "2026-10-23T19:42:54.475Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Lemonade": {
+    "probedAt": "2026-10-23T19:00:10.388Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "lemonade",
+    "jobs": 40,
+    "via": "slug-guess"
+  },
+  "Lenovo": {
+    "probedAt": "2026-10-23T19:40:41.989Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.lenovo.com/en_US/careers",
+    "via": "careers-page"
+  },
+  "Levi Strauss": {
+    "probedAt": "2026-10-23T19:42:06.562Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Liberty Mutual": {
+    "probedAt": "2026-10-23T19:41:08.032Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "libertymutual",
+    "host": "libertymutual.eightfold.ai",
+    "site": "libertymutual.com",
+    "jobs": 225,
+    "via": "slug-guess"
+  },
+  "Linear": {
+    "probedAt": "2026-10-23T18:59:15.047Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "Linear",
+    "jobs": 34,
+    "via": "careers-page",
+    "careersUrl": "https://linear.app/careers"
+  },
+  "LinkedIn": {
+    "probedAt": "2026-10-23T19:40:22.276Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.linkedin.com/",
+    "via": "careers-page"
+  },
+  "Live Nation": {
+    "probedAt": "2026-10-23T19:01:39.882Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "livenation",
+    "tenant": "livenation",
+    "shard": "503",
+    "site": "LNExternalSite",
+    "jobs": 1310,
+    "via": "careers-page",
+    "careersUrl": "https://www.livenationentertainment.com/careers"
+  },
+  "Lockheed Martin": {
+    "probedAt": "2026-10-23T19:42:45.694Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "lockheedmartin",
+    "host": "lockheedmartin.eightfold.ai",
+    "site": "lockheedmartin.com",
+    "jobs": 6234,
+    "via": "careers-page",
+    "careersUrl": "https://www.lockheedmartin.com/en-us/careers/index.html"
+  },
+  "Logitech": {
+    "probedAt": "2026-10-23T18:59:35.865Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "logitech",
+    "tenant": "logitech",
+    "shard": "5",
+    "site": "Logitech",
+    "jobs": 218,
+    "via": "careers-page",
+    "careersUrl": "https://www.logitech.com/en-us/careers"
+  },
+  "Los Alamos National Laboratory": {
+    "probedAt": "2026-10-23T19:43:41.030Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.lanl.gov/careers",
+    "via": "careers-page"
+  },
+  "Lowe's": {
+    "probedAt": "2026-10-23T19:44:00.805Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "loweus",
+    "host": "talent.lowes.com",
+    "site": "LOWEUS",
+    "jobs": 4454,
+    "via": "careers-page",
+    "careersUrl": "https://talent.lowes.com/us/en"
+  },
+  "Lucid Motors": {
+    "probedAt": "2026-10-23T19:01:56.383Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "lucidmotors",
+    "jobs": 443,
+    "via": "slug-guess"
+  },
+  "Lululemon": {
+    "probedAt": "2026-10-23T19:42:03.606Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.lululemon.com/en_US/careers",
+    "via": "careers-page"
+  },
+  "Lumen Technologies": {
+    "probedAt": "2026-10-23T19:42:22.966Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "lumen",
+    "host": "lumen.eightfold.ai",
+    "site": "lumen.com",
+    "jobs": 120,
+    "via": "slug-guess"
+  },
+  "Macy's": {
+    "probedAt": "2026-10-23T19:41:27.009Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ebwh",
+    "host": "ebwh.fa.us2.oraclecloud.com",
+    "site": "CX_1001",
+    "jobs": 6101,
+    "via": "careers-page",
+    "careersUrl": "https://www.macys.com/customer-service/articles/job-and-career-opportunities"
+  },
+  "Maersk": {
+    "probedAt": "2026-10-23T19:43:34.900Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Marriott": {
+    "probedAt": "2026-10-23T19:34:19.784Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ejwl",
+    "host": "ejwl.fa.us2.oraclecloud.com",
+    "site": "CX",
+    "jobs": 13477,
+    "via": "careers-page",
+    "careersUrl": "https://careers.marriott.com/"
+  },
+  "Mars": {
+    "probedAt": "2026-10-23T19:44:06.497Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "marsglobal",
+    "host": "careers.mars.com",
+    "site": "MARSGLOBAL",
+    "jobs": 328,
+    "via": "careers-page",
+    "careersUrl": "https://careers.mars.com/us/en"
+  },
+  "Marvell": {
+    "probedAt": "2026-10-23T18:59:27.559Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "marvell",
+    "tenant": "marvell",
+    "shard": "1",
+    "site": "MarvellCareers",
+    "jobs": 342,
+    "via": "careers-page",
+    "careersUrl": "https://www.marvell.com/company/careers.html"
+  },
+  "Match Group": {
+    "probedAt": "2026-10-23T18:59:20.695Z",
+    "status": "live",
+    "ats": "lever",
+    "slug": "matchgroup",
+    "jobs": 67,
+    "via": "careers-page",
+    "careersUrl": "https://mtch.com/careers/"
+  },
+  "Mattel": {
+    "probedAt": "2026-10-23T19:42:14.026Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://corporate.mattel.com/careers",
+    "via": "careers-page"
+  },
+  "McDonald's": {
+    "probedAt": "2026-10-23T19:41:43.110Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.mcdonalds.com/",
+    "via": "careers-page"
+  },
+  "McKesson": {
+    "probedAt": "2026-10-23T19:43:30.766Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.mckesson.com/en",
+    "via": "careers-page"
+  },
+  "McKinsey & Company": {
+    "probedAt": "2026-10-23T19:41:17.582Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.mckinsey.com/careers/home",
+    "via": "careers-page"
+  },
+  "Medtronic": {
+    "probedAt": "2026-10-23T19:02:39.983Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "medtronic",
+    "tenant": "medtronic",
+    "shard": "1",
+    "site": "MedtronicCareers",
+    "jobs": 1069,
+    "via": "careers-page",
+    "careersUrl": "https://www.medtronic.com/en-us/our-company/careers.html"
+  },
+  "Meijer": {
+    "probedAt": "2026-10-23T19:00:44.411Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "meijer",
+    "tenant": "meijer",
+    "shard": "5",
+    "site": "Meijer_Stores_Hourly",
+    "jobs": 1440,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.meijer.com/"
+  },
+  "Mercedes-Benz": {
+    "probedAt": "2026-10-23T19:42:39.923Z",
+    "status": "blocked",
+    "platform": "Oracle Taleo",
+    "careersUrl": "https://group.mercedes-benz.com/careers/",
+    "via": "careers-page"
+  },
+  "Merck": {
+    "probedAt": "2026-10-23T19:02:32.882Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "msd",
+    "tenant": "msd",
+    "shard": "5",
+    "site": "SearchJobs",
+    "jobs": 1011,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.merck.com/us/en"
+  },
+  "Mercury": {
+    "probedAt": "2026-10-23T18:59:21.627Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "mercury",
+    "jobs": 76,
+    "via": "careers-page",
+    "careersUrl": "https://mercury.com/jobs"
+  },
+  "Meta": {
+    "probedAt": "2026-10-23T19:34:45.279Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "MetLife": {
+    "probedAt": "2026-10-23T19:41:08.494Z",
+    "status": "blocked",
+    "platform": "Avature",
+    "careersUrl": "https://www.metlifecareers.com/en_US/ml",
+    "via": "careers-page"
+  },
+  "MGM Resorts": {
+    "probedAt": "2026-10-23T19:01:49.561Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "mgmresortsinternational",
+    "jobs": 5,
+    "via": "slug-guess"
+  },
+  "Micron": {
+    "probedAt": "2026-10-23T18:59:24.950Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "micron",
+    "tenant": "micron",
+    "shard": "1",
+    "site": "External",
+    "jobs": 3120,
+    "via": "careers-page",
+    "careersUrl": "https://careers.micron.com/careers"
+  },
+  "Microsoft": {
+    "probedAt": "2026-10-23T19:34:47.411Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "microsoft",
+    "host": "microsoft.eightfold.ai",
+    "site": "microsoft.com",
+    "jobs": 1367,
+    "via": "slug-guess"
+  },
+  "Millennium": {
+    "probedAt": "2026-10-23T19:40:47.556Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "mlp",
+    "host": "mlp.eightfold.ai",
+    "site": "mlp.com",
+    "jobs": 78,
+    "via": "careers-page",
+    "careersUrl": "https://www.mlp.com/careers/"
+  },
+  "Miro": {
+    "probedAt": "2026-10-23T18:59:14.988Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "miro",
+    "jobs": 21,
+    "via": "slug-guess"
+  },
+  "MIT": {
+    "probedAt": "2026-10-23T19:43:38.393Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://hr.mit.edu/jobs",
+    "via": "careers-page"
+  },
+  "MITRE": {
+    "probedAt": "2026-10-23T19:44:13.015Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "mitrus",
+    "host": "careers.mitre.org",
+    "site": "MITRUS",
+    "jobs": 382,
+    "via": "careers-page",
+    "careersUrl": "https://careers.mitre.org/us/en"
+  },
+  "Moderna": {
+    "probedAt": "2026-10-23T19:02:35.369Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "modernatx",
+    "tenant": "modernatx",
+    "shard": "1",
+    "site": "M_tx",
+    "jobs": 275,
+    "via": "careers-page",
+    "careersUrl": "https://www.modernatx.com/careers/life-at-moderna?"
+  },
+  "Mondelez": {
+    "probedAt": "2026-10-23T19:44:05.774Z",
+    "status": "blocked",
+    "platform": "Phenom",
+    "careersUrl": "https://www.mondelezinternational.com/careers/",
+    "via": "careers-page"
+  },
+  "MongoDB": {
+    "probedAt": "2026-10-23T18:59:01.373Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "mongodb",
+    "jobs": 384,
+    "via": "slug-guess"
+  },
+  "Moody's": {
+    "probedAt": "2026-10-23T19:40:57.206Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.moodys.com/en",
+    "via": "careers-page"
+  },
+  "Morgan Stanley": {
+    "probedAt": "2026-10-23T19:37:38.674Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "morganstanley",
+    "host": "morganstanley.eightfold.ai",
+    "site": "morganstanley.com",
+    "jobs": 881,
+    "via": "slug-guess"
+  },
+  "NASA JPL": {
+    "probedAt": "2026-10-23T19:02:56.072Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "citjpl",
+    "tenant": "citjpl",
+    "shard": "5",
+    "site": "Jobs",
+    "jobs": 127,
+    "via": "careers-page",
+    "careersUrl": "https://www.jpl.jobs/"
+  },
+  "Nasdaq": {
+    "probedAt": "2026-10-23T18:59:56.616Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "nasdaq",
+    "tenant": "nasdaq",
+    "shard": "1",
+    "site": "Global_External_Site",
+    "jobs": 171,
+    "via": "careers-page",
+    "careersUrl": "https://www.nasdaq.com/about/careers"
+  },
+  "Nationwide": {
+    "probedAt": "2026-10-23T19:00:05.721Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "nationwide",
+    "tenant": "nationwide",
+    "shard": "1",
+    "site": "Nationwide_Career",
+    "jobs": 181,
+    "via": "careers-page",
+    "careersUrl": "https://careers.nationwide.com/"
+  },
+  "Navy Federal Credit Union": {
+    "probedAt": "2026-10-23T19:41:03.648Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://jobs.navyfederal.org/hcmUI/CandidateExperience/en/sites/nfcu",
+    "via": "careers-page"
+  },
+  "NBCUniversal": {
+    "probedAt": "2026-10-23T19:42:18.077Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.nbcuniversal.com/careers",
+    "via": "careers-page"
+  },
+  "Nestlé": {
+    "probedAt": "2026-10-23T19:42:01.023Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "New York Life": {
+    "probedAt": "2026-10-23T19:41:11.225Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "newyorklife",
+    "host": "newyorklife.eightfold.ai",
+    "site": "newyorklife.com",
+    "jobs": 330,
+    "via": "slug-guess"
+  },
+  "Nextdoor": {
+    "probedAt": "2026-10-23T18:59:21.046Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "nextdoor",
+    "jobs": 24,
+    "via": "careers-page",
+    "careersUrl": "https://about.nextdoor.com/careers/"
+  },
+  "NextEra Energy": {
+    "probedAt": "2026-10-23T19:43:08.187Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.nexteraenergy.com/careers.html",
+    "via": "careers-page"
+  },
+  "Nike": {
+    "probedAt": "2026-10-23T18:56:39.982Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "nike",
+    "tenant": "nike",
+    "shard": "1",
+    "site": "nke2",
+    "jobs": 502,
+    "via": "careers-page",
+    "careersUrl": "https://careers.nike.com/"
+  },
+  "Nintendo": {
+    "probedAt": "2026-10-23T18:59:37.860Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "nintendo",
+    "jobs": 64,
+    "via": "slug-guess"
+  },
+  "Nissan": {
+    "probedAt": "2026-10-23T19:42:42.516Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Nordstrom": {
+    "probedAt": "2026-10-23T19:41:27.120Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.nordstrom.com/",
+    "via": "careers-page"
+  },
+  "Norfolk Southern": {
+    "probedAt": "2026-10-23T19:43:37.920Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://norfolksouthern.com/careers",
+    "via": "careers-page"
+  },
+  "Northern Trust": {
+    "probedAt": "2026-10-23T18:59:49.726Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "ntrs",
+    "tenant": "ntrs",
+    "shard": "1",
+    "site": "northerntrust",
+    "jobs": 618,
+    "via": "careers-page",
+    "careersUrl": "https://ntrs.wd1.myworkdayjobs.com/northerntrust"
+  },
+  "Northrop Grumman": {
+    "probedAt": "2026-10-23T19:42:46.865Z",
+    "status": "blocked",
+    "platform": "Eightfold",
+    "careersUrl": "https://www.northropgrumman.com/careers",
+    "via": "careers-page"
+  },
+  "Northwestern Mutual": {
+    "probedAt": "2026-10-23T19:00:10.060Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "NorthwesternMutual",
+    "via": "existing-source"
+  },
+  "Notion": {
+    "probedAt": "2026-10-23T18:54:34.276Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "notion",
+    "via": "existing-source"
+  },
+  "Novartis": {
+    "probedAt": "2026-10-23T19:43:20.162Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.novartis.com/careers",
+    "via": "careers-page"
+  },
+  "Novo Nordisk": {
+    "probedAt": "2026-10-23T19:43:21.960Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.novonordisk.com/",
+    "via": "careers-page"
+  },
+  "Oak Ridge National Laboratory": {
+    "probedAt": "2026-10-23T19:03:00.069Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "oakridgenationallaboratory",
+    "jobs": 3,
+    "via": "slug-guess"
+  },
+  "Optum": {
+    "probedAt": "2026-10-23T19:43:30.859Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.optum.com/en/careers.html",
+    "via": "careers-page"
+  },
+  "Oracle": {
+    "probedAt": "2026-10-23T19:40:16.500Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://careers.oracle.com/en/sites/jobsearch",
+    "via": "careers-page"
+  },
+  "Oscar Health": {
+    "probedAt": "2026-10-23T19:43:31.922Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://oscarhealth.com/careers",
+    "via": "careers-page"
+  },
+  "Otis": {
+    "probedAt": "2026-10-23T19:02:22.635Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "otis",
+    "tenant": "otis",
+    "shard": "504",
+    "site": "REC_Ext_Gateway",
+    "jobs": 1383,
+    "via": "careers-page",
+    "careersUrl": "https://www.otis.com/en/us/careers"
+  },
+  "Palo Alto Networks": {
+    "probedAt": "2026-10-23T18:58:58.080Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "paloaltonetworks",
+    "tenant": "paloaltonetworks",
+    "shard": "5",
+    "site": "panwexternalcareers",
+    "jobs": 1418,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.paloaltonetworks.com/en"
+  },
+  "Panera Bread": {
+    "probedAt": "2026-10-23T19:44:04.557Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "pabrglobal",
+    "host": "careers.panerabread.com",
+    "site": "PABRGLOBAL",
+    "jobs": 6264,
+    "via": "careers-page",
+    "careersUrl": "https://careers.panerabread.com/global/en"
+  },
+  "Papa John's": {
+    "probedAt": "2026-10-23T19:41:45.647Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.papajohns.com/",
+    "via": "careers-page"
+  },
+  "Paramount": {
+    "probedAt": "2026-10-23T19:42:17.529Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.paramount.com/",
+    "via": "careers-page"
+  },
+  "Patagonia": {
+    "probedAt": "2026-10-23T19:42:15.314Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "PayPal": {
+    "probedAt": "2026-10-23T19:34:19.785Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "paypal",
+    "host": "paypal.eightfold.ai",
+    "site": "paypal.com",
+    "jobs": 193,
+    "via": "slug-guess"
+  },
+  "Peloton": {
+    "probedAt": "2026-10-23T18:59:10.987Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "peloton",
+    "jobs": 59,
+    "via": "slug-guess"
+  },
+  "PepsiCo": {
+    "probedAt": "2026-10-23T19:37:44.498Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.pepsico.com/en/careers",
+    "via": "careers-page"
+  },
+  "Perplexity": {
+    "probedAt": "2026-10-23T18:59:16.433Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "Perplexity",
+    "via": "existing-source"
+  },
+  "Petco": {
+    "probedAt": "2026-10-23T19:00:42.342Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "petco",
+    "tenant": "petco",
+    "shard": "504",
+    "site": "External",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://careers.petco.com/"
+  },
+  "Pfizer": {
+    "probedAt": "2026-10-23T19:37:44.406Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "PG&E": {
+    "probedAt": "2026-10-23T19:43:11.127Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.pge.com/",
+    "via": "careers-page"
+  },
+  "Plaid": {
+    "probedAt": "2026-10-23T18:54:34.232Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "plaid",
+    "jobs": 134,
+    "via": "slug-guess"
+  },
+  "PNC": {
+    "probedAt": "2026-10-23T19:44:03.150Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "pnc1global",
+    "host": "careers.pnc.com",
+    "site": "PNC1GLOBAL",
+    "jobs": 2142,
+    "via": "careers-page",
+    "careersUrl": "https://careers.pnc.com/global/en"
+  },
+  "Postman": {
+    "probedAt": "2026-10-23T18:59:16.433Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "postman",
+    "via": "existing-source"
+  },
+  "Procter & Gamble": {
+    "probedAt": "2026-10-23T19:44:00.807Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "pgbpgnglobal",
+    "host": "www.pgcareers.com",
+    "site": "PGBPGNGLOBAL",
+    "jobs": 221,
+    "via": "careers-page",
+    "careersUrl": "https://www.pgcareers.com/us/en"
+  },
+  "Progressive": {
+    "probedAt": "2026-10-23T19:41:05.735Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Prudential Financial": {
+    "probedAt": "2026-10-23T19:00:06.431Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "pru",
+    "tenant": "pru",
+    "shard": "5",
+    "site": "Careers",
+    "jobs": 163,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.prudential.com/"
+  },
+  "Publix": {
+    "probedAt": "2026-10-23T19:41:32.230Z",
+    "status": "blocked",
+    "platform": "BrassRing",
+    "careersUrl": "https://jobs.publix.com/",
+    "via": "careers-page"
+  },
+  "PwC": {
+    "probedAt": "2026-10-23T19:41:14.110Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.pwc.com/",
+    "via": "careers-page"
+  },
+  "Qualcomm": {
+    "probedAt": "2026-10-23T19:34:19.785Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "qualcomm",
+    "host": "qualcomm.eightfold.ai",
+    "site": "qualcomm.com",
+    "jobs": 809,
+    "via": "slug-guess"
+  },
+  "Radix Trading": {
+    "probedAt": "2026-10-23T18:54:32.803Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "radixuniversity",
+    "via": "existing-source"
+  },
+  "Ralph Lauren": {
+    "probedAt": "2026-10-23T19:42:07.589Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.ralphlauren.com/en_US/CareersCorporate",
+    "via": "careers-page"
+  },
+  "Raymond James": {
+    "probedAt": "2026-10-23T18:59:57.849Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "raymondjames",
+    "tenant": "raymondjames",
+    "shard": "1",
+    "site": "RaymondJamesCareers",
+    "jobs": 296,
+    "via": "careers-page",
+    "careersUrl": "https://www.raymondjames.com/careers"
+  },
+  "Regeneron": {
+    "probedAt": "2026-10-23T19:43:19.207Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Relativity Space": {
+    "probedAt": "2026-10-23T19:02:16.654Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "relativity",
+    "via": "existing-source"
+  },
+  "Renaissance Technologies": {
+    "probedAt": "2026-10-23T19:40:47.692Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://rentec.com/careers",
+    "via": "careers-page"
+  },
+  "Restaurant Brands International": {
+    "probedAt": "2026-10-23T19:44:04.469Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "rbinglobal",
+    "host": "careers.rbi.com",
+    "site": "RBINGLOBAL",
+    "jobs": 124,
+    "via": "careers-page",
+    "careersUrl": "https://careers.rbi.com/global/en"
+  },
+  "Retool": {
+    "probedAt": "2026-10-23T19:40:31.563Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.retool.com/",
+    "via": "careers-page"
+  },
+  "Riot Games": {
+    "probedAt": "2026-10-23T18:59:37.823Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "riotgames",
+    "jobs": 175,
+    "via": "slug-guess"
+  },
+  "Rippling": {
+    "probedAt": "2026-10-23T19:40:29.286Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.rippling.com/careers",
+    "via": "careers-page"
+  },
+  "Rivian": {
+    "probedAt": "2026-10-23T19:42:34.848Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.rivian.com/careers-home/",
+    "via": "careers-page"
+  },
+  "Roblox": {
+    "probedAt": "2026-10-23T18:59:39.938Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "roblox",
+    "jobs": 264,
+    "via": "slug-guess"
+  },
+  "Rocket Lab": {
+    "probedAt": "2026-10-23T19:02:16.293Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "rocketlab",
+    "jobs": 565,
+    "via": "slug-guess"
+  },
+  "Rockwell Automation": {
+    "probedAt": "2026-10-23T19:02:20.494Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "rockwellautomation",
+    "tenant": "rockwellautomation",
+    "shard": "1",
+    "site": "External_Rockwell_Automation",
+    "jobs": 436,
+    "via": "careers-page",
+    "careersUrl": "https://www.rockwellautomation.com/en-us/careers.html"
+  },
+  "Roku": {
+    "probedAt": "2026-10-23T18:59:17.901Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "roku",
+    "jobs": 85,
+    "via": "slug-guess"
+  },
+  "Ross Stores": {
+    "probedAt": "2026-10-23T19:41:30.605Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.rossstores.com/",
+    "via": "careers-page"
+  },
+  "Royal Caribbean": {
+    "probedAt": "2026-10-23T19:42:29.086Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.royalcaribbeangroup.com/",
+    "via": "careers-page"
+  },
+  "RTX": {
+    "probedAt": "2026-10-23T19:44:08.046Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "raytglobal",
+    "host": "careers.rtx.com",
+    "site": "RAYTGLOBAL",
+    "jobs": 4751,
+    "via": "careers-page",
+    "careersUrl": "https://careers.rtx.com/global/en"
+  },
+  "Rubrik": {
+    "probedAt": "2026-10-23T19:40:34.357Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.rubrik.com/company/careers",
+    "via": "careers-page"
+  },
+  "Ryder": {
+    "probedAt": "2026-10-23T19:02:54.318Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "ryder",
+    "tenant": "ryder",
+    "shard": "5",
+    "site": "RyderCareers",
+    "jobs": 436,
+    "via": "careers-page",
+    "careersUrl": "https://www.ryder.com/en-us/careers"
+  },
+  "S&P Global": {
+    "probedAt": "2026-10-23T18:59:55.426Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "spgi",
+    "tenant": "spgi",
+    "shard": "5",
+    "site": "SPGI_Careers",
+    "jobs": 303,
+    "via": "careers-page",
+    "careersUrl": "https://careers.spglobal.com/jobs?"
+  },
+  "Sandia National Laboratories": {
+    "probedAt": "2026-10-23T19:43:41.425Z",
+    "status": "blocked",
+    "platform": "Avature",
+    "careersUrl": "https://www.sandia.gov/careers/",
+    "via": "careers-page"
+  },
+  "Sanofi": {
+    "probedAt": "2026-10-23T19:43:21.936Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://jobs.sanofi.com/en",
+    "via": "careers-page"
+  },
+  "Schonfeld": {
+    "probedAt": "2026-10-23T18:59:43.534Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "schonfeld",
+    "via": "existing-source"
+  },
+  "Seagate": {
+    "probedAt": "2026-10-23T19:40:38.794Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.seagate.com/careers/",
+    "via": "careers-page"
+  },
+  "Sephora": {
+    "probedAt": "2026-10-23T19:41:36.343Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "sephora",
+    "host": "sephora.eightfold.ai",
+    "site": "sephora.com",
+    "jobs": 1042,
+    "via": "slug-guess"
+  },
+  "ServiceNow": {
+    "probedAt": "2026-10-23T18:58:54.995Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "ServiceNow",
+    "via": "existing-source"
+  },
+  "Shake Shack": {
+    "probedAt": "2026-10-23T19:41:55.492Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.shakeshack.com/",
+    "via": "careers-page"
+  },
+  "Shell": {
+    "probedAt": "2026-10-23T19:02:26.880Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "shell",
+    "tenant": "shell",
+    "shard": "3",
+    "site": "shellcareers",
+    "jobs": 139,
+    "via": "careers-page",
+    "careersUrl": "https://shell.wd3.myworkdayjobs.com/shellcareers"
+  },
+  "Sherwin-Williams": {
+    "probedAt": "2026-10-23T19:43:01.832Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "ejhp",
+    "host": "ejhp.fa.us6.oraclecloud.com",
+    "site": "CX_2",
+    "jobs": 2309,
+    "via": "careers-page",
+    "careersUrl": "https://careers.sherwin-williams.com/us/en/home.html"
+  },
+  "Shield AI": {
+    "probedAt": "2026-10-23T19:06:21.465Z",
+    "status": "live",
+    "ats": "lever",
+    "slug": "shieldai",
+    "jobs": 655,
+    "via": "careers-page",
+    "careersUrl": "https://shield.ai/careers/"
+  },
+  "Shopify": {
+    "probedAt": "2026-10-23T19:40:20.123Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.shopify.com/careers",
+    "via": "careers-page"
+  },
+  "Siemens": {
+    "probedAt": "2026-10-23T19:42:57.707Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.siemens.com/en-us/company/jobs/",
+    "via": "careers-page"
+  },
+  "SiriusXM": {
+    "probedAt": "2026-10-23T19:42:20.614Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.siriusxm.com/careers/",
+    "via": "careers-page"
+  },
+  "Skechers": {
+    "probedAt": "2026-10-23T19:44:06.641Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "srjsvuus",
+    "host": "careers.skechers.com",
+    "site": "SRJSVUUS",
+    "jobs": 1811,
+    "via": "careers-page",
+    "careersUrl": "https://careers.skechers.com/us/en"
+  },
+  "Slalom": {
+    "probedAt": "2026-10-23T19:41:24.532Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.slalom.com/en_US/careersmarketplace",
+    "via": "careers-page"
+  },
+  "SLB": {
+    "probedAt": "2026-10-23T19:43:13.427Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "slb",
+    "host": "slb.eightfold.ai",
+    "site": "slb.com",
+    "jobs": 227,
+    "via": "slug-guess"
+  },
+  "Snap": {
+    "probedAt": "2026-10-23T19:40:21.068Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.snap.com/",
+    "via": "careers-page"
+  },
+  "Snowflake": {
+    "probedAt": "2026-10-23T18:54:34.232Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "snowflake",
+    "via": "existing-source"
+  },
+  "SoFi": {
+    "probedAt": "2026-10-23T18:59:52.669Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "sofi",
+    "jobs": 56,
+    "via": "slug-guess"
+  },
+  "Sony": {
+    "probedAt": "2026-10-23T19:42:18.665Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.sony.com/en_us/SCA/careers/overview.html",
+    "via": "careers-page"
+  },
+  "Southern Company": {
+    "probedAt": "2026-10-23T19:43:10.275Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://southerncompany.jobs/",
+    "via": "careers-page"
+  },
+  "Southwest Airlines": {
+    "probedAt": "2026-10-23T19:44:00.804Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "soutus",
+    "host": "careers.southwestair.com",
+    "site": "SOUTUS",
+    "jobs": 42,
+    "via": "careers-page",
+    "careersUrl": "https://careers.southwestair.com/us/en/"
+  },
+  "SpaceX": {
+    "probedAt": "2026-10-23T18:53:10.461Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "spacex",
+    "via": "existing-source"
+  },
+  "Spirit Airlines": {
+    "probedAt": "2026-10-23T19:42:25.183Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.spirit.com/careers-home/",
+    "via": "careers-page"
+  },
+  "Splunk": {
+    "probedAt": "2026-10-23T19:44:00.809Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "ciscisglobal",
+    "host": "careers.cisco.com",
+    "site": "CISCISGLOBAL",
+    "jobs": 1477,
+    "via": "careers-page",
+    "careersUrl": "https://careers.cisco.com/global/en/splunk"
+  },
+  "Spotify": {
+    "probedAt": "2026-10-23T18:58:55.574Z",
+    "status": "live",
+    "ats": "lever",
+    "slug": "spotify",
+    "via": "existing-source"
+  },
+  "Squarepoint Capital": {
+    "probedAt": "2026-10-23T18:59:43.388Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "squarepointcapital",
+    "jobs": 91,
+    "via": "slug-guess"
+  },
+  "Squarespace": {
+    "probedAt": "2026-10-23T18:59:07.392Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "squarespace",
+    "jobs": 27,
+    "via": "slug-guess"
+  },
+  "Stanford University": {
+    "probedAt": "2026-10-23T19:34:47.476Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careersearch.stanford.edu/hcmUI/CandidateExperience/en/sites/stanford/",
+    "via": "careers-page"
+  },
+  "Staples": {
+    "probedAt": "2026-10-23T19:41:41.334Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "fa-exhh-saasfaprod1",
+    "host": "fa-exhh-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site": "StaplesInc",
+    "jobs": 1113,
+    "via": "careers-page",
+    "careersUrl": "https://careers.staples.com/en"
+  },
+  "Starbucks": {
+    "probedAt": "2026-10-23T19:34:19.782Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "starbucks",
+    "host": "starbucks.eightfold.ai",
+    "site": "starbucks.com",
+    "jobs": 19882,
+    "via": "careers-page",
+    "careersUrl": "https://careers.starbucks.com/"
+  },
+  "State Farm": {
+    "probedAt": "2026-10-23T19:41:05.381Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://www.statefarm.com/careers",
+    "via": "careers-page"
+  },
+  "State Street": {
+    "probedAt": "2026-10-23T18:59:49.255Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "statestreet",
+    "tenant": "statestreet",
+    "shard": "1",
+    "site": "Global",
+    "jobs": 1364,
+    "via": "careers-page",
+    "careersUrl": "https://careers.statestreet.com/global/en"
+  },
+  "Stellantis": {
+    "probedAt": "2026-10-23T19:42:37.050Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.stellantis.com/",
+    "via": "careers-page"
+  },
+  "Stryker": {
+    "probedAt": "2026-10-23T19:02:41.058Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "stryker",
+    "tenant": "stryker",
+    "shard": "1",
+    "site": "StrykerCareers",
+    "jobs": 1498,
+    "via": "careers-page",
+    "careersUrl": "https://careers.stryker.com/"
+  },
+  "Subway": {
+    "probedAt": "2026-10-23T19:41:51.797Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.subway.com/en/jobs",
+    "via": "careers-page"
+  },
+  "Sunrun": {
+    "probedAt": "2026-10-23T19:02:31.798Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "sunrun",
+    "tenant": "sunrun",
+    "shard": "5",
+    "site": "Sunrun_Careers",
+    "jobs": 254,
+    "via": "careers-page",
+    "careersUrl": "https://careers.sunrun.com/"
+  },
+  "Supabase": {
+    "probedAt": "2026-10-23T18:59:15.458Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "supabase",
+    "jobs": 59,
+    "via": "careers-page",
+    "careersUrl": "https://supabase.com/careers"
+  },
+  "Susquehanna (SIG)": {
+    "probedAt": "2026-10-23T19:34:45.277Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.sig.com/jobs",
+    "via": "careers-page"
+  },
+  "Sweetgreen": {
+    "probedAt": "2026-10-23T19:01:10.154Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "sweetgreen",
+    "jobs": 63,
+    "via": "slug-guess"
+  },
+  "Synchrony": {
+    "probedAt": "2026-10-23T19:40:53.936Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://www.synchronycareers.com/",
+    "via": "careers-page"
+  },
+  "Sysco": {
+    "probedAt": "2026-10-23T19:42:03.048Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://careers.sysco.com/en",
+    "via": "careers-page"
+  },
+  "T-Mobile": {
+    "probedAt": "2026-10-23T19:01:43.326Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "tmobile",
+    "tenant": "tmobile",
+    "shard": "1",
+    "site": "External",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://careers.t-mobile.com/"
+  },
+  "Take-Two Interactive": {
+    "probedAt": "2026-10-23T18:59:36.727Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "rockstargames",
+    "jobs": 25,
+    "via": "slug-guess"
+  },
+  "Tapestry": {
+    "probedAt": "2026-10-23T19:01:27.703Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "tapestry",
+    "tenant": "tapestry",
+    "shard": "108",
+    "site": "Tapestry_Careers",
+    "jobs": 2000,
+    "via": "careers-page",
+    "careersUrl": "https://www.tapestry.com/careers/"
+  },
+  "Tata Consultancy Services": {
+    "probedAt": "2026-10-23T19:41:23.828Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.tcs.com/careers",
+    "via": "careers-page"
+  },
+  "TD Bank": {
+    "probedAt": "2026-10-23T18:59:58.185Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "td",
+    "tenant": "td",
+    "shard": "3",
+    "site": "TD_Bank_Careers",
+    "jobs": 1724,
+    "via": "careers-page",
+    "careersUrl": "https://careers.td.com/"
+  },
+  "Tempus": {
+    "probedAt": "2026-10-23T19:43:32.215Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.tempuscareers.com/",
+    "via": "careers-page"
+  },
+  "Tesla": {
+    "probedAt": "2026-10-23T19:42:33.472Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Texas Instruments": {
+    "probedAt": "2026-10-23T19:40:36.953Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://careers.ti.com/en/sites/CX",
+    "via": "careers-page"
+  },
+  "Texas Roadhouse": {
+    "probedAt": "2026-10-23T19:44:04.662Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "ttytrsus",
+    "host": "careers.becomearoadie.com",
+    "site": "TTYTRSUS",
+    "jobs": 5536,
+    "via": "careers-page",
+    "careersUrl": "https://careers.becomearoadie.com/us/en"
+  },
+  "Textron": {
+    "probedAt": "2026-10-23T19:42:53.226Z",
+    "status": "blocked",
+    "platform": "Oracle Taleo",
+    "careersUrl": "https://careers.textron.com/",
+    "via": "careers-page"
+  },
+  "The Hartford": {
+    "probedAt": "2026-10-23T19:00:11.259Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "thehartford",
+    "tenant": "thehartford",
+    "shard": "5",
+    "site": "Careers_External",
+    "jobs": 239,
+    "via": "careers-page",
+    "careersUrl": "https://www.thehartford.com/careers"
+  },
+  "The Home Depot": {
+    "probedAt": "2026-10-23T19:34:19.745Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "homedepot",
+    "tenant": "homedepot",
+    "shard": "5",
+    "site": "CareerDepot",
+    "jobs": 992,
+    "via": "careers-page",
+    "careersUrl": "https://careers.homedepot.com/"
+  },
+  "The New York Times": {
+    "probedAt": "2026-10-23T19:42:18.674Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.nytco.com/careers/",
+    "via": "careers-page"
+  },
+  "Thermo Fisher Scientific": {
+    "probedAt": "2026-10-23T19:44:10.987Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "tfscglobal",
+    "host": "jobs.thermofisher.com",
+    "site": "TFSCGLOBAL",
+    "jobs": 3003,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.thermofisher.com/global/en"
+  },
+  "Thoughtworks": {
+    "probedAt": "2026-10-23T19:00:20.468Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "thoughtworks",
+    "jobs": 38,
+    "via": "slug-guess"
+  },
+  "TikTok": {
+    "probedAt": "2026-10-23T19:40:29.193Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://lifeattiktok.com/",
+    "via": "careers-page"
+  },
+  "TJX Companies": {
+    "probedAt": "2026-10-23T19:44:04.242Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "tjcoglobal",
+    "host": "jobs.tjx.com",
+    "site": "TJCOGLOBAL",
+    "jobs": 10601,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.tjx.com/global/en"
+  },
+  "Toast": {
+    "probedAt": "2026-10-23T18:59:13.823Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "toast",
+    "jobs": 320,
+    "via": "slug-guess"
+  },
+  "Toyota": {
+    "probedAt": "2026-10-23T19:01:57.795Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "toyota",
+    "tenant": "toyota",
+    "shard": "503",
+    "site": "TMNA",
+    "jobs": 114,
+    "via": "careers-page",
+    "careersUrl": "https://careers.toyota.com/us/en"
+  },
+  "Tractor Supply": {
+    "probedAt": "2026-10-23T19:41:37.308Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.tractorsupply.careers/",
+    "via": "careers-page"
+  },
+  "Trader Joe's": {
+    "probedAt": "2026-10-23T19:41:33.058Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.traderjoes.com/home/careers",
+    "via": "careers-page"
+  },
+  "Trane Technologies": {
+    "probedAt": "2026-10-23T19:44:09.727Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "trteglobal",
+    "host": "careers.tranetechnologies.com",
+    "site": "TRTEGLOBAL",
+    "jobs": 1730,
+    "via": "careers-page",
+    "careersUrl": "https://careers.tranetechnologies.com/global/en/home"
+  },
+  "TransUnion": {
+    "probedAt": "2026-10-23T19:41:04.994Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Travelers": {
+    "probedAt": "2026-10-23T19:00:07.750Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "travelers",
+    "tenant": "travelers",
+    "shard": "5",
+    "site": "External",
+    "jobs": 405,
+    "via": "careers-page",
+    "careersUrl": "https://careers.travelers.com/"
+  },
+  "Truist": {
+    "probedAt": "2026-10-23T19:44:03.265Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "tbjtbfus",
+    "host": "careers.truist.com",
+    "site": "TBJTBFUS",
+    "jobs": 1503,
+    "via": "careers-page",
+    "careersUrl": "https://careers.truist.com/us/en"
+  },
+  "Two Sigma": {
+    "probedAt": "2026-10-23T19:34:45.275Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.twosigma.com/",
+    "via": "careers-page"
+  },
+  "Tyson Foods": {
+    "probedAt": "2026-10-23T19:01:17.045Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "tysonfoods",
+    "tenant": "tysonfoods",
+    "shard": "5",
+    "site": "TSN",
+    "jobs": 706,
+    "via": "careers-page",
+    "careersUrl": "https://www.tysonfoods.com/careers"
+  },
+  "U.S. Bank": {
+    "probedAt": "2026-10-23T18:59:45.105Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "usbank",
+    "tenant": "usbank",
+    "shard": "1",
+    "site": "US_Bank_Careers",
+    "jobs": 1267,
+    "via": "careers-page",
+    "careersUrl": "https://careers.usbank.com/global/en"
+  },
+  "Uber": {
+    "probedAt": "2026-10-23T19:40:20.124Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://ubercareers.com/",
+    "via": "careers-page"
+  },
+  "Ubisoft": {
+    "probedAt": "2026-10-23T19:40:43.355Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.ubisoft.com/en-us/company/careers",
+    "via": "careers-page"
+  },
+  "UBS": {
+    "probedAt": "2026-10-23T19:41:01.103Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.ubs.com/",
+    "via": "careers-page"
+  },
+  "UC Berkeley": {
+    "probedAt": "2026-10-23T19:34:48.187Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://jobs.berkeley.edu/",
+    "via": "careers-page"
+  },
+  "Ulta Beauty": {
+    "probedAt": "2026-10-23T19:41:35.312Z",
+    "status": "blocked",
+    "platform": "iCIMS",
+    "careersUrl": "https://careers.ulta.com/careers",
+    "via": "careers-page"
+  },
+  "Under Armour": {
+    "probedAt": "2026-10-23T19:42:05.175Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.underarmour.com/",
+    "via": "careers-page"
+  },
+  "Unilever": {
+    "probedAt": "2026-10-23T19:01:33.549Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "unilever",
+    "tenant": "unilever",
+    "shard": "3",
+    "site": "Unilever_Experienced_Professionals",
+    "jobs": 269,
+    "via": "careers-page",
+    "careersUrl": "https://careers.unilever.com/en"
+  },
+  "Union Pacific": {
+    "probedAt": "2026-10-23T19:43:35.126Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.up.com/careers",
+    "via": "careers-page"
+  },
+  "United Airlines": {
+    "probedAt": "2026-10-23T19:44:00.766Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "uaiuadus",
+    "host": "careers.united.com",
+    "site": "UAIUADUS",
+    "jobs": 143,
+    "via": "careers-page",
+    "careersUrl": "https://careers.united.com/us/en"
+  },
+  "UnitedHealth Group": {
+    "probedAt": "2026-10-23T19:37:43.872Z",
+    "status": "blocked",
+    "platform": "Oracle Taleo",
+    "careersUrl": "https://careers.unitedhealthgroup.com/search-jobs",
+    "via": "careers-page"
+  },
+  "Unity": {
+    "probedAt": "2026-10-23T19:40:46.394Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://unity.com/careers",
+    "via": "careers-page"
+  },
+  "Universal Music Group": {
+    "probedAt": "2026-10-23T19:01:41.001Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "umusic",
+    "tenant": "umusic",
+    "shard": "5",
+    "site": "UMGUS",
+    "jobs": 31,
+    "via": "careers-page",
+    "careersUrl": "https://www.umusiccareers.com/"
+  },
+  "UPS": {
+    "probedAt": "2026-10-23T19:40:14.735Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.ups.com/us/en/error",
+    "via": "careers-page"
+  },
+  "USAA": {
+    "probedAt": "2026-10-23T19:41:08.129Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.usaa.com/careers?akredirect=true",
+    "via": "careers-page"
+  },
+  "USPS": {
+    "probedAt": "2026-10-23T19:43:34.069Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.usps.com/careers/",
+    "via": "careers-page"
+  },
+  "Valve": {
+    "probedAt": "2026-10-23T19:40:44.531Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.valvesoftware.com/en/",
+    "via": "careers-page"
+  },
+  "Vanguard": {
+    "probedAt": "2026-10-23T19:40:49.468Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.vanguard.com/careers",
+    "via": "careers-page"
+  },
+  "Vanta": {
+    "probedAt": "2026-10-23T18:59:22.280Z",
+    "status": "live",
+    "ats": "ashby",
+    "slug": "vanta",
+    "jobs": 84,
+    "via": "slug-guess"
+  },
+  "Verizon": {
+    "probedAt": "2026-10-23T19:37:40.611Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Verkada": {
+    "probedAt": "2026-10-23T18:59:17.307Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "verkada",
+    "via": "existing-source"
+  },
+  "VF Corporation": {
+    "probedAt": "2026-10-23T19:01:28.753Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "vfc",
+    "tenant": "vfc",
+    "shard": "5",
+    "site": "vfc_careers",
+    "jobs": 1245,
+    "via": "careers-page",
+    "careersUrl": "https://vfc.com/careers"
+  },
+  "Visa": {
+    "probedAt": "2026-10-23T18:59:43.844Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "visa",
+    "tenant": "visa",
+    "shard": "5",
+    "site": "Visa",
+    "jobs": 833,
+    "via": "careers-page",
+    "careersUrl": "https://corporate.visa.com/en/careers.html"
+  },
+  "Volkswagen": {
+    "probedAt": "2026-10-23T19:42:40.068Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://jobs.volkswagen-group.com/",
+    "via": "careers-page"
+  },
+  "Wabtec": {
+    "probedAt": "2026-10-23T19:02:22.635Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "Wabtec",
+    "via": "existing-source"
+  },
+  "Walgreens": {
+    "probedAt": "2026-10-23T19:37:35.634Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://jobs.walgreens.com/en",
+    "via": "careers-page"
+  },
+  "Walmart": {
+    "probedAt": "2026-10-23T19:34:55.293Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://careers.walmart.com/us/en/home",
+    "via": "careers-page"
+  },
+  "Walt Disney": {
+    "probedAt": "2026-10-23T19:37:40.677Z",
+    "status": "blocked",
+    "platform": "Radancy",
+    "careersUrl": "https://www.disneycareers.com/en/search-jobs",
+    "via": "careers-page"
+  },
+  "Warner Bros. Discovery": {
+    "probedAt": "2026-10-23T19:44:07.388Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "wameglobal",
+    "host": "careers.wbd.com",
+    "site": "WAMEGLOBAL",
+    "jobs": 268,
+    "via": "careers-page",
+    "careersUrl": "https://careers.wbd.com/global/en"
+  },
+  "Wayfair": {
+    "probedAt": "2026-10-23T19:41:33.945Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.aboutwayfair.com/careers",
+    "via": "careers-page"
+  },
+  "Waymo": {
+    "probedAt": "2026-10-23T19:02:04.129Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "waymo",
+    "jobs": 362,
+    "via": "slug-guess"
+  },
+  "Wegmans": {
+    "probedAt": "2026-10-23T19:00:45.322Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "wegmans",
+    "tenant": "wegmans",
+    "shard": "1",
+    "site": "Wegmans",
+    "jobs": 564,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.wegmans.com/en"
+  },
+  "Wells Fargo": {
+    "probedAt": "2026-10-23T19:37:36.953Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Wendy's": {
+    "probedAt": "2026-10-23T19:41:46.805Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://wendys-careers.com/",
+    "via": "careers-page"
+  },
+  "Western Digital": {
+    "probedAt": "2026-10-23T18:59:28.490Z",
+    "status": "live",
+    "ats": "smartrecruiters",
+    "slug": "WesternDigital",
+    "via": "existing-source"
+  },
+  "Whirlpool": {
+    "probedAt": "2026-10-23T19:42:15.436Z",
+    "status": "workday",
+    "ats": "eightfold",
+    "slug": "whirlpool",
+    "host": "whirlpool.eightfold.ai",
+    "site": "whirlpool.com",
+    "jobs": 138,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.whirlpool.com/careers"
+  },
+  "Williams-Sonoma": {
+    "probedAt": "2026-10-23T19:41:39.008Z",
+    "status": "blocked",
+    "platform": "Oracle HCM",
+    "careersUrl": "https://www.williams-sonoma.com/customer-service/careers/?cm_src=OLDLINK",
+    "via": "careers-page"
+  },
+  "Wingstop": {
+    "probedAt": "2026-10-23T19:41:56.037Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.wingstop.com/careers",
+    "via": "careers-page"
+  },
+  "Wiz": {
+    "probedAt": "2026-10-23T19:40:35.459Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.wiz.io/careers",
+    "via": "careers-page"
+  },
+  "Workday": {
+    "probedAt": "2026-10-23T18:58:54.995Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "workday",
+    "tenant": "workday",
+    "shard": "5",
+    "site": "Workday",
+    "jobs": 385,
+    "via": "careers-page",
+    "careersUrl": "https://www.workday.com/en-us/company/careers/overview.html"
+  },
+  "Wyndham": {
+    "probedAt": "2026-10-23T19:42:33.165Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.wyndhamhotels.com/",
+    "via": "careers-page"
+  },
+  "X": {
+    "probedAt": "2026-10-23T19:40:21.617Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://x.com/jobs",
+    "via": "careers-page"
+  },
+  "XPO": {
+    "probedAt": "2026-10-23T19:43:34.133Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://www.xpo.com/work-with-us/",
+    "via": "careers-page"
+  },
+  "XTX Markets": {
+    "probedAt": "2026-10-23T18:54:31.523Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "xtxmarketstechnologies",
+    "jobs": 7,
+    "via": "careers-page",
+    "careersUrl": "https://www.xtxmarkets.com/careers/"
+  },
+  "Yelp": {
+    "probedAt": "2026-10-23T19:44:02.142Z",
+    "status": "workday",
+    "ats": "phenom",
+    "slug": "yelpus",
+    "host": "www.yelp.careers",
+    "site": "YELPUS",
+    "jobs": 18,
+    "via": "careers-page",
+    "careersUrl": "https://www.yelp.careers/us/en"
+  },
+  "YETI": {
+    "probedAt": "2026-10-23T19:42:16.886Z",
+    "status": "blocked",
+    "platform": "No careers page reached",
+    "via": "careers-page"
+  },
+  "Yum! Brands": {
+    "probedAt": "2026-10-23T19:41:44.755Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.yum.com/wps/portal/yumbrands/Yumbrands/careers",
+    "via": "careers-page"
+  },
+  "Zillow": {
+    "probedAt": "2026-10-23T18:59:06.451Z",
+    "status": "workday",
+    "ats": "workday",
+    "slug": "zillow",
+    "tenant": "zillow",
+    "shard": "5",
+    "site": "Zillow_Group_External",
+    "jobs": 182,
+    "via": "careers-page",
+    "careersUrl": "https://www.zillow.com/careers/"
+  },
+  "Zoom": {
+    "probedAt": "2026-10-23T19:40:22.519Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.careers.zoom.us/",
+    "via": "careers-page"
+  },
+  "Zoox": {
+    "probedAt": "2026-10-23T19:02:04.436Z",
+    "status": "live",
+    "ats": "lever",
+    "slug": "zoox",
+    "via": "existing-source"
+  },
+  "Zscaler": {
+    "probedAt": "2026-10-23T18:59:00.486Z",
+    "status": "live",
+    "ats": "greenhouse",
+    "slug": "zscaler",
+    "jobs": 351,
+    "via": "slug-guess"
+  }
+}

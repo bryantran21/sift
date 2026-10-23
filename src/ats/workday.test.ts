@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
-import { parseWorkday, parsePostedOn, cxsUrl } from './workday';
+import { parseWorkday, parsePostedOn, cxsUrl, usCountryFacet } from './workday';
 import { normalizeJob } from '../ingest/normalize';
 import type { Source } from '../types';
 
@@ -67,4 +67,23 @@ test('normalizeJob handles a description-less Workday posting', () => {
   assert.equal(job.ats, 'workday');
   assert.equal(job.description, '');
   assert.equal(job.id.length, 20);
+});
+
+test('usCountryFacet finds the US value whatever the tenant names the facet', () => {
+  assert.deepEqual(
+    usCountryFacet([
+      { facetParameter: 'jobFamilyGroup', values: [{ descriptor: 'Engineering', id: 'x' }] },
+      { facetParameter: 'Location_Country', values: [{ descriptor: 'Canada', id: 'ca' }, { descriptor: 'United States of America', id: 'us1' }] },
+    ]),
+    { Location_Country: ['us1'] },
+  );
+  assert.deepEqual(usCountryFacet([{ facetParameter: 'locationCountry', values: [{ descriptor: 'United States', id: 'us2' }] }]), { locationCountry: ['us2'] });
+  assert.equal(usCountryFacet([{ facetParameter: 'timeType', values: [] }]), null);
+  assert.equal(usCountryFacet(undefined), null);
+});
+
+test('parseWorkday marks US-facet results as US', () => {
+  const src = { company: 'X', ats: 'workday' as const, slug: 'x', tier: 3 as const, tags: [], enabled: true, tenant: 'x', shard: '1', site: 'S' };
+  const [j] = parseWorkday([{ title: 'Software Engineer', externalPath: '/job/a', locationsText: '5 Locations' }], src, true);
+  assert.equal(j!.country, 'US');
 });

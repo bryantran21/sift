@@ -8,6 +8,10 @@ export type Ats =
   | 'smartrecruiters'
   | 'workable'
   | 'workday'
+  // Generic enterprise career platforms (public JSON APIs behind their career sites).
+  | 'eightfold'
+  | 'oraclehcm'
+  | 'phenom'
   // Bespoke big-tech adapters (custom career-site JSON APIs, 1:1 with a company).
   | 'amazon'
   | 'netflix';
@@ -43,10 +47,16 @@ export interface Source {
   tags: string[];
   enabled: boolean;
   industry?: string; // optional override; normally resolved from the company registry
+  search?: string[]; // Workday: query these terms instead of paging the whole board
   // Workday needs coordinates discovered from the careers URL (Phase 7).
   tenant?: string;
   shard?: string;
+  // Board id within the platform: Workday site, Eightfold `domain` param, Oracle siteNumber,
+  // Phenom refNum.
   site?: string;
+  // Eightfold / Oracle HCM / Phenom API host (starbucks.eightfold.ai, jpmc.fa.oraclecloud.com,
+  // careers.adobe.com).
+  host?: string;
 }
 
 // What an adapter emits: the source's fields plus the raw, un-normalized posting.
@@ -66,6 +76,9 @@ export interface RawJob {
   applyUrl: string;
   postedAt: string | null; // ISO string from source, often null
   updatedAt: string | null;
+  // Set when the adapter *knows* the country (e.g. Workday queried with its US-only facet),
+  // so "5 Locations" or a blank location still lands in the US feed.
+  country?: Country;
 }
 
 // The shared interface every ATS adapter implements (§2).
