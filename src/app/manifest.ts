@@ -18,6 +18,11 @@ export default function manifest(): MetadataRoute.Manifest {
     icons: [
       { src: '/icon.svg', type: 'image/svg+xml', sizes: 'any', purpose: 'any' },
       { src: '/icon-maskable.svg', type: 'image/svg+xml', sizes: 'any', purpose: 'maskable' },
+      // PNG fallbacks for launchers that ignore SVG icons (src/app/pwa-icon/[size]).
+      { src: '/pwa-icon/192', type: 'image/png', sizes: '192x192', purpose: 'any' },
+      { src: '/pwa-icon/512', type: 'image/png', sizes: '512x512', purpose: 'any' },
+      { src: '/pwa-icon/maskable-192', type: 'image/png', sizes: '192x192', purpose: 'maskable' },
+      { src: '/pwa-icon/maskable-512', type: 'image/png', sizes: '512x512', purpose: 'maskable' },
     ],
   };
 }
