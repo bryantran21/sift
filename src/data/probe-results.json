@@ -113,11 +113,15 @@
     "via": "slug-guess"
   },
   "Akamai": {
-    "probedAt": "2026-10-23T19:40:34.372Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://www.akamai.com/careers",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:38:20.849Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "fa-extu-saasfaprod1",
+    "host": "fa-extu-saasfaprod1.fa.ocs.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 280,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.akamai.com/en/sites/CX_1"
   },
   "Alaska Airlines": {
     "probedAt": "2026-10-23T19:34:51.388Z",
@@ -206,11 +210,15 @@
     "via": "careers-page"
   },
   "American Express": {
-    "probedAt": "2026-10-23T19:37:38.834Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://careers.americanexpress.com/en/sites/CX_1",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:38:20.847Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "egug",
+    "host": "egug.fa.us2.oraclecloud.com",
+    "site": "CX_1",
+    "jobs": 409,
+    "via": "careers-page",
+    "careersUrl": "https://careers.americanexpress.com/en/sites/CX_1"
   },
   "Amgen": {
     "probedAt": "2026-10-23T19:02:35.070Z",
@@ -386,11 +394,15 @@
     "via": "slug-guess"
   },
   "AutoZone": {
-    "probedAt": "2026-10-23T19:41:36.709Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:39:12.242Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "autozone",
+    "host": "careers.autozone.com",
+    "site": "CX_1",
+    "jobs": 11393,
+    "via": "careers-page",
+    "careersUrl": "https://careers.autozone.com/hcmUI/CandidateExperience/en/sites/CX_1"
   },
   "Avis Budget Group": {
     "probedAt": "2026-10-23T19:42:32.019Z",
@@ -697,6 +709,13 @@
     "via": "careers-page",
     "careersUrl": "https://careers.carmax.com/"
   },
+  "Carnegie Mellon (CMU)": {
+    "probedAt": "2026-10-24T03:32:25.851Z",
+    "status": "live",
+    "ats": "workday",
+    "slug": "cmu",
+    "via": "existing-source"
+  },
   "Carnival": {
     "probedAt": "2026-10-23T19:42:27.566Z",
     "status": "blocked",
@@ -827,13 +846,13 @@
     "careersUrl": "https://jobs.thecignagroup.com/us/en"
   },
   "Cisco": {
-    "probedAt": "2026-10-23T19:44:00.807Z",
+    "probedAt": "2026-10-24T03:40:01.531Z",
     "status": "workday",
     "ats": "phenom",
     "slug": "ciscisglobal",
     "host": "careers.cisco.com",
     "site": "CISCISGLOBAL",
-    "jobs": 1477,
+    "jobs": 1490,
     "via": "careers-page",
     "careersUrl": "https://careers.cisco.com/global/en"
   },
@@ -1787,7 +1806,7 @@
     "via": "careers-page"
   },
   "Hertz": {
-    "probedAt": "2026-10-23T19:42:30.066Z",
+    "probedAt": "2026-10-24T03:38:22.513Z",
     "status": "blocked",
     "platform": "Oracle HCM",
     "careersUrl": "https://www.hertz.com/careers/",
@@ -2147,11 +2166,15 @@
     "via": "careers-page"
   },
   "Kroger": {
-    "probedAt": "2026-10-23T19:37:34.789Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://www.krogerfamilycareers.com/en/sites/CX_2001",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:38:20.804Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "eluq",
+    "host": "eluq.fa.us2.oraclecloud.com",
+    "site": "CX_2001",
+    "jobs": 11782,
+    "via": "careers-page",
+    "careersUrl": "https://www.krogerfamilycareers.com/en/sites/CX_2001"
   },
   "L'Oréal": {
     "probedAt": "2026-10-23T19:42:10.088Z",
@@ -2629,11 +2652,15 @@
     "careersUrl": "https://careers.nationwide.com/"
   },
   "Navy Federal Credit Union": {
-    "probedAt": "2026-10-23T19:41:03.648Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://jobs.navyfederal.org/hcmUI/CandidateExperience/en/sites/nfcu",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:39:12.204Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "navyfederal",
+    "host": "jobs.navyfederal.org",
+    "site": "nfcu",
+    "jobs": 184,
+    "via": "careers-page",
+    "careersUrl": "https://jobs.navyfederal.org/hcmUI/CandidateExperience/en/sites/nfcu"
   },
   "NBCUniversal": {
     "probedAt": "2026-10-23T19:42:18.077Z",
@@ -2777,11 +2804,15 @@
     "via": "careers-page"
   },
   "Oracle": {
-    "probedAt": "2026-10-23T19:40:16.500Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://careers.oracle.com/en/sites/jobsearch",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:38:20.848Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "eeho",
+    "host": "eeho.fa.us2.oraclecloud.com",
+    "site": "jobsearch",
+    "jobs": 2476,
+    "via": "careers-page",
+    "careersUrl": "https://careers.oracle.com/en/sites/jobsearch"
   },
   "Oscar Health": {
     "probedAt": "2026-10-23T19:43:31.922Z",
@@ -3353,17 +3384,6 @@
     "careersUrl": "https://careers.spirit.com/careers-home/",
     "via": "careers-page"
   },
-  "Splunk": {
-    "probedAt": "2026-10-23T19:44:00.809Z",
-    "status": "workday",
-    "ats": "phenom",
-    "slug": "ciscisglobal",
-    "host": "careers.cisco.com",
-    "site": "CISCISGLOBAL",
-    "jobs": 1477,
-    "via": "careers-page",
-    "careersUrl": "https://careers.cisco.com/global/en/splunk"
-  },
   "Spotify": {
     "probedAt": "2026-10-23T18:58:55.574Z",
     "status": "live",
@@ -3576,11 +3596,15 @@
     "via": "careers-page"
   },
   "Texas Instruments": {
-    "probedAt": "2026-10-23T19:40:36.953Z",
-    "status": "blocked",
-    "platform": "Oracle HCM",
-    "careersUrl": "https://careers.ti.com/en/sites/CX",
-    "via": "careers-page"
+    "probedAt": "2026-10-24T03:38:20.850Z",
+    "status": "workday",
+    "ats": "oraclehcm",
+    "slug": "edbz",
+    "host": "edbz.fa.us2.oraclecloud.com",
+    "site": "CX",
+    "jobs": 893,
+    "via": "careers-page",
+    "careersUrl": "https://careers.ti.com/en/sites/CX"
   },
   "Texas Roadhouse": {
     "probedAt": "2026-10-23T19:44:04.662Z",
@@ -4056,7 +4080,7 @@
     "careersUrl": "https://jobs.whirlpool.com/careers"
   },
   "Williams-Sonoma": {
-    "probedAt": "2026-10-23T19:41:39.008Z",
+    "probedAt": "2026-10-24T03:38:20.851Z",
     "status": "blocked",
     "platform": "Oracle HCM",
     "careersUrl": "https://www.williams-sonoma.com/customer-service/careers/?cm_src=OLDLINK",

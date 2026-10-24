@@ -25,6 +25,9 @@ function saveWatchlist(list: string[]): void {
   } catch {
     /* ignore (private mode / disabled storage) */
   }
+  // Mirrored to a cookie so the server can render the watchlist-filtered feed on first
+  // paint (page.tsx) instead of flashing the full feed before this effect re-filters it.
+  document.cookie = `${WATCHLIST_KEY}=${encodeURIComponent(JSON.stringify(list))}; path=/; max-age=31536000; samesite=lax`;
 }
 
 const TAGS: [string, string][] = [
@@ -125,7 +128,10 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     const params = new URLSearchParams(window.location.search);
     if (params.get('companies') || params.get('company')) return;
     const saved = loadWatchlist();
-    if (saved.length) update({ companies: saved.join(',') });
+    if (saved.length) {
+      saveWatchlist(saved); // writes the cookie for lists saved before it existed
+      update({ companies: saved.join(',') });
+    }
   }, [update]);
 
   // Debounced live search: the input drives `q` directly so the visible box always

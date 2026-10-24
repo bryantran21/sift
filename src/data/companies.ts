@@ -126,7 +126,7 @@ const core: Company[] = [
   { name: 'Netflix', tag: 'big-tech', domain: 'netflix.com', ats: 'netflix', slug: 'netflix', status: 'live', eta: 'Live', tier: 2, note: 'Bespoke adapter over the Eightfold careers API.' },
 
   // ── COLLEGE · you'd work here ───────────────────────────────────────────────
-  { name: 'Carnegie Mellon (CMU)', tag: 'college', domain: 'cmu.edu', ats: 'workday', slug: 'cmu', status: 'live', eta: 'Live', tier: 1, jobs: 203, tenant: 'cmu', shard: '5', site: 'CMU' },
+  { name: 'Carnegie Mellon (CMU)', tag: 'college', domain: 'cmu.edu', ats: 'workday', slug: 'cmu', status: 'live', eta: 'Live', tier: 1, jobs: 190, tenant: 'cmu', shard: '115', site: 'CMU' },
   { name: 'Stanford University', tag: 'college', domain: 'stanford.edu', ats: 'oracle', status: 'blocked', tier: 1, note: 'University jobs are on Oracle/Taleo (careersearch.stanford.edu); only Stanford Healthcare is Workday.' },
   { name: 'Georgia Tech', tag: 'college', domain: 'gatech.edu', ats: 'unknown', status: 'unknown', tier: 2, note: 'Public postings appear to be on Trakstar; Workday tenant exists but its careers site is auth-gated (401).' },
   { name: 'UC Berkeley', tag: 'college', domain: 'berkeley.edu', ats: 'oracle', status: 'blocked', tier: 1, note: 'Staff jobs are on UCPath (Oracle), not a public Workday board.' },

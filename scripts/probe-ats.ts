@@ -148,6 +148,10 @@ interface Fingerprint {
   workday?: { tenant: string; shard: string; site: string };
   eightfold?: { host: string; domain?: string };
   oracle?: { host: string; site: string };
+  // Oracle sites on a company's own careers domain (careers.americanexpress.com/en/sites/CX_1):
+  // the site id from the URL, plus any *.fa.*.oraclecloud.com API host the page references.
+  oracleSite?: string;
+  oracleHosts?: string[];
   phenomRefNum?: string; // Phenom site id; the host is the careers page's own host
   platform?: string; // a non-supported platform, for the blocked report
 }
@@ -200,6 +204,11 @@ function fingerprint(text: string): Fingerprint {
   }
   const or = text.match(/([a-z0-9.-]+\.oraclecloud\.com)\/hcmUI\/CandidateExperience\/[a-z_-]+\/sites\/([A-Za-z0-9_]+)/i);
   if (or) fp.oracle = { host: or[1].toLowerCase(), site: or[2] };
+  const orSite = text.match(/\/(?:hcmUI\/CandidateExperience\/)?[a-z]{2}(?:[-_][A-Za-z]{2})?\/sites\/([A-Za-z0-9_]+)/);
+  if (orSite) {
+    fp.oracleSite = orSite[1];
+    fp.oracleHosts = [...new Set([...text.matchAll(/([a-z0-9-]+\.fa(?:\.[a-z0-9]+)?\.oraclecloud\.com)/gi)].map((m) => m[1]!.toLowerCase()))];
+  }
   const ph = text.match(/"refNum"\s*:\s*"([A-Z0-9]{3,20})"/);
   if (ph) fp.phenomRefNum = ph[1];
   for (const [re, name] of BLOCKED_PLATFORMS) {
@@ -209,6 +218,14 @@ function fingerprint(text: string): Fingerprint {
     }
   }
   return fp;
+}
+
+// A board slug from an API host. Generic subdomains (careers.autozone.com, jobs.navyfederal.org)
+// would collide across companies, so use the brand label instead: autozone, navyfederal.
+function hostSlug(host: string): string {
+  const labels = host.toLowerCase().split('.');
+  const generic = new Set(['careers', 'jobs', 'www', 'apply', 'career', 'job']);
+  return (generic.has(labels[0]!) && labels.length > 2 ? labels[1] : labels[0])!;
 }
 
 function careersUrls(c: Company): string[] {
@@ -290,15 +307,25 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
         const domain = fp.eightfold.domain ?? c.domain?.replace(/^www\./, '') ?? '';
         const b = await eightfoldBoard(fp.eightfold.host, domain);
         if (b.count > 0) {
-          const slug = fp.eightfold.host.split('.')[0];
+          const slug = hostSlug(fp.eightfold.host);
           return { ...base, status: 'workday', ats: 'eightfold', slug, host: fp.eightfold.host, site: domain, jobs: b.count, via: 'careers-page', careersUrl: page.url };
         }
       }
       if (fp.oracle) {
         const b = await oracleBoard(fp.oracle.host, fp.oracle.site);
         if (b.count > 0) {
-          const slug = fp.oracle.host.split('.')[0];
+          const slug = hostSlug(fp.oracle.host);
           return { ...base, status: 'workday', ats: 'oraclehcm', slug, host: fp.oracle.host, site: fp.oracle.site, jobs: b.count, via: 'careers-page', careersUrl: page.url };
+        }
+      }
+      if (!fp.oracle && fp.oracleSite) {
+        // The careers domain itself sometimes serves the API (AutoZone, Navy Federal); otherwise
+        // the oraclecloud host referenced in the page does (American Express, Kroger, TI).
+        for (const host of [new URL(page.url).host, ...(fp.oracleHosts ?? [])]) {
+          const b = await oracleBoard(host, fp.oracleSite);
+          if (b.count > 0) {
+            return { ...base, status: 'workday', ats: 'oraclehcm', slug: hostSlug(host), host, site: fp.oracleSite, jobs: b.count, via: 'careers-page', careersUrl: page.url };
+          }
         }
       }
       if (fp.phenomRefNum) {
@@ -319,7 +346,7 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
     const host = `${bare.split('.')[0]}.eightfold.ai`;
     const b = await eightfoldBoard(host, bare);
     if (b.count > 0) {
-      return { ...base, status: 'workday', ats: 'eightfold', slug: host.split('.')[0], host, site: bare, jobs: b.count, via: 'slug-guess' };
+      return { ...base, status: 'workday', ats: 'eightfold', slug: hostSlug(host), host, site: bare, jobs: b.count, via: 'slug-guess' };
     }
   }
 
