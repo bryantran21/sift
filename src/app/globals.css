@@ -312,6 +312,89 @@ select.ctrl:focus {
   font-variant-numeric: tabular-nums;
   font-weight: 500;
 }
+/* Grouped postings ("Software Development Engineer · 107 roles") + pay */
+.grp-badge {
+  flex: none;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 9px;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.pay {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.pay-pill {
+  color: var(--green);
+}
+.grp-table {
+  width: 100%;
+  min-width: 0; /* the global feed-table min-width doesn't apply inside the drawer */
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.grp-table th {
+  position: static;
+  text-align: left;
+  font-weight: 600;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+}
+.grp-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+}
+.grp-table td:nth-child(2) {
+  color: var(--green);
+  white-space: nowrap;
+}
+.grp-table td:nth-child(3) {
+  color: var(--muted);
+  text-align: right;
+}
+.grp-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.grp-item {
+  display: block;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.grp-item:last-child {
+  border-bottom: none;
+}
+.grp-item:hover {
+  background: var(--ink-2);
+}
+.grp-item-title {
+  font-size: 13px;
+  color: var(--ink);
+}
+.grp-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
 /* Industry label under the company name in feed rows */
 .slug .ind {
   color: var(--muted);

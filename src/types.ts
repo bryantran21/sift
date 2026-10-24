@@ -18,6 +18,14 @@ export type Ats =
 
 export type Tier = 1 | 2 | 3;
 
+// One posted pay range for one location ("Pasadena, CA: $142,800–$193,200/yr").
+export interface LocationPay {
+  location: string;
+  min: number;
+  max: number;
+  period: 'year' | 'hour' | 'month';
+}
+
 export type WorkMode = 'remote' | 'hybrid' | 'onsite' | 'unknown';
 
 // Coarse location bucket derived from the free-text location strings (no structured
@@ -96,6 +104,7 @@ export interface NormalizedJob {
   companyTier: Tier;
   title: string;
   normalizedTitle: string; // grouping key for fan-out collapse (Phase 3)
+  titleBase: string; // role without team/org decorations — the feed's grouping key
   locations: string[];
   country: Country; // derived bucket for the US-only filter
   workMode: WorkMode;
@@ -110,6 +119,8 @@ export interface NormalizedJob {
   category: Category;
   seniority: Seniority;
   skills: string[]; // tech skills extracted from title + description (for résumé fit)
+  salary: { min: number; max: number; period: 'year' | 'hour' | 'month' } | null; // posted pay
+  payByLocation: LocationPay[]; // per-location pay lines, when the posting lists them
   relevanceScore: number;
   filterFlags: string[];
 }

@@ -5,6 +5,8 @@ import { classifyCategory } from './classify';
 import { classifySeniority } from './seniority';
 import { deriveCountry } from './location';
 import { extractSkills } from '../scoring/skills';
+import { parseSalary, parsePayByLocation } from './salary';
+import { baseTitle } from './title-base';
 
 export function normalizeJob(raw: RawJob): NormalizedJob {
   const description =
@@ -17,6 +19,7 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     companyTier: raw.companyTier,
     title: raw.title,
     normalizedTitle: normalizeTitle(raw.title),
+    titleBase: baseTitle(raw.title),
     locations,
     country: raw.country === 'US' ? 'US' : deriveCountry(locations),
     workMode: inferWorkMode(raw, description),
@@ -32,6 +35,8 @@ export function normalizeJob(raw: RawJob): NormalizedJob {
     category: classifyCategory(raw.title),
     seniority: classifySeniority(raw.title),
     skills: extractSkills(`${raw.title}\n${description}`),
+    salary: parseSalary(description),
+    payByLocation: parsePayByLocation(description),
     relevanceScore: 0,
     filterFlags: [],
   };

@@ -1,0 +1,1 @@
+ALTER TABLE "jobs" ADD COLUMN "pay_by_location" jsonb DEFAULT '[]'::jsonb NOT NULL;

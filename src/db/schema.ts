@@ -7,10 +7,11 @@ import {
   jsonb,
   serial,
   bigserial,
+  doublePrecision,
   index,
   uniqueIndex,
 } from 'drizzle-orm/pg-core';
-import type { Ats, Category, Country, Seniority, Tier, WorkMode } from '../types';
+import type { Ats, Category, Country, LocationPay, Seniority, Tier, WorkMode } from '../types';
 
 // Enums are plain text columns (not pg enums) on purpose: categories and seniority
 // buckets are defined in the editable rules file and will change over time, and
@@ -61,6 +62,9 @@ export const jobs = pgTable(
     companyTier: integer('company_tier').$type<Tier>().notNull(),
     title: text('title').notNull(),
     normalizedTitle: text('normalized_title').notNull(),
+    // Role with team/org decorations stripped (src/ingest/title-base.ts) — the feed groups
+    // near-identical postings ("SDE, AWS Lambda" + "SDE, Prime Video") under it.
+    titleBase: text('title_base').notNull().default(''),
     locations: jsonb('locations').$type<string[]>().notNull().default([]),
     country: text('country').$type<Country>().notNull().default('unknown'),
     workMode: text('work_mode').$type<WorkMode>().notNull().default('unknown'),
@@ -81,6 +85,12 @@ export const jobs = pgTable(
     category: text('category').$type<Category>().notNull().default('other'),
     seniority: text('seniority').$type<Seniority>().notNull().default('unknown'),
     skills: jsonb('skills').$type<string[]>().notNull().default([]),
+    // Posted pay range parsed from the description (src/ingest/salary.ts); null if none.
+    salaryMin: doublePrecision('salary_min'),
+    salaryMax: doublePrecision('salary_max'),
+    salaryPeriod: text('salary_period').$type<'year' | 'hour' | 'month'>(),
+    // Per-location pay lines when the posting lists them (Amazon: one per city).
+    payByLocation: jsonb('pay_by_location').$type<LocationPay[]>().notNull().default([]),
     relevanceScore: integer('relevance_score').notNull().default(0),
     filterFlags: jsonb('filter_flags').$type<string[]>().notNull().default([]),
 
@@ -90,6 +100,8 @@ export const jobs = pgTable(
   (t) => [
     // grouping key for fan-out collapse
     index('jobs_company_norm_title_idx').on(t.company, t.normalizedTitle),
+    // feed grouping of near-identical postings
+    index('jobs_company_title_base_idx').on(t.company, t.titleBase),
     // "live set" lookups during diffing
     index('jobs_removed_at_idx').on(t.removedAt),
     // feed ordering: COALESCE(posted_at, first_seen_at) desc

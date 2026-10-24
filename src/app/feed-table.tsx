@@ -5,6 +5,9 @@ import { recencyBucket, ageLabel } from '../lib/recency';
 import { monogram } from '../lib/avatar';
 import { CompanyTracker } from './company-tracker';
 import { industryLabel } from '../data/industries';
+import { formatSalary, type SalaryPeriod } from '../ingest/salary';
+import { baseTitleDisplay } from '../ingest/title-base';
+import { shortLocation } from '../lib/short-location';
 import type { FeedRow } from '../db/feed';
 
 export type FeedTableRow = FeedRow & { logo: string | null };
@@ -44,13 +47,14 @@ export function FeedTable({
             <th>Company</th>
             <th>Title</th>
             <th>Locations</th>
+            <th>Pay</th>
             <th>Added</th>
           </tr>
         </thead>
         <tbody>
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={showMatch ? 5 : 4}>
+              <td colSpan={showMatch ? 6 : 5}>
                 <div className="empty">No roles match these filters.</div>
               </td>
             </tr>
@@ -67,7 +71,13 @@ export function FeedTable({
           )}
         </tbody>
       </table>
-      {selected ? <JobDrawer row={selected} onClose={() => setSelected(null)} /> : null}
+      {selected ? (
+        selected.groupSize > 1 ? (
+          <GroupDrawer row={selected} onClose={() => setSelected(null)} />
+        ) : (
+          <JobDrawer row={selected} onClose={() => setSelected(null)} />
+        )
+      ) : null}
     </>
   );
 }
@@ -125,20 +135,35 @@ function Row({
         </div>
       </td>
       <td>
-        <a
-          className="jtitle"
-          href={r.applyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          title={r.title}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</span>
-          <span className="ext">↗</span>
-        </a>
+        {r.groupSize > 1 ? (
+          // A group: opens the drawer listing every posting, so no external link here.
+          <span className="jtitle" title={`${r.groupSize} postings — click to see all`}>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              {baseTitleDisplay(r.title)}
+            </span>
+            <span className="grp-badge">{r.groupSize} roles</span>
+          </span>
+        ) : (
+          <a
+            className="jtitle"
+            href={r.applyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={r.title}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.title}</span>
+            <span className="ext">↗</span>
+          </a>
+        )}
       </td>
       <td>
-        <div className="locs">{formatLocs(r.locations)}</div>
+        <div className="locs">
+          {r.groupSize > 1 ? formatLocs(r.topLocations, r.locationCount) : formatLocs(r.locations)}
+        </div>
+      </td>
+      <td>
+        <span className="pay mono">{payLabel(r.payMin, r.payMax, r.payPeriod) ?? '—'}</span>
       </td>
       <td>
         <span className="added">
@@ -201,6 +226,9 @@ function JobDrawer({ row, onClose }: { row: FeedTableRow; onClose: () => void })
 
         <div className="drawer-meta">
           <span className="pill">{industryLabel(row.industry)}</span>
+          {payLabel(row.payMin, row.payMax, row.payPeriod) ? (
+            <span className="pill pay-pill">{payLabel(row.payMin, row.payMax, row.payPeriod)}</span>
+          ) : null}
           {row.seniority && row.seniority !== 'unknown' ? <span className="pill">{row.seniority}</span> : null}
           {row.category && row.category !== 'other' ? <span className="pill">{row.category}</span> : null}
           {row.workMode && row.workMode !== 'unknown' ? <span className="pill">{row.workMode}</span> : null}
@@ -252,10 +280,175 @@ function Avatar({ company, logo }: { company: string; logo: string | null }) {
   );
 }
 
-function formatLocs(locations: string[]): string {
-  if (!locations || locations.length === 0) return '—';
-  if (locations.length <= 2) return locations.join(' · ');
-  return `${locations.slice(0, 2).join(' · ')} +${locations.length - 2}`;
+// "Seattle, WA · Redmond, WA +19" — spellings unified and de-duplicated.
+function formatLocs(raw: string[], total?: number): string {
+  if (!raw || raw.length === 0) return '—';
+  const locations = [...new Set(raw.map(shortLocation))];
+  const n = total ?? locations.length;
+  if (n <= 2) return locations.slice(0, 2).join(' · ');
+  return `${locations.slice(0, 2).join(' · ')} +${n - 2}`;
+}
+
+function payLabel(min: number | null, max: number | null, period: SalaryPeriod | null): string | null {
+  if (min == null || max == null || !period) return null;
+  return formatSalary({ min, max, period });
+}
+
+interface GroupMember {
+  id: string;
+  title: string;
+  locations: string[];
+  applyUrl: string;
+  workMode: string;
+  added: string;
+  salaryMin: number | null;
+  salaryMax: number | null;
+  salaryPeriod: SalaryPeriod | null;
+  payByLocation: { location: string; min: number; max: number; period: SalaryPeriod }[];
+}
+
+// Pay per location across a group's postings: for each location, the span of the posted
+// ranges (per pay period) and how many postings list it. A posting that lists its own
+// per-city pay lines (Amazon) contributes those; otherwise its single range applies to
+// each of its locations. Pure.
+export function payByLocation(members: GroupMember[]) {
+  const byLoc = new Map<string, { roles: number; min: number | null; max: number | null; period: SalaryPeriod | null }>();
+  const add = (rawLoc: string, min: number | null, max: number | null, period: SalaryPeriod | null) => {
+    const loc = shortLocation(rawLoc);
+    const cur = byLoc.get(loc) ?? { roles: 0, min: null, max: null, period: null };
+    cur.roles++;
+    if (min != null && max != null && period) {
+      // Keep one period per location; annual wins over hourly/monthly.
+      if (!cur.period || (cur.period !== 'year' && period === 'year')) {
+        cur.period = period;
+        cur.min = min;
+        cur.max = max;
+      } else if (cur.period === period) {
+        cur.min = Math.min(cur.min!, min);
+        cur.max = Math.max(cur.max!, max);
+      }
+    }
+    byLoc.set(loc, cur);
+  };
+  for (const m of members) {
+    if (m.payByLocation?.length) {
+      for (const p of m.payByLocation) add(p.location, p.min, p.max, p.period);
+    } else {
+      for (const loc of m.locations.length ? m.locations : ['—']) add(loc, m.salaryMin, m.salaryMax, m.salaryPeriod);
+    }
+  }
+  return [...byLoc.entries()]
+    .map(([location, v]) => ({ location, ...v }))
+    .sort((a, b) => b.roles - a.roles || a.location.localeCompare(b.location));
+}
+
+// The expanded view of a group: pay by location, then every posting with its team, city,
+// pay, and a link — e.g. all of Amazon's "Software Development Engineer" reqs in one place.
+function GroupDrawer({ row, onClose }: { row: FeedTableRow; onClose: () => void }) {
+  const [members, setMembers] = useState<GroupMember[] | null>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    let alive = true;
+    setMembers(null);
+    setError(false);
+    const q = new URLSearchParams({ company: row.company, base: row.titleBase });
+    fetch(`/api/group?${q}`)
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((d: { members: GroupMember[] }) => alive && setMembers(d.members))
+      .catch(() => alive && setError(true));
+    return () => {
+      alive = false;
+    };
+  }, [row.company, row.titleBase]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  const pay = payLabel(row.payMin, row.payMax, row.payPeriod);
+  const locs = members ? payByLocation(members) : [];
+
+  return (
+    <div className="drawer-backdrop" onClick={onClose}>
+      <aside className="drawer" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="Role group">
+        <button className="drawer-close" onClick={onClose} aria-label="Close">
+          ✕
+        </button>
+        <div className="drawer-head">
+          <Avatar company={row.company} logo={row.logo} />
+          <div>
+            <div className="drawer-title">{baseTitleDisplay(row.title)}</div>
+            <div className="drawer-sub">
+              {row.company} · {row.groupSize} roles · {row.locationCount} locations
+            </div>
+          </div>
+        </div>
+
+        <div className="drawer-meta">
+          <span className="pill">{industryLabel(row.industry)}</span>
+          {pay ? <span className="pill pay-pill">{pay}</span> : null}
+          {row.seniority && row.seniority !== 'unknown' ? <span className="pill">{row.seniority}</span> : null}
+        </div>
+
+        <CompanyTracker company={row.company} />
+
+        {error ? (
+          <div className="drawer-muted">Couldn&apos;t load the postings in this group.</div>
+        ) : !members ? (
+          <div className="drawer-muted">Loading postings…</div>
+        ) : (
+          <>
+            <div className="drawer-section">
+              <div className="drawer-label">Pay by location</div>
+              <table className="grp-table">
+                <thead>
+                  <tr>
+                    <th>Location</th>
+                    <th>Pay</th>
+                    <th>Roles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {locs.map((l) => (
+                    <tr key={l.location}>
+                      <td>{l.location}</td>
+                      <td className="mono">{payLabel(l.min, l.max, l.period) ?? '—'}</td>
+                      <td className="mono">{l.roles}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="drawer-section">
+              <div className="drawer-label">All postings ({members.length})</div>
+              <div className="grp-list">
+                {members.map((m) => (
+                  <a key={m.id} className="grp-item" href={m.applyUrl} target="_blank" rel="noopener noreferrer">
+                    <div className="grp-item-title">
+                      {m.title} <span className="ext">↗</span>
+                    </div>
+                    <div className="grp-item-meta">
+                      <span>{formatLocs(m.locations)}</span>
+                      {payLabel(m.salaryMin, m.salaryMax, m.salaryPeriod) ? (
+                        <span className="mono">{payLabel(m.salaryMin, m.salaryMax, m.salaryPeriod)}</span>
+                      ) : null}
+                      <span className="mono">{fmtDate(new Date(m.added))}</span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </aside>
+    </div>
+  );
 }
 
 function fmtDate(d: Date): string {
