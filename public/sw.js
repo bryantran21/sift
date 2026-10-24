@@ -1,7 +1,7 @@
 // Minimal service worker: enough to make sift installable as a PWA and give it an offline
 // app shell, without ever serving stale job data. The feed and all /api responses always go
 // to the network; only the shell HTML and static build assets are cached.
-const CACHE = 'sift-v1';
+const CACHE = 'sift-v2'; // bump to evict every client's cached shell + assets on next load
 const SHELL = '/';
 
 self.addEventListener('install', (event) => {

@@ -2,6 +2,7 @@ import { and, desc, eq, inArray, isNull, isNotNull, sql, type SQL } from 'drizzl
 import { getDb } from './client';
 import { jobs, sources, runs } from './schema';
 import type { LocationPay, Seniority, Tier, WorkMode } from '../types';
+import { shortLocation } from '../lib/short-location';
 
 export interface FeedParams {
   q?: string;
@@ -178,10 +179,13 @@ interface GroupRow {
   industry: string;
 }
 
-// Locations across a group, most common first.
+// Locations across a group, most common first, with spellings unified ("Seattle,
+// Washington, USA" and "US, WA, Seattle" both count as "Seattle, WA").
 function rankLocations(locs: string[][]): string[] {
   const freq = new Map<string, number>();
-  for (const arr of locs ?? []) for (const l of arr ?? []) freq.set(l, (freq.get(l) ?? 0) + 1);
+  for (const arr of locs ?? []) {
+    for (const raw of new Set((arr ?? []).map(shortLocation))) freq.set(raw, (freq.get(raw) ?? 0) + 1);
+  }
   return [...freq.entries()].sort((a, b) => b[1] - a[1]).map(([l]) => l);
 }
 

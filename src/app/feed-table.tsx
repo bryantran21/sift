@@ -7,6 +7,7 @@ import { CompanyTracker } from './company-tracker';
 import { industryLabel } from '../data/industries';
 import { formatSalary, type SalaryPeriod } from '../ingest/salary';
 import { baseTitleDisplay } from '../ingest/title-base';
+import { shortLocation } from '../lib/short-location';
 import type { FeedRow } from '../db/feed';
 
 export type FeedTableRow = FeedRow & { logo: string | null };
@@ -279,10 +280,13 @@ function Avatar({ company, logo }: { company: string; logo: string | null }) {
   );
 }
 
-function formatLocs(locations: string[], total = locations?.length ?? 0): string {
-  if (!locations || locations.length === 0) return '—';
-  if (total <= 2) return locations.slice(0, 2).join(' · ');
-  return `${locations.slice(0, 2).join(' · ')} +${total - 2}`;
+// "Seattle, WA · Redmond, WA +19" — spellings unified and de-duplicated.
+function formatLocs(raw: string[], total?: number): string {
+  if (!raw || raw.length === 0) return '—';
+  const locations = [...new Set(raw.map(shortLocation))];
+  const n = total ?? locations.length;
+  if (n <= 2) return locations.slice(0, 2).join(' · ');
+  return `${locations.slice(0, 2).join(' · ')} +${n - 2}`;
 }
 
 function payLabel(min: number | null, max: number | null, period: SalaryPeriod | null): string | null {
@@ -309,7 +313,8 @@ interface GroupMember {
 // each of its locations. Pure.
 export function payByLocation(members: GroupMember[]) {
   const byLoc = new Map<string, { roles: number; min: number | null; max: number | null; period: SalaryPeriod | null }>();
-  const add = (loc: string, min: number | null, max: number | null, period: SalaryPeriod | null) => {
+  const add = (rawLoc: string, min: number | null, max: number | null, period: SalaryPeriod | null) => {
+    const loc = shortLocation(rawLoc);
     const cur = byLoc.get(loc) ?? { roles: 0, min: null, max: null, period: null };
     cur.roles++;
     if (min != null && max != null && period) {

@@ -334,10 +334,12 @@ select.ctrl:focus {
 }
 .grp-table {
   width: 100%;
+  min-width: 0; /* the global feed-table min-width doesn't apply inside the drawer */
   border-collapse: collapse;
   font-size: 12.5px;
 }
 .grp-table th {
+  position: static;
   text-align: left;
   font-weight: 600;
   font-size: 10.5px;
