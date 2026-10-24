@@ -16,6 +16,15 @@ test('registry Workday boards at tech companies page the whole board', () => {
   assert.equal(nvidia!.search, undefined);
 });
 
+test('every registry board has a unique ats:slug (dedupe would silently drop a collision)', () => {
+  const seen = new Map<string, string>();
+  for (const s of registrySources()) {
+    const key = `${s.ats}:${s.slug}`;
+    assert.ok(!seen.has(key), `${key} used by both ${seen.get(key)} and ${s.company}`);
+    seen.set(key, s.company);
+  }
+});
+
 test('registry sources carry the registry industry', () => {
   for (const s of registrySources()) assert.ok(s.industry, `${s.company} has no industry`);
 });

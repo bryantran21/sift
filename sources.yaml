@@ -303,7 +303,7 @@
   tier: 1
   tags: [college]
   tenant: cmu
-  shard: "5"
+  shard: "115" # moved from wd5 (which now returns 422) in 2026-10
   site: CMU
 
 # ── Live via Ashby (single GET; JSON with descriptions) ──────────────────────

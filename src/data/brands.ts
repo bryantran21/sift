@@ -21,7 +21,7 @@ export const brands: Company[] = [
   // ── Tech & Software ─────────────────────────────────────────────────────────
   brand('IBM', 'ibm.com', 'tech', 'big-tech'),
   brand('Oracle', 'oracle.com', 'tech', 'big-tech'),
-  brand('Cisco', 'cisco.com', 'tech', 'big-tech'),
+  brand('Cisco', 'cisco.com', 'tech', 'big-tech', { aliases: ['Splunk'] }), // Splunk hires through Cisco's board
   brand('Adobe', 'adobe.com', 'tech', 'big-tech'),
   brand('Intuit', 'intuit.com', 'tech', 'big-tech'),
   brand('ServiceNow', 'servicenow.com', 'tech', 'big-tech'),
@@ -43,7 +43,6 @@ export const brands: Company[] = [
   brand('Elastic', 'elastic.co', 'tech', 'big-tech'),
   brand('Confluent', 'confluent.io', 'tech', 'big-tech'),
   brand('HashiCorp', 'hashicorp.com', 'tech', 'big-tech'),
-  brand('Splunk', 'splunk.com', 'tech', 'big-tech'),
   brand('Autodesk', 'autodesk.com', 'tech', 'big-tech'),
   brand('Canva', 'canva.com', 'tech', 'big-tech'),
   brand('Grammarly', 'grammarly.com', 'tech', 'big-tech'),

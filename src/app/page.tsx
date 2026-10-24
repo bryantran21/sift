@@ -1,7 +1,8 @@
 import { getFeed, getFeedMeta, getCompanies, PAGE_SIZE, type FeedParams } from '../db/feed';
 import { logoFor } from '../lib/logos';
 import { isIndustry } from '../data/industries';
-import { getDeviceId } from '../lib/device';
+import { getDeviceId, savedWatchlist } from '../lib/device';
+import { redirect } from 'next/navigation';
 import { getProfile } from '../db/profile';
 import { getCooldownStatuses } from '../db/events';
 import type { Seniority, WorkMode } from '../types';
@@ -43,6 +44,19 @@ function parse(sp: SP): FeedParams {
 
 export default async function Page({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
+
+  // Saved company watchlist (cookie mirror of localStorage): a bare visit goes straight to
+  // the filtered view, so the first paint is already curated — no flash of the full feed.
+  if (!sp.companies && !sp.company) {
+    const saved = await savedWatchlist();
+    if (saved.length) {
+      const q = new URLSearchParams();
+      for (const [k, v] of Object.entries(sp)) if (typeof v === 'string') q.set(k, v);
+      q.set('companies', saved.join(','));
+      redirect(`/?${q}`);
+    }
+  }
+
   const params = parse(sp);
 
   const deviceId = await getDeviceId();
