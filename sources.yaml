@@ -70,10 +70,10 @@
   tags: [quant] # 38 jobs
 
 - company: Old Mission Capital
-  ats: greenhouse
-  slug: oldmissioncapital
+  ats: ashby # moved off Greenhouse (404) in 2026-11
+  slug: old-mission-capital
   tier: 2
-  tags: [quant] # 32 jobs
+  tags: [quant] # 38 jobs
 
 - company: Optiver
   ats: greenhouse

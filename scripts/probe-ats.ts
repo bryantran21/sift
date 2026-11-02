@@ -303,7 +303,7 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
         const b = await smartRecruitersBoard(fp.smartrecruiters);
         if (b.count > 0) return { ...base, status: 'live', ats: 'smartrecruiters', slug: fp.smartrecruiters, jobs: b.count, via: 'careers-page', careersUrl: page.url };
       }
-      if (fp.eightfold) {
+      if (fp.eightfold && ok('eightfold', hostSlug(fp.eightfold.host))) {
         const domain = fp.eightfold.domain ?? c.domain?.replace(/^www\./, '') ?? '';
         const b = await eightfoldBoard(fp.eightfold.host, domain);
         if (b.count > 0) {
@@ -311,7 +311,7 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
           return { ...base, status: 'workday', ats: 'eightfold', slug, host: fp.eightfold.host, site: domain, jobs: b.count, via: 'careers-page', careersUrl: page.url };
         }
       }
-      if (fp.oracle) {
+      if (fp.oracle && ok('oraclehcm', hostSlug(fp.oracle.host))) {
         const b = await oracleBoard(fp.oracle.host, fp.oracle.site);
         if (b.count > 0) {
           const slug = hostSlug(fp.oracle.host);
@@ -322,13 +322,14 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
         // The careers domain itself sometimes serves the API (AutoZone, Navy Federal); otherwise
         // the oraclecloud host referenced in the page does (American Express, Kroger, TI).
         for (const host of [new URL(page.url).host, ...(fp.oracleHosts ?? [])]) {
+          if (!ok('oraclehcm', hostSlug(host))) continue;
           const b = await oracleBoard(host, fp.oracleSite);
           if (b.count > 0) {
             return { ...base, status: 'workday', ats: 'oraclehcm', slug: hostSlug(host), host, site: fp.oracleSite, jobs: b.count, via: 'careers-page', careersUrl: page.url };
           }
         }
       }
-      if (fp.phenomRefNum) {
+      if (fp.phenomRefNum && ok('phenom', fp.phenomRefNum)) {
         const host = new URL(page.url).host;
         const b = await phenomBoard(host, fp.phenomRefNum);
         if (b.count > 0) {
@@ -344,7 +345,7 @@ async function probe(c: Company, existing: Existing): Promise<ProbeResult> {
   if (c.domain) {
     const bare = c.domain.replace(/^www\./, '');
     const host = `${bare.split('.')[0]}.eightfold.ai`;
-    const b = await eightfoldBoard(host, bare);
+    const b = ok('eightfold', hostSlug(host)) ? await eightfoldBoard(host, bare) : { count: 0 };
     if (b.count > 0) {
       return { ...base, status: 'workday', ats: 'eightfold', slug: hostSlug(host), host, site: bare, jobs: b.count, via: 'slug-guess' };
     }

@@ -580,13 +580,13 @@
     "careersUrl": "https://careers.bose.com/us/en"
   },
   "Boston Consulting Group": {
-    "probedAt": "2026-10-23T19:41:18.159Z",
+    "probedAt": "2026-11-02T21:31:58.247Z",
     "status": "workday",
-    "ats": "eightfold",
-    "slug": "bcg",
-    "host": "bcg.eightfold.ai",
-    "site": "bcg.com",
-    "jobs": 5,
+    "ats": "phenom",
+    "slug": "bcg1us",
+    "host": "careers.bcg.com",
+    "site": "BCG1US",
+    "jobs": 940,
     "via": "careers-page",
     "careersUrl": "https://careers.bcg.com/global/en/"
   },
@@ -1865,14 +1865,11 @@
     "careersUrl": "https://careers.hpe.com/us/en"
   },
   "HSBC": {
-    "probedAt": "2026-10-23T19:41:00.201Z",
-    "status": "workday",
-    "ats": "eightfold",
-    "slug": "hsbc",
-    "host": "hsbc.eightfold.ai",
-    "site": "hsbc.com",
-    "jobs": 56,
-    "via": "slug-guess"
+    "probedAt": "2026-11-02T21:31:58.237Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.hsbc.com/careers",
+    "via": "careers-page"
   },
   "HubSpot": {
     "probedAt": "2026-10-23T19:40:24.757Z",
@@ -2248,14 +2245,11 @@
     "via": "careers-page"
   },
   "Liberty Mutual": {
-    "probedAt": "2026-10-23T19:41:08.032Z",
-    "status": "workday",
-    "ats": "eightfold",
-    "slug": "libertymutual",
-    "host": "libertymutual.eightfold.ai",
-    "site": "libertymutual.com",
-    "jobs": 225,
-    "via": "slug-guess"
+    "probedAt": "2026-11-02T21:31:58.239Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.libertymutualgroup.com/about-lm/careers/overview",
+    "via": "careers-page"
   },
   "Linear": {
     "probedAt": "2026-10-23T18:59:15.047Z",
@@ -2535,15 +2529,11 @@
     "via": "slug-guess"
   },
   "Millennium": {
-    "probedAt": "2026-10-23T19:40:47.556Z",
-    "status": "workday",
-    "ats": "eightfold",
-    "slug": "mlp",
-    "host": "mlp.eightfold.ai",
-    "site": "mlp.com",
-    "jobs": 78,
-    "via": "careers-page",
-    "careersUrl": "https://www.mlp.com/careers/"
+    "probedAt": "2026-11-02T21:31:58.235Z",
+    "status": "blocked",
+    "platform": "Eightfold",
+    "careersUrl": "https://www.mlp.com/careers/",
+    "via": "careers-page"
   },
   "Miro": {
     "probedAt": "2026-10-23T18:59:14.988Z",
@@ -2676,14 +2666,11 @@
     "via": "careers-page"
   },
   "New York Life": {
-    "probedAt": "2026-10-23T19:41:11.225Z",
-    "status": "workday",
-    "ats": "eightfold",
-    "slug": "newyorklife",
-    "host": "newyorklife.eightfold.ai",
-    "site": "newyorklife.com",
-    "jobs": 330,
-    "via": "slug-guess"
+    "probedAt": "2026-11-02T21:31:58.246Z",
+    "status": "blocked",
+    "platform": "SAP SuccessFactors",
+    "careersUrl": "https://careers.newyorklife.com/careers",
+    "via": "careers-page"
   },
   "Nextdoor": {
     "probedAt": "2026-10-23T18:59:21.046Z",
@@ -2953,11 +2940,11 @@
     "careersUrl": "https://careers.pnc.com/global/en"
   },
   "Postman": {
-    "probedAt": "2026-10-23T18:59:16.433Z",
-    "status": "live",
-    "ats": "greenhouse",
-    "slug": "postman",
-    "via": "existing-source"
+    "probedAt": "2026-11-02T21:31:57.913Z",
+    "status": "blocked",
+    "platform": "Custom careers site",
+    "careersUrl": "https://www.postman.com/company/careers/",
+    "via": "careers-page"
   },
   "Procter & Gamble": {
     "probedAt": "2026-10-23T19:44:00.807Z",

@@ -58,7 +58,7 @@ const core: Company[] = [
   { name: 'Flow Traders', tag: 'quant', domain: 'flowtraders.com', ats: 'greenhouse', slug: 'flowtraders', status: 'live', eta: 'Live', tier: 2, jobs: 39 },
   { name: 'Virtu Financial', tag: 'quant', domain: 'virtu.com', ats: 'greenhouse', slug: 'virtu', status: 'live', eta: 'Live', tier: 2, jobs: 38 },
   { name: 'Akuna Capital', tag: 'quant', domain: 'akunacapital.com', ats: 'greenhouse', slug: 'akunacapital', status: 'live', eta: 'Live', tier: 2, jobs: 38 },
-  { name: 'Old Mission Capital', tag: 'quant', domain: 'oldmissioncapital.com', ats: 'greenhouse', slug: 'oldmissioncapital', status: 'live', eta: 'Live', tier: 2, jobs: 32 },
+  { name: 'Old Mission Capital', tag: 'quant', domain: 'oldmissioncapital.com', ats: 'ashby', slug: 'old-mission-capital', status: 'live', eta: 'Live', tier: 2, jobs: 38 },
   { name: 'Optiver', tag: 'quant', domain: 'optiver.com', ats: 'greenhouse', slug: 'optiver', status: 'live', eta: 'Live', tier: 1, jobs: 0, note: 'Live board, no open roles at last check.' },
 
   // ── QUANT · not reachable via a supported JSON API ──────────────────────────
