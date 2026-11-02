@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { loadSources, registrySources, TECH_SEARCH } from './sources';
 import { findCompany } from '../data/companies';
+import { isRejectedBoard } from './rejected-boards';
 
 test('registry Workday boards at non-tech companies query tech terms', () => {
   const target = registrySources().find((s) => s.company === 'Target');
@@ -23,6 +24,10 @@ test('every registry board has a unique ats:slug (dedupe would silently drop a c
     assert.ok(!seen.has(key), `${key} used by both ${seen.get(key)} and ${s.company}`);
     seen.set(key, s.company);
   }
+});
+
+test('disabled boards (decoy / blocked / gone) are never ingested', () => {
+  for (const s of loadSources()) assert.ok(!isRejectedBoard(s.ats, s.slug), `${s.ats}:${s.slug} is disabled`);
 });
 
 test('registry sources carry the registry industry', () => {
