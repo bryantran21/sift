@@ -98,7 +98,7 @@ function Row({
           <Avatar company={r.company} logo={r.logo} />
           <div>
             <div className="name">
-              {r.company} {r.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
+              {r.company}
               {cooldownUntil ? (
                 <span
                   className="cd-badge"

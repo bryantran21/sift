@@ -10,6 +10,7 @@ import { FeedFilters } from './feed-filters';
 import { FeedTable } from './feed-table';
 import { FeedBoard } from './feed-board';
 import { ResumeBar } from './resume-bar';
+import { ThemeToggle } from './theme-toggle';
 
 export const dynamic = 'force-dynamic';
 
@@ -105,6 +106,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
           <a className="fit-link" href="/tracker">
             ⏳ tracker
           </a>
+          <ThemeToggle />
         </div>
         <div className="metrics">
           <div className="metric">

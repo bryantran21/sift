@@ -150,7 +150,7 @@ export function JobPanel({ row, cooldownUntil }: { row: FeedTableRow; cooldownUn
         <Avatar company={row.company} logo={row.logo} size="lg" />
         <div className="jp-co">
           <div className="jp-co-name">
-            {row.company} {row.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
+            {row.company}
           </div>
           <div className="jp-co-sub">{industryLabel(row.industry)}</div>
         </div>
@@ -363,7 +363,7 @@ export function GroupPanel({ row, cooldownUntil }: { row: FeedTableRow; cooldown
         <Avatar company={row.company} logo={row.logo} size="lg" />
         <div className="jp-co">
           <div className="jp-co-name">
-            {row.company} {row.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
+            {row.company}
           </div>
           <div className="jp-co-sub">{industryLabel(row.industry)}</div>
         </div>

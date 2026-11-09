@@ -132,7 +132,6 @@ function JobCard({
         </div>
         <div className="jcard-co">
           {r.company}
-          {r.companyTier === 1 ? <span className="badge tier1">T1</span> : null}
           {cooldown ? (
             <span className="cd-badge" title="You're in a cooldown with this company">
               ⏳
