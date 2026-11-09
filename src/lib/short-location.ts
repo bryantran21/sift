@@ -31,8 +31,11 @@ function titleCase(s: string): string {
 }
 
 export function shortLocation(loc: string): string {
+  // Workday writes "United States - Minnesota - Plymouth"; split on " - " only when there's
+  // no comma (hyphenated places like "Winston-Salem, NC" never have the spaces).
+  const sep = !loc.includes(',') && loc.includes(' - ') ? ' - ' : ',';
   const parts = loc
-    .split(',')
+    .split(sep)
     .map((p) => p.trim())
     .filter((p) => p && !COUNTRY.test(p));
   if (parts.length !== 2) return loc.trim();

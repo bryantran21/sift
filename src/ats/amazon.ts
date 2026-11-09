@@ -46,8 +46,14 @@ export function amazonUrl(offset: number): string {
 export function parseAmazon(payload: AmazonResponse, source: Source): RawJob[] {
   const jobs = payload.jobs ?? [];
   return jobs.map((j): RawJob => {
-    const description = [j.description, j.basic_qualifications, j.preferred_qualifications]
-      .filter((s) => s && s.trim())
+    // Label the qualification blocks — the API returns them as bare lists, and without
+    // headings the job summary can't tell requirements from nice-to-haves.
+    const description = [
+      j.description,
+      j.basic_qualifications?.trim() ? `<h3>Basic Qualifications</h3>${j.basic_qualifications}` : null,
+      j.preferred_qualifications?.trim() ? `<h3>Preferred Qualifications</h3>${j.preferred_qualifications}` : null,
+    ]
+      .filter((s): s is string => !!s && !!s.trim())
       .join('\n\n');
     const location = (j.normalized_location || j.location || '').trim();
     return {

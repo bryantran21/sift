@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseLever, leverUrl } from './lever';
+import { parseLever, leverUrl, leverDescription } from './lever';
 import { normalizeJob } from '../ingest/normalize';
 import type { Source } from '../types';
 
@@ -60,4 +60,21 @@ test('normalizeJob works on lever output', () => {
 
 test('parseLever tolerates an empty board', () => {
   assert.deepEqual(parseLever([], source), []);
+});
+
+test('leverDescription keeps the lists and the closing block (requirements, pay)', () => {
+  const html = leverDescription({
+    id: 'x',
+    description: '<p>Intro</p>',
+    lists: [
+      { text: "What You'll Do", content: '<li>Build things</li>' },
+      { text: 'Empty', content: '' },
+    ],
+    additional: '<p>The base salary range is $150,000 - $200,000.</p>',
+  })!;
+  const text = normalizeJob({ ats: 'lever', sourceSlug: 's', company: 'C', companyTier: 3, tags: [], atsJobId: 'x', reqNumber: null, title: 'SWE', locations: [], workplaceType: null, description: html, descriptionFormat: 'html', applyUrl: 'u', postedAt: null, updatedAt: null });
+  assert.ok(text.description.includes("What You'll Do"));
+  assert.ok(text.description.includes('Build things'));
+  assert.ok(!text.description.includes('Empty'));
+  assert.deepEqual(text.salary, { min: 150000, max: 200000, period: 'year' });
 });
