@@ -20,14 +20,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0b0c0e',
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#0b0c0e' },
+    { media: '(prefers-color-scheme: light)', color: '#f5f6f8' },
+  ],
   // Fill the notch area so the standalone app looks native edge-to-edge.
   viewportFit: 'cover',
 };
 
+// Applies a saved light/dark choice before first paint (no flash of the wrong theme).
+// Without one, CSS follows the OS via prefers-color-scheme. See theme-toggle.tsx.
+const THEME_SCRIPT = `try{var t=localStorage.getItem('sift_theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`;
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         {children}
         <SwRegister />

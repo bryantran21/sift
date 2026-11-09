@@ -18,13 +18,61 @@
   --green-soft: #46c46a1c;
   --amber-soft: #e0b23c1c;
   --red-soft: #f0616d1c;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --scrim: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* Light theme: an explicit choice (theme toggle), or the OS setting when none is saved. */
+:root[data-theme='light'] {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --panel-2: #f0f2f5;
+  --line: #dde1e7;
+  --ink: #16191e;
+  --ink-2: #0000000a;
+  --muted: #5a6370;
+  --faint: #868f9b;
+  --accent: #2f6df6;
+  --accent-2: #1d5bd8;
+  --accent-soft: #2f6df614;
+  --green: #18884a;
+  --amber: #a87a06;
+  --red: #d1343f;
+  --green-soft: #18884a17;
+  --amber-soft: #a87a0617;
+  --red-soft: #d1343f14;
+  --shadow: rgba(16, 24, 40, 0.12);
+  --scrim: rgba(16, 24, 40, 0.35);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --panel-2: #f0f2f5;
+  --line: #dde1e7;
+  --ink: #16191e;
+  --ink-2: #0000000a;
+  --muted: #5a6370;
+  --faint: #868f9b;
+  --accent: #2f6df6;
+  --accent-2: #1d5bd8;
+  --accent-soft: #2f6df614;
+  --green: #18884a;
+  --amber: #a87a06;
+  --red: #d1343f;
+  --green-soft: #18884a17;
+  --amber-soft: #a87a0617;
+  --red-soft: #d1343f14;
+  --shadow: rgba(16, 24, 40, 0.12);
+  --scrim: rgba(16, 24, 40, 0.35);
+  color-scheme: light;
+  }
 }
 
 * {
   box-sizing: border-box;
-}
-html {
-  color-scheme: dark;
 }
 body {
   margin: 0;
@@ -114,17 +162,16 @@ a {
 }
 
 /* toolbar / filters */
+/* Search on its own row, then a fixed grid of filters: picking a long option ("Tech &
+   Software") truncates inside its cell instead of reflowing the whole toolbar. */
 .toolbar {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
   margin: 16px 0;
 }
 .search {
   position: relative;
-  flex: 1;
-  min-width: 220px;
 }
 .search .ic {
   position: absolute;
@@ -149,11 +196,20 @@ a {
   border-color: var(--accent);
 }
 .selects {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) 44px;
   gap: 8px;
-  flex-wrap: wrap;
+  align-items: center;
+}
+@media (max-width: 700px) {
+  .selects {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 select.ctrl {
+  width: 100%;
+  height: 36px;
+  text-overflow: ellipsis;
   font: inherit;
   font-size: 13px;
   color: var(--ink);
@@ -168,9 +224,17 @@ select.ctrl:focus {
   border-color: var(--accent);
 }
 .clear {
+  font: inherit;
   font-size: 12.5px;
   color: var(--accent-2);
   padding: 8px 4px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.clear[hidden] {
+  display: block;
+  visibility: hidden;
 }
 .clear:hover {
   text-decoration: underline;
@@ -179,7 +243,8 @@ select.ctrl:focus {
 /* company picker (custom dropdown with logos) */
 .picker {
   position: relative;
-  display: inline-flex;
+  display: flex;
+  min-width: 0;
 }
 .picker-trigger {
   font: inherit;
@@ -194,7 +259,9 @@ select.ctrl:focus {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  max-width: 220px;
+  width: 100%;
+  height: 36px;
+  min-width: 0;
 }
 .picker-trigger:hover,
 .picker-trigger[aria-expanded='true'] {
@@ -220,7 +287,7 @@ select.ctrl:focus {
   background: var(--panel-2);
   border: 1px solid var(--line);
   border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 30px var(--shadow);
   padding: 6px;
   display: flex;
   flex-direction: column;
@@ -643,7 +710,7 @@ tbody tr:hover td {
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--scrim);
   display: flex;
   justify-content: flex-end;
 }
@@ -654,7 +721,7 @@ tbody tr:hover td {
   overflow-y: auto;
   background: var(--panel);
   border-left: 1px solid var(--line);
-  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.4);
+  box-shadow: -20px 0 40px var(--shadow);
   padding: 22px 24px 40px;
 }
 .drawer-close {
@@ -798,7 +865,6 @@ tbody tr:hover td {
   border: 1px solid var(--line);
   border-radius: 6px;
   padding: 5px 8px;
-  color-scheme: dark;
 }
 .track-btn {
   font: inherit;
@@ -1100,7 +1166,7 @@ tbody tr:hover td {
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--scrim);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1113,7 +1179,7 @@ tbody tr:hover td {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 24px 60px var(--shadow);
   padding: 26px 26px 30px;
 }
 .fit-modal-title {
@@ -1487,4 +1553,24 @@ tbody tr:hover td {
   .board-pane {
     display: none;
   }
+}
+
+/* light / dark toggle (masthead) */
+.theme-toggle {
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  color: var(--muted);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--accent);
 }

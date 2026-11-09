@@ -30,25 +30,12 @@ function saveWatchlist(list: string[]): void {
   document.cookie = `${WATCHLIST_KEY}=${encodeURIComponent(JSON.stringify(list))}; path=/; max-age=31536000; samesite=lax`;
 }
 
-const TAGS: [string, string][] = [
-  ['', 'All tags'],
-  ['quant', 'Quant'],
-  ['big-tech', 'Big Tech'],
-  ['fortune-500', 'Fortune 500'],
-  ['college', 'College'],
-];
-const TIERS: [string, string][] = [
-  ['', 'All tiers'],
-  ['1', 'Tier 1'],
-  ['2', 'Tier 2'],
-  ['3', 'Tier 3'],
-];
 const MODES: [string, string][] = [
-  ['', 'Any mode'],
-  ['remote', 'Remote'],
-  ['hybrid', 'Hybrid'],
+  ['', 'Any work setting'],
   ['onsite', 'Onsite'],
-  ['unknown', 'Unknown'],
+  ['hybrid', 'Hybrid'],
+  ['remote', 'Remote'],
+  ['unknown', 'Not stated'],
 ];
 const RECENCY: [string, string][] = [
   ['', 'Any age'],
@@ -161,6 +148,18 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
     update({ q: text.trim() });
   };
 
+  const clearAll = () => {
+    if (qTimer.current) clearTimeout(qTimer.current);
+    setText('');
+    saveWatchlist([]);
+    const keep = new URLSearchParams();
+    for (const k of ['view', 'sort', 'minmatch']) {
+      const v = sp.get(k);
+      if (v) keep.set(k, v);
+    }
+    router.replace(keep.toString() ? `${pathname}?${keep}` : pathname);
+  };
+
   const hasFilters = ['q', 'level', 'tier', 'tag', 'industry', 'mode', 'recency', 'company', 'companies'].some(
     (k) => sp.get(k),
   );
@@ -201,15 +200,12 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
           onChange={setCompanies}
         />
         <Ctrl name="level" value={sp.get('level') ?? ''} opts={LEVELS} onChange={(v) => update({ level: v })} />
-        <Ctrl name="tag" value={sp.get('tag') ?? ''} opts={TAGS} onChange={(v) => update({ tag: v })} />
-        <Ctrl name="tier" value={sp.get('tier') ?? ''} opts={TIERS} onChange={(v) => update({ tier: v })} />
-        <Ctrl name="mode" value={sp.get('mode') ?? ''} opts={MODES} onChange={(v) => update({ mode: v })} />
+        <Ctrl name="mode" label="Work setting" value={sp.get('mode') ?? ''} opts={MODES} onChange={(v) => update({ mode: v })} />
         <Ctrl name="recency" value={sp.get('recency') ?? ''} opts={RECENCY} onChange={(v) => update({ recency: v })} />
-        {hasFilters ? (
-          <a className="clear" href={pathname}>
-            Clear
-          </a>
-        ) : null}
+        {/* Always rendered (hidden when idle) so it doesn't shift the grid. */}
+        <button type="button" className="clear" hidden={!hasFilters} onClick={clearAll}>
+          Clear
+        </button>
       </div>
     </div>
   );
@@ -217,17 +213,19 @@ export function FeedFilters({ companies = [] }: { companies?: CompanyOpt[] }) {
 
 function Ctrl({
   name,
+  label,
   value,
   opts,
   onChange,
 }: {
   name: string;
+  label?: string;
   value: string;
   opts: [string, string][];
   onChange: (v: string) => void;
 }) {
   return (
-    <select className="ctrl" name={name} value={value} onChange={(e) => onChange(e.target.value)} aria-label={name}>
+    <select className="ctrl" name={name} value={value} onChange={(e) => onChange(e.target.value)} aria-label={label ?? name} title={label}>
       {opts.map(([v, label]) => (
         <option key={v} value={v}>
           {label}

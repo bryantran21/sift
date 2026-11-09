@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { ThemeToggle } from '../theme-toggle';
 
 interface TrackedEvent {
   id: number;
@@ -58,6 +59,7 @@ export default function TrackerPage() {
         <div className="brand">
           <span className="mark">sift</span>
           <span className="tag">application tracker</span>
+          <ThemeToggle />
         </div>
         <a className="clear" href="/">
           ← back to feed
