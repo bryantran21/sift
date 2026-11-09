@@ -8,6 +8,7 @@ import { getCooldownStatuses } from '../db/events';
 import type { Seniority, WorkMode } from '../types';
 import { FeedFilters } from './feed-filters';
 import { FeedTable } from './feed-table';
+import { FeedBoard } from './feed-board';
 import { ResumeBar } from './resume-bar';
 
 export const dynamic = 'force-dynamic';
@@ -58,6 +59,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
   }
 
   const params = parse(sp);
+  const view: 'board' | 'table' = sp.view === 'table' ? 'table' : 'board';
 
   const deviceId = await getDeviceId();
   const [profile, cooldownStatuses] = deviceId
@@ -135,19 +137,69 @@ export default async function Page({ searchParams }: { searchParams: Promise<SP>
 
       <FeedFilters companies={companies} />
 
-      <div className="tablewrap">
-        <div className="scroll">
-          <FeedTable rows={rows} showMatch={hasResume} cooldowns={cooldowns} />
-        </div>
-        <div className="showing">
-          <span>
-            Showing {feed.rows.length ? (params.page! - 1) * PAGE_SIZE + 1 : 0}–
-            {(params.page! - 1) * PAGE_SIZE + feed.rows.length} of {feed.total.toLocaleString()} · sorted newest first
-          </span>
-          <Pager sp={sp} page={params.page!} totalPages={totalPages} />
+      <div className="viewbar">
+        <span className="viewbar-count">
+          {feed.total.toLocaleString()} {feed.total === 1 ? 'role' : 'roles'}
+          {params.sort === 'match' ? ' · best match first' : ' · newest first'}
+        </span>
+        <div className="seg" role="tablist" aria-label="View">
+          <a className={view === 'board' ? 'on' : ''} href={viewHref(sp, 'board')} role="tab">
+            Board
+          </a>
+          <a className={view === 'table' ? 'on' : ''} href={viewHref(sp, 'table')} role="tab">
+            Table
+          </a>
         </div>
       </div>
+
+      {view === 'table' ? (
+        <div className="tablewrap">
+          <div className="scroll">
+            <FeedTable rows={rows} showMatch={hasResume} cooldowns={cooldowns} />
+          </div>
+          <Showing sp={sp} page={params.page!} totalPages={totalPages} shown={feed.rows.length} total={feed.total} />
+        </div>
+      ) : (
+        <>
+          <FeedBoard rows={rows} showMatch={hasResume} cooldowns={cooldowns} />
+          <div className="board-foot">
+            <Showing sp={sp} page={params.page!} totalPages={totalPages} shown={feed.rows.length} total={feed.total} />
+          </div>
+        </>
+      )}
     </main>
+  );
+}
+
+// Board is the default; ?view=table switches to the dense table. Other params are kept.
+function viewHref(sp: SP, view: 'board' | 'table'): string {
+  const q = new URLSearchParams();
+  for (const [k, v] of Object.entries(sp)) if (typeof v === 'string' && k !== 'view') q.set(k, v);
+  if (view === 'table') q.set('view', 'table');
+  const s = q.toString();
+  return s ? `/?${s}` : '/';
+}
+
+function Showing({
+  sp,
+  page,
+  totalPages,
+  shown,
+  total,
+}: {
+  sp: SP;
+  page: number;
+  totalPages: number;
+  shown: number;
+  total: number;
+}) {
+  return (
+    <div className="showing">
+      <span>
+        Showing {shown ? (page - 1) * PAGE_SIZE + 1 : 0}–{(page - 1) * PAGE_SIZE + shown} of {total.toLocaleString()}
+      </span>
+      <Pager sp={sp} page={page} totalPages={totalPages} />
+    </div>
   );
 }
 

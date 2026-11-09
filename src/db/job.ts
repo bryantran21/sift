@@ -5,6 +5,8 @@ import { htmlToText } from '../lib/html';
 import { contentHash } from '../lib/hash';
 import { httpJson } from '../lib/http';
 import { extractSkills } from '../scoring/skills';
+import { summarizeJd, type JdSummary } from '../lib/jd-summary';
+import type { LocationPay } from '../types';
 
 export interface JobDetail {
   id: string;
@@ -21,6 +23,11 @@ export interface JobDetail {
   firstSeenAt: Date;
   description: string; // plain text, HTML stripped
   skills: string[]; // extracted from the description
+  salaryMin: number | null;
+  salaryMax: number | null;
+  salaryPeriod: 'year' | 'hour' | 'month' | null;
+  payByLocation: LocationPay[];
+  summary: JdSummary; // sections / benefits / sponsorship / experience, for the panel
 }
 
 // One job by id, for the detail panel. Greenhouse rows already carry the JD; Workday
@@ -44,6 +51,10 @@ export async function getJobDetail(id: string): Promise<JobDetail | null> {
       postedAt: jobs.postedAt,
       firstSeenAt: jobs.firstSeenAt,
       description: jobs.description,
+      salaryMin: jobs.salaryMin,
+      salaryMax: jobs.salaryMax,
+      salaryPeriod: jobs.salaryPeriod,
+      payByLocation: jobs.payByLocation,
     })
     .from(jobs)
     .where(eq(jobs.id, id))
@@ -57,7 +68,7 @@ export async function getJobDetail(id: string): Promise<JobDetail | null> {
   }
 
   const { sourceSlug, ...rest } = row;
-  return { ...rest, description, skills: extractSkills(description) };
+  return { ...rest, description, skills: extractSkills(description), summary: summarizeJd(description) };
 }
 
 interface WorkdayDetail {

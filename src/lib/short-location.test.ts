@@ -15,6 +15,8 @@ test('every spelling of a US city collapses to "City, ST"', () => {
   }
   assert.equal(shortLocation('Washington D.C., District of Columbia, United States of America'), 'Washington D.C., DC');
   assert.equal(shortLocation('McLean, Virginia, USA'), 'McLean, VA');
+  assert.equal(shortLocation('United States - Minnesota - Plymouth'), 'Plymouth, MN'); // Workday
+  assert.equal(shortLocation('Winston-Salem, NC'), 'Winston-Salem, NC');
 });
 
 test('per-state remote listings collapse to one "Remote (US)"', () => {
