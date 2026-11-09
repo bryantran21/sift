@@ -46,7 +46,11 @@ export function getDb() {
     // needs very few connections. (Transaction pooler on :6543 removes the cap.)
     // idle_timeout: release idle connections after 20s, so warm-but-idle serverless
     // instances don't sit on the shared cap.
-    client = postgres(poolerUrl(url), { max: 3, prepare: false, idle_timeout: 20 });
+    // max_pipeline: 0 — one in-flight query per connection. Supavisor's transaction mode
+    // drops pipelined parameterless queries (getCompanies, getFeedMeta): the backend sits
+    // in ClientRead forever and the page never finishes rendering. Reproduced with 8
+    // concurrent `select count(*) from sources` over max: 3; this setting fixes it.
+    client = postgres(poolerUrl(url), { max: 3, prepare: false, idle_timeout: 20, max_pipeline: 0 });
   } catch {
     // Never surface the URL itself — it contains the password.
     throw new Error(
