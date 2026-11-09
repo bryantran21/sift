@@ -13,6 +13,26 @@ const g = globalThis as unknown as { __siftPg?: ReturnType<typeof postgres> | nu
 let client: ReturnType<typeof postgres> | null = g.__siftPg ?? null;
 let db: Db | null = g.__siftDb ?? null;
 
+// Supabase's session-mode pooler (:5432) pins one Postgres backend per open client socket
+// and caps them at 15. Vercel freezes idle function instances with their sockets still
+// open, so idle_timeout never fires and the slots fill up until every page 500s. The
+// transaction pooler (:6543, same host and credentials) hands backends out per query and
+// has no such cap. Nothing here uses session state (LISTEN, advisory locks, SET), so it
+// is safe everywhere. SIFT_SESSION_POOLER=1 opts out.
+export function poolerUrl(url: string): string {
+  if (process.env.SIFT_SESSION_POOLER === '1') return url;
+  try {
+    const u = new URL(url);
+    if (u.hostname.endsWith('.pooler.supabase.com') && (u.port === '5432' || u.port === '')) {
+      u.port = '6543';
+      return u.toString();
+    }
+  } catch {
+    // fall through — postgres() reports the bad URL below without echoing it
+  }
+  return url;
+}
+
 export function getDb() {
   if (db) return db;
   const url = process.env.DATABASE_URL;
@@ -26,7 +46,7 @@ export function getDb() {
     // needs very few connections. (Transaction pooler on :6543 removes the cap.)
     // idle_timeout: release idle connections after 20s, so warm-but-idle serverless
     // instances don't sit on the shared cap.
-    client = postgres(url, { max: 3, prepare: false, idle_timeout: 20 });
+    client = postgres(poolerUrl(url), { max: 3, prepare: false, idle_timeout: 20 });
   } catch {
     // Never surface the URL itself — it contains the password.
     throw new Error(
