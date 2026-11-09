@@ -50,7 +50,9 @@ export function getDb() {
     // drops pipelined parameterless queries (getCompanies, getFeedMeta): the backend sits
     // in ClientRead forever and the page never finishes rendering. Reproduced with 8
     // concurrent `select count(*) from sources` over max: 3; this setting fixes it.
-    client = postgres(poolerUrl(url), { max: 3, prepare: false, idle_timeout: 20, max_pipeline: 0 });
+    // (max_pipeline is a real runtime option that postgres-js's typings omit.)
+    const opts = { max: 3, prepare: false, idle_timeout: 20, max_pipeline: 0 } as Parameters<typeof postgres>[1];
+    client = postgres(poolerUrl(url), opts);
   } catch {
     // Never surface the URL itself — it contains the password.
     throw new Error(
